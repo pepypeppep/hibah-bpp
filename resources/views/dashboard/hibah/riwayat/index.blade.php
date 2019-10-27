@@ -78,7 +78,16 @@
                                 <h6><span class="badge badge-warning">Verifikasi</span></h6>
                             </td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-outline-secondary btn-sm" title="Detail Pengajuan">
+                                <a href="#" class="btn btn-outline-danger btn-sm" title="Ajukan">
+                                    <i class="fas fa-lock"></i>
+                                </a>
+                                <a href="{{ route('hibah.riwayat.edit') }}" class="btn btn-outline-warning btn-sm" title="Ubah">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a href="{{ route('hibah.riwayat.upload') }}" class="btn btn-outline-info btn-sm" title="Upload Dokumen">
+                                    <i class="fas fa-file"></i>
+                                </a>
+                                <a href="{{ route('hibah.riwayat.show') }}" class="btn btn-outline-secondary btn-sm" title="Detail Pengajuan">
                                     <i class="fas fa-share"></i>
                                 </a>
                             </td>

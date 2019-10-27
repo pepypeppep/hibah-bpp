@@ -6,7 +6,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header">
-                <h3 class="card-title">Filter</h3>
+                <h3 class="card-title font-weight-bold">Filter</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
@@ -25,7 +25,7 @@
                                     <label>Judul</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" name="title" class="form-control">
+                                    <input type="text" name="title" class="form-control" placeholder="Judul Hibah">
                                 </div>
                             </div>
                             <div class="row mt-3 mb-3">
@@ -34,8 +34,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select name="category" class="form-control select2" style="width: 100%;">
-                                        <option selected="selected">Alabama</option>
-                                        <option>Alaska</option>
+                                        <option selected>Tampilkan Semua</option>
                                         <option>California</option>
                                         <option>Delaware</option>
                                         <option>Tennessee</option>
@@ -50,8 +49,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select name="unit" class="form-control select2" style="width: 100%;">
-                                        <option selected="selected">Alabama</option>
-                                        <option>Alaska</option>
+                                        <option selected>Tampilkan Semua</option>
                                         <option>California</option>
                                         <option>Delaware</option>
                                         <option>Tennessee</option>
@@ -118,7 +116,7 @@
                                 <a href="#">Download</a>
                             </td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-sm btn-info">Pengajuan</a>
+                                <a href="{{ route('hibah.daftar.create') }}" class="btn btn-sm btn-info">Pengajuan</a>
                             </td>
                         </tr>
                     </tbody>
