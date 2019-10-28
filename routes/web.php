@@ -54,4 +54,13 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('pengaturan', function () {
         return view('staff.hibah.pengaturan.index');
     })->name('s_hibah.pengaturan.index');
+    Route::get('pengaturan/create', function () {
+        return view('staff.hibah.pengaturan.create');
+    })->name('s_hibah.pengaturan.create');
+    Route::get('pengaturan/edit/1', function () {
+        return view('staff.hibah.pengaturan.edit');
+    })->name('s_hibah.pengaturan.edit');
+    Route::get('pengaturan/show/1', function () {
+        return view('staff.hibah.pengaturan.show');
+    })->name('s_hibah.pengaturan.show');
 });

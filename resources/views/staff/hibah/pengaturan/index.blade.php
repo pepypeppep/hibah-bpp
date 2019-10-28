@@ -96,7 +96,7 @@
                 <h3 class="card-title">Daftar Hibah</h3>
 
                 <div class="card-tools">
-                    <a href="#" class="btn btn-sm btn-success" data-card-widget="collapse"><i class="fas fa-plus"></i> Tambah Hibah</a>
+                    <a href="{{ route('s_hibah.pengaturan.create') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Tambah Hibah</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -127,10 +127,10 @@
                                 <span class="badge badge-danger">Ditutup</span>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('hibah.daftar.create') }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('s_hibah.pengaturan.edit') }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="{{ route('hibah.daftar.create') }}" class="btn btn-sm btn-default">
+                                <a href="{{ route('s_hibah.pengaturan.show') }}" class="btn btn-sm btn-default">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
