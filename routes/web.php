@@ -41,3 +41,17 @@ Route::get('/dashboard/riwayat/1/edit', function () {
 Route::get('/dashboard/riwayat/1/upload', function () {
     return view('dashboard.hibah.riwayat.upload');
 })->name('hibah.riwayat.upload');
+
+
+Route::group(['prefix' => 'staff'], function () {
+    Route::get('/', function () {
+        return redirect()->route('hibah.daftar.index');
+    });
+    Route::get('daftar', function () {
+        return view('staff.hibah.daftar.index');
+    })->name('s_hibah.daftar.index');
+
+    Route::get('pengaturan', function () {
+        return view('staff.hibah.pengaturan.index');
+    })->name('s_hibah.pengaturan.index');
+});
