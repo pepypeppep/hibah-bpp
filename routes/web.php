@@ -63,4 +63,7 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('pengaturan/show/1', function () {
         return view('staff.hibah.pengaturan.show');
     })->name('s_hibah.pengaturan.show');
+    Route::get('pengaturan/show/1/1', function () {
+        return view('staff.hibah.pengaturan.criteria');
+    })->name('s_hibah.pengaturan.criteria');
 });

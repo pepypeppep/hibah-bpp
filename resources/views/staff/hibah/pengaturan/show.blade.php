@@ -92,7 +92,7 @@
                 <h3 class="card-title">Kriteria Penilaian Proposal</h3>
 
                 <div class="card-tools">
-                    <a href="#" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -134,7 +134,7 @@
                 <h3 class="card-title">Kriteria Penilaian Laporan Kemajuan</h3>
 
                 <div class="card-tools">
-                    <a href="#" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -176,7 +176,7 @@
                 <h3 class="card-title">Kriteria Penilaian Laporan Akhir</h3>
 
                 <div class="card-tools">
-                    <a href="#" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -218,7 +218,7 @@
                 <h3 class="card-title">Kriteria Penilaian Luaran</h3>
 
                 <div class="card-tools">
-                    <a href="#" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
