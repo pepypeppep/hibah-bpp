@@ -167,7 +167,7 @@
                                 <span class="badge badge-warning">Verifikasi</span>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('hibah.daftar.create') }}" class="btn btn-sm btn-default">
+                                <a href="{{ route('s_hibah.daftar.show') }}" class="btn btn-sm btn-default">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="{{ route('hibah.daftar.create') }}" class="btn btn-sm btn-danger">

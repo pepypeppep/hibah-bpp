@@ -50,6 +50,9 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('daftar', function () {
         return view('staff.hibah.daftar.index');
     })->name('s_hibah.daftar.index');
+    Route::get('daftar/1/show', function () {
+        return view('staff.hibah.daftar.show');
+    })->name('s_hibah.daftar.show');
 
     Route::get('pengaturan', function () {
         return view('staff.hibah.pengaturan.index');
