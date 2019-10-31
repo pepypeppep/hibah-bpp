@@ -58,6 +58,7 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('/pengaturan/create', 'Staff\HibahPengaturanController@create')->name('s_hibah.pengaturan.create');
     Route::get('/pengaturan/1/show', 'Staff\HibahPengaturanController@show')->name('s_hibah.pengaturan.show');
     Route::get('/pengaturan/1/edit', 'Staff\HibahPengaturanController@edit')->name('s_hibah.pengaturan.edit');
+    Route::post('/pengaturan/store', 'Staff\HibahPengaturanController@store')->name('s_hibah.pengaturan.store');
 
 
     Route::get('pengaturan/show/1/1', function () {

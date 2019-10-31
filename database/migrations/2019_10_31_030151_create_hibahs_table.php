@@ -20,10 +20,10 @@ class CreateHibahsTable extends Migration
             $table->dateTime('hibah_tgl_publish');
             $table->dateTime('hibah_tgl_mulai');
             $table->dateTime('hibah_tgl_selesai');
-            $table->dateTime('hibah_tgl_mulai_laporankemajuan');
-            $table->dateTime('hibah_tgl_selesai_laporankemajuan');
-            $table->dateTime('hibah_tgl_mulai_laporanfinal');
-            $table->dateTime('hibah_tgl_selesai_laporanfinal');
+            $table->dateTime('hibah_tgl_mulai_laporankemajuan')->nullable();
+            $table->dateTime('hibah_tgl_selesai_laporankemajuan')->nullable();
+            $table->dateTime('hibah_tgl_mulai_laporanfinal')->nullable();
+            $table->dateTime('hibah_tgl_selesai_laporanfinal')->nullable();
             $table->dateTime('hibah_tgl_pengumuman');
             $table->bigInteger('unit_id')->unsigned()->index();
             $table->string('hibah_panduan');

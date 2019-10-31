@@ -1,5 +1,9 @@
 @extends('staff.layouts.app')
 
+@section('title', 'Tambah Hibah')
+
+@section('header', 'Tambah Hibah')
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -17,7 +21,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="#" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <form method="POST" action="{{ route('s_hibah.pengaturan.store') }}" enctype="multipart/form-data" class="needs-validation" novalidate>
                             @csrf
                             <div class="form-group">
                                 <div class="row mb-3">
@@ -312,7 +316,7 @@
             $('.datetimepicker').datetimepicker({
                 // Formats
                 // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
-                format: 'DD-MM-YYYY HH:mm',
+                format: 'YYYY-MM-DD HH:mm',
 
                 // Your Icons
                 // as Bootstrap 4 is not using Glyphicons anymore

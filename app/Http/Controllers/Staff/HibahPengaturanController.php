@@ -36,6 +36,11 @@ class HibahPengaturanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'hibah_judul' => 'required|max:255',
+            // 'hibah_panduan' => 'required|mimes:pdf',
+        ]);
+
         $data = new Hibah;
         $data->hibah_judul = $request->hibah_judul;
         $data->hibah_kategori_id = $request->hibah_kategori;
