@@ -45,7 +45,7 @@ Route::get('/dashboard/riwayat/1/upload', function () {
 
 Route::group(['prefix' => 'staff'], function () {
     Route::get('/', function () {
-        return redirect()->route('hibah.daftar.index');
+        return redirect()->route('s_hibah.daftar.index');
     });
     Route::get('daftar', function () {
         return view('staff.hibah.daftar.index');
@@ -54,18 +54,12 @@ Route::group(['prefix' => 'staff'], function () {
         return view('staff.hibah.daftar.show');
     })->name('s_hibah.daftar.show');
 
-    Route::get('pengaturan', function () {
-        return view('staff.hibah.pengaturan.index');
-    })->name('s_hibah.pengaturan.index');
-    Route::get('pengaturan/create', function () {
-        return view('staff.hibah.pengaturan.create');
-    })->name('s_hibah.pengaturan.create');
-    Route::get('pengaturan/edit/1', function () {
-        return view('staff.hibah.pengaturan.edit');
-    })->name('s_hibah.pengaturan.edit');
-    Route::get('pengaturan/show/1', function () {
-        return view('staff.hibah.pengaturan.show');
-    })->name('s_hibah.pengaturan.show');
+    Route::get('/pengaturan', 'Staff\HibahPengaturanController@index')->name('s_hibah.pengaturan.index');
+    Route::get('/pengaturan/create', 'Staff\HibahPengaturanController@create')->name('s_hibah.pengaturan.create');
+    Route::get('/pengaturan/1/show', 'Staff\HibahPengaturanController@show')->name('s_hibah.pengaturan.show');
+    Route::get('/pengaturan/1/edit', 'Staff\HibahPengaturanController@edit')->name('s_hibah.pengaturan.edit');
+
+
     Route::get('pengaturan/show/1/1', function () {
         return view('staff.hibah.pengaturan.criteria');
     })->name('s_hibah.pengaturan.criteria');
