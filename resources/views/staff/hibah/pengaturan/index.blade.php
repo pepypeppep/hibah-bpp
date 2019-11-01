@@ -1,11 +1,15 @@
 @extends('staff.layouts.app')
 
+@section('title', 'Pengaturan Hibah')
+
+@section('header', 'Pengaturan Hibah')
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
-            <div class="card-header">
+            <div class="card-header bg-info">
                 <h3 class="card-title font-weight-bold">Filter</h3>
 
                 <div class="card-tools">
@@ -92,8 +96,8 @@
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">Daftar Hibah</h3>
+            <div class="card-header bg-info">
+                <h3 class="card-title font-weight-bold">Daftar Hibah</h3>
 
                 <div class="card-tools">
                     <a href="{{ route('s_hibah.pengaturan.create') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Tambah Hibah</a>
@@ -102,7 +106,7 @@
             <!-- /.card-header -->
             <div class="card-body p-0">
                 <table class="table table-condensed">
-                    <thead class="bg-info text-center">
+                    <thead class="text-center">
                         <tr>
                             <th style="width: 10px">No</th>
                             <th style="width: 300px">Hibah</th>
@@ -114,20 +118,27 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($hibahs as $no => $hibah)
                         <tr>
-                            <td>1</td>
+                            <td>{{ $no+1 }}</td>
                             <td>
-                                <b>Publikasi</b><br>
-                                Penulisan Book Chapter
+                                <b>{{ $hibah->hibah_kategori_id }}</b><br>
+                                {{ $hibah->hibah_judul }}
                             </td>
-                            <td>1 Oktober 2018</td>
-                            <td>1 Oktober 2019 s/d 31 Oktober 2019</td>
-                            <td>Badan Penerbit dan Publikasi</td>
+                            <td>{{ Carbon\Carbon::parse($hibah->hibah_tgl_publish)->format('d M Y') }}</td>
+                            <td>{{ Carbon\Carbon::parse($hibah->hibah_tgl_mulai)->format('d M Y') }} s/d {{ Carbon\Carbon::parse($hibah->hibah_tgl_selesai)->format('d M Y') }}</td>
+                            <td>{{ $hibah->unit_id }}</td>
                             <td class="text-center">
-                                <span class="badge badge-danger">Ditutup</span>
+                                @if ($hibah->hibah_tgl_mulai < now())
+                                    <span class="badge badge-secondary">Belum Dibuka</span>
+                                @elseif (now() > $hibah->hibah_tgl_selesai)
+                                    <span class="badge badge-danger">Ditutup</span>
+                                @else
+                                    <span class="badge badge-success">Dibuka</span>
+                                @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('s_hibah.pengaturan.edit') }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('s_hibah.pengaturan.edit', $hibah->id) }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a href="{{ route('s_hibah.pengaturan.show') }}" class="btn btn-sm btn-default">
@@ -135,6 +146,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

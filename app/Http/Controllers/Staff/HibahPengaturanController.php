@@ -15,7 +15,9 @@ class HibahPengaturanController extends Controller
      */
     public function index()
     {
-        return view('staff.hibah.pengaturan.index');
+        return view('staff.hibah.pengaturan.index', [
+            'hibahs'=> Hibah::paginate(10)
+        ]);
     }
 
     /**
@@ -78,7 +80,9 @@ class HibahPengaturanController extends Controller
      */
     public function edit($id)
     {
-        return view('staff.hibah.pengaturan.edit');
+        return view('staff.hibah.pengaturan.edit', [
+            'hibah' => Hibah::find($id)
+        ]);
     }
 
     /**
