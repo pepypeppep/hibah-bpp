@@ -13,10 +13,37 @@ class HibahPengaturanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $hibahs = Hibah::orderBy('created_at');
+
+        $data = $request->validate([
+            'judul' => 'string|nullable',
+            'hibah_kategori_id' => 'integer|nullable',
+            'unit_id' => 'integer|nullable',
+        ]);
+
+        $filtered = collect($data)->filter(function ($value, $key) {
+            return $value;
+        });
+
+        foreach ($filtered->all() as $key => $value) {
+            $hibahs->where($key, $value);
+        }
+
+        if (!is_null(request('status'))) {
+            if (request('status') == 1) {
+                $hibahs->where('hibah_tgl_mulai', '<', now());
+            } elseif (request('status') == 2) {
+                $hibahs->where('hibah_tgl_mulai', '>=', now())
+                                ->where('hibah_tgl_selesai', '<=', now());
+            } elseif (request('status') == 3) {
+                $hibahs->where('hibah_tgl_selesai', '>', now());
+            }
+        }
+
         return view('staff.hibah.pengaturan.index', [
-            'hibahs'=> Hibah::paginate(10)
+            'hibahs'=> $hibahs->paginate(10)
         ]);
     }
 
