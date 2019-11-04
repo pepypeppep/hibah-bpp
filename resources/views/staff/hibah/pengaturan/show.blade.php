@@ -15,55 +15,69 @@
                         <tr>
                             <td class="font-weight-bold">Nama Hibah</td>
                             <td>
-                                Bantuan Penulisan Book Chapter
+                                {{ $hibah->hibah_judul }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Tanggal Publish</td>
                             <td>
-                                Senin, 30 September 2019
+                                {{ Carbon\Carbon::parse($hibah->hibah_tgl_publish)->format('d M Y') }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Pendaftaran</td>
                             <td>
-                                1 Oktober 2019 s/d 30 Oktober 2019
+                                {{ Carbon\Carbon::parse($hibah->hibah_tgl_mulai)->format('d M Y'). ' s/d '.Carbon\Carbon::parse($hibah->hibah_tgl_selesai)->format('d M Y') }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Periode Laporan Kemajuan</td>
                             <td>
-                                -
+                                @if ($hibah->hibah_tgl_mulai_laporankemajuan && $hibah->hibah_tgl_selesai_laporankemajuan)
+                                    {{ Carbon\Carbon::parse($hibah->hibah_tgl_mulai_laporankemajuan)->format('d M Y').' s/d '.Carbon\Carbon::parse($hibah->hibah_tgl_selesai_laporankemajuan)->format('d M Y') }}
+                                @else
+                                    -
+                                @endif
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Periode Laporan Final</td>
                             <td>
-                                -
+                                @if ($hibah->hibah_tgl_mulai_laporanfinal && $hibah->hibah_tgl_selesai_laporanfinal)
+                                    {{ Carbon\Carbon::parse($hibah->hibah_tgl_mulai_laporanfinal)->format('d M Y').' s/d '.Carbon\Carbon::parse($hibah->hibah_tgl_selesai_laporanfinal)->format('d M Y') }}
+                                @else
+                                    -
+                                @endif
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Tanggal Pengumuman</td>
                             <td>
-                                15 November 2019 | 15:00
+                                {{ Carbon\Carbon::parse($hibah->hibah_tgl_pengumuman)->format('d M Y') }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Penyelenggara</td>
                             <td>
-                                Badan Penerbit dan Publikasi
+                                {{ $hibah->unit_id }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Panduan</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-outline-danger"><i class="fas fa-file"></i> Unduh Panduan</a>
+                                <a href="{{ $hibah->hibah_panduan }}" class="btn btn-sm btn-outline-danger"><i class="fas fa-file"></i> Unduh Panduan</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Status</td>
                             <td>
-                                <span class="badge badge-warning">Berlangsung</span>
+                                @if ($hibah->hibah_tgl_mulai < now())
+                                    <span class="badge badge-secondary">Belum Dibuka</span>
+                                @elseif (now() > $hibah->hibah_tgl_selesai)
+                                    <span class="badge badge-danger">Ditutup</span>
+                                @else
+                                    <span class="badge badge-warning">Berlangsung</span>
+                                @endif
                             </td>
                         </tr>
                         <tr>

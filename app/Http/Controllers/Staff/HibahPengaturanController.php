@@ -96,7 +96,9 @@ class HibahPengaturanController extends Controller
      */
     public function show($id)
     {
-        return view('staff.hibah.pengaturan.show');
+        return view('staff.hibah.pengaturan.show', [
+            'hibah' => Hibah::find($id)
+        ]);
     }
 
     /**
