@@ -38,7 +38,8 @@
                                         <label>Kategori Hibah</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <select name="hibah_kategori_id" class="form-control select2" style="width: 100%;">
+                                        <select name="hibah_kategori_id" class="form-control select2"
+                                            style="width: 100%;">
                                             <option value="" {{ request('hibah_kategori_id') == '' ? 'selected' : '' }}>
                                                 Tampilkan Semua</option>
                                             <option value="7" {{ request('hibah_kategori_id') == 7 ? 'selected' : '' }}>
@@ -47,7 +48,8 @@
                                                 Pengabdian</option>
                                             <option value="9" {{ request('hibah_kategori_id') == 9 ? 'selected' : '' }}>
                                                 Publikasi</option>
-                                            <option value="10" {{ request('hibah_kategori_id') == 10 ? 'selected' : '' }}>
+                                            <option value="10"
+                                                {{ request('hibah_kategori_id') == 10 ? 'selected' : '' }}>
                                                 Pendidikan</option>
                                         </select>
                                     </div>
@@ -58,50 +60,73 @@
                                     </div>
                                     <div class="col-md-8">
                                         <select name="unit_id" class="form-control select2" style="width: 100%;">
-                                            <option value="" {{ request('unit_id') == '' ? 'selected' : ''  }}>Tampilkan Semua</option>
-                                            <option value='67' {{ request('unit_id') == 67 ? 'selected' : ''  }}>Fakultas
+                                            <option value="" {{ request('unit_id') == '' ? 'selected' : ''  }}>Tampilkan
+                                                Semua</option>
+                                            <option value='67' {{ request('unit_id') == 67 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Biologi</option>
-                                            <option value='69' {{ request('unit_id') == 69 ? 'selected' : ''  }}>Fakultas
+                                            <option value='69' {{ request('unit_id') == 69 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Farmasi</option>
-                                            <option value='70' {{ request('unit_id') == 70 ? 'selected' : ''  }}>Fakultas
+                                            <option value='70' {{ request('unit_id') == 70 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Filsafat</option>
-                                            <option value='71' {{ request('unit_id') == 71 ? 'selected' : ''  }}>Fakultas
+                                            <option value='71' {{ request('unit_id') == 71 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Geografi</option>
-                                            <option value='72' {{ request('unit_id') == 72 ? 'selected' : ''  }}>Fakultas
+                                            <option value='72' {{ request('unit_id') == 72 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Hukum</option>
-                                            <option value='73' {{ request('unit_id') == 73 ? 'selected' : ''  }}>Fakultas
+                                            <option value='73' {{ request('unit_id') == 73 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Ilmu Sosial dan Ilmu Politik</option>
-                                            <option value='74' {{ request('unit_id') == 74 ? 'selected' : ''  }}>Fakultas
+                                            <option value='74' {{ request('unit_id') == 74 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Kedokteran</option>
-                                            <option value='75' {{ request('unit_id') == 75 ? 'selected' : ''  }}>Fakultas
+                                            <option value='75' {{ request('unit_id') == 75 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Kedokteran Gigi</option>
-                                            <option value='76' {{ request('unit_id') == 76 ? 'selected' : ''  }}>Fakultas
+                                            <option value='76' {{ request('unit_id') == 76 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Kedokteran Hewan</option>
-                                            <option value='77' {{ request('unit_id') == 77 ? 'selected' : ''  }}>Fakultas
+                                            <option value='77' {{ request('unit_id') == 77 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Kehutanan</option>
-                                            <option value='78' {{ request('unit_id') == 78 ? 'selected' : ''  }}>Fakultas
+                                            <option value='78' {{ request('unit_id') == 78 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Matematika dan Ilmu Pengetahuan Alam</option>
-                                            <option value='79' {{ request('unit_id') == 79 ? 'selected' : ''  }}>Fakultas
+                                            <option value='79' {{ request('unit_id') == 79 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Pertanian</option>
-                                            <option value='80' {{ request('unit_id') == 80 ? 'selected' : ''  }}>Fakultas
+                                            <option value='80' {{ request('unit_id') == 80 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Peternakan</option>
-                                            <option value='81' {{ request('unit_id') == 81 ? 'selected' : ''  }}>Fakultas
+                                            <option value='81' {{ request('unit_id') == 81 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Psikologi</option>
-                                            <option value='83' {{ request('unit_id') == 83 ? 'selected' : ''  }}>Fakultas
+                                            <option value='83' {{ request('unit_id') == 83 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Teknik</option>
-                                            <option value='84' {{ request('unit_id') == 84 ? 'selected' : ''  }}>Fakultas
+                                            <option value='84' {{ request('unit_id') == 84 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Teknologi Pertanian</option>
-                                            <option value='85' {{ request('unit_id') == 85 ? 'selected' : ''  }}>Fakultas
+                                            <option value='85' {{ request('unit_id') == 85 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Ilmu Budaya</option>
-                                            <option value='86' {{ request('unit_id') == 86 ? 'selected' : ''  }}>Direktorat
+                                            <option value='86' {{ request('unit_id') == 86 ? 'selected' : ''  }}>
+                                                Direktorat
                                                 Keuangan</option>
-                                            <option value='88' {{ request('unit_id') == 88 ? 'selected' : ''  }}>Direktorat
+                                            <option value='88' {{ request('unit_id') == 88 ? 'selected' : ''  }}>
+                                                Direktorat
                                                 Sumber Daya Manusia</option>
-                                            <option value='90' {{ request('unit_id') == 90 ? 'selected' : ''  }}>Direktorat
+                                            <option value='90' {{ request('unit_id') == 90 ? 'selected' : ''  }}>
+                                                Direktorat
                                                 Perencanaan dan Pengembangan</option>
-                                            <option value='91' {{ request('unit_id') == 91 ? 'selected' : ''  }}>Direktorat
+                                            <option value='91' {{ request('unit_id') == 91 ? 'selected' : ''  }}>
+                                                Direktorat
                                                 Kemahasiswaan</option>
-                                            <option value='92' {{ request('unit_id') == 92 ? 'selected' : ''  }}>Fakultas
+                                            <option value='92' {{ request('unit_id') == 92 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Ekonomika dan Bisnis</option>
                                             <option value='94' {{ request('unit_id') == 94 ? 'selected' : ''  }}>
                                                 Perpustakaan</option>
@@ -113,11 +138,14 @@
                                                 KORPAGAMA</option>
                                             <option value='106' {{ request('unit_id') == 106 ? 'selected' : ''  }}>
                                                 Laboratorium Penelitian dan Pengujian Terpadu (LPPT)</option>
-                                            <option value='109' {{ request('unit_id') == 109 ? 'selected' : ''  }}>Kantor
+                                            <option value='109' {{ request('unit_id') == 109 ? 'selected' : ''  }}>
+                                                Kantor
                                                 Jaminan Mutu</option>
-                                            <option value='111' {{ request('unit_id') == 111 ? 'selected' : ''  }}>Sekolah
+                                            <option value='111' {{ request('unit_id') == 111 ? 'selected' : ''  }}>
+                                                Sekolah
                                                 Vokasi</option>
-                                            <option value='112' {{ request('unit_id') == 112 ? 'selected' : ''  }}>Bagian
+                                            <option value='112' {{ request('unit_id') == 112 ? 'selected' : ''  }}>
+                                                Bagian
                                                 Tata Usaha dan Rumah Tangga</option>
                                             <option value='113' {{ request('unit_id') == 113 ? 'selected' : ''  }}>Grha
                                                 Sabha Pramana</option>
@@ -185,9 +213,11 @@
                                                 Kebudayaan Koesnadi Hardjasoemantri</option>
                                             <option value='159' {{ request('unit_id') == 159 ? 'selected' : ''  }}>Pusat
                                                 Studi Perdagangan Dunia</option>
-                                            <option value='160' {{ request('unit_id') == 160 ? 'selected' : ''  }}>Majelis
+                                            <option value='160' {{ request('unit_id') == 160 ? 'selected' : ''  }}>
+                                                Majelis
                                                 Wali Amanat</option>
-                                            <option value='161' {{ request('unit_id') == 161 ? 'selected' : ''  }}>Wisma MM
+                                            <option value='161' {{ request('unit_id') == 161 ? 'selected' : ''  }}>Wisma
+                                                MM
                                             </option>
                                             <option value='162' {{ request('unit_id') == 162 ? 'selected' : ''  }}>Senat
                                                 Akademik Universitas</option>
@@ -203,17 +233,21 @@
                                                 Kampus Yogyakarta</option>
                                             <option value='171' {{ request('unit_id') == 171 ? 'selected' : ''  }}>MM
                                                 Kampus Jakarta</option>
-                                            <option value='172' {{ request('unit_id') == 172 ? 'selected' : ''  }}>Magister
+                                            <option value='172' {{ request('unit_id') == 172 ? 'selected' : ''  }}>
+                                                Magister
                                                 Ekonomika Pembangunan (MEP) FEB</option>
-                                            <option value='173' {{ request('unit_id') == 173 ? 'selected' : ''  }}>Magister
+                                            <option value='173' {{ request('unit_id') == 173 ? 'selected' : ''  }}>
+                                                Magister
                                                 Akuntansi (MAKSI) FEB</option>
                                             <option value='174' {{ request('unit_id') == 174 ? 'selected' : ''  }}>
                                                 Penelitian dan Pelatihan Ekonomika dan Bisnis (P2EB) FEB</option>
                                             <option value='175' {{ request('unit_id') == 175 ? 'selected' : ''  }}>
                                                 Pendidikan Profesi Akuntansi (PPAK) FEB</option>
-                                            <option value='176' {{ request('unit_id') == 176 ? 'selected' : ''  }}>Kantor
+                                            <option value='176' {{ request('unit_id') == 176 ? 'selected' : ''  }}>
+                                                Kantor
                                                 Audit Internal</option>
-                                            <option value='179' {{ request('unit_id') == 179 ? 'selected' : ''  }}>Kantor
+                                            <option value='179' {{ request('unit_id') == 179 ? 'selected' : ''  }}>
+                                                Kantor
                                                 Hukum dan Organisasi</option>
                                             <option value='200' {{ request('unit_id') == 200 ? 'selected' : ''  }}>Dewan
                                                 Audit</option>
@@ -245,19 +279,23 @@
                                                 Sekretariat Universitas</option>
                                             <option value='222' {{ request('unit_id') == 222 ? 'selected' : ''  }}>
                                                 Sekretaris Eksekutif</option>
-                                            <option value='223' {{ request('unit_id') == 223 ? 'selected' : ''  }}>Bagian
+                                            <option value='223' {{ request('unit_id') == 223 ? 'selected' : ''  }}>
+                                                Bagian
                                                 Hubungan Masyarakat dan Protokol</option>
-                                            <option value='224' {{ request('unit_id') == 224 ? 'selected' : ''  }}>Bagian
+                                            <option value='224' {{ request('unit_id') == 224 ? 'selected' : ''  }}>
+                                                Bagian
                                                 Hubungan Kelembagaan</option>
                                             <option value='225' {{ request('unit_id') == 225 ? 'selected' : ''  }}>Pusat
                                                 Keamanan, Keselamatan, Kesehatan Kerja dan Lingkungan</option>
                                             <option value='226' {{ request('unit_id') == 226 ? 'selected' : ''  }}>
                                                 Direktorat Perencanaan</option>
-                                            <option value='230' {{ request('unit_id') == 230 ? 'selected' : ''  }}>Gadjah
+                                            <option value='230' {{ request('unit_id') == 230 ? 'selected' : ''  }}>
+                                                Gadjah
                                                 Mada Medical Center</option>
                                             <option value='232' {{ request('unit_id') == 232 ? 'selected' : ''  }}>Rumah
                                                 Sakit Gigi dan Mulut Universitas Gadjah Mada Prof. Soedomo</option>
-                                            <option value='234' {{ request('unit_id') == 234 ? 'selected' : ''  }}>Fakultas
+                                            <option value='234' {{ request('unit_id') == 234 ? 'selected' : ''  }}>
+                                                Fakultas
                                                 Kedokteran, Kesehatan Masyarakat, dan Keperawatan</option>
                                         </select>
                                     </div>
@@ -349,7 +387,7 @@
                                     class="btn btn-sm btn-warning">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="{{ route('s_hibah.pengaturan.show') }}" class="btn btn-sm btn-default">
+                                <a href="{{ route('s_hibah.pengaturan.show', $hibah->id) }}" class="btn btn-sm btn-default">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>

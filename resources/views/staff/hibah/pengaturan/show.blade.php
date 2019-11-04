@@ -1,5 +1,9 @@
 @extends('staff.layouts.app')
 
+@section('title', 'Detail Hibah')
+
+@section('header', 'Detail Hibah')
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
