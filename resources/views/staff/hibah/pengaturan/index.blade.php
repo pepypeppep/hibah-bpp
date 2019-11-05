@@ -374,13 +374,13 @@
                                 {{ Carbon\Carbon::parse($hibah->hibah_tgl_selesai)->format('d M Y') }}</td>
                             <td>{{ request('unit_id') }}</td>
                             <td class="text-center">
-                                @if ($hibah->hibah_tgl_mulai < now()) <span class="badge badge-secondary">Belum
-                                    Dibuka</span>
-                                    @elseif (now() > $hibah->hibah_tgl_selesai)
+                                @if (now() >= $hibah->hibah_tgl_mulai && now() <= $hibah->hibah_tgl_selesai)
+                                    <span class="badge badge-warning">Berlangsung</span>
+                                @elseif (now() > $hibah->hibah_tgl_mulai && now() > $hibah->hibah_tgl_selesai)
                                     <span class="badge badge-danger">Ditutup</span>
-                                    @else
-                                    <span class="badge badge-success">Dibuka</span>
-                                    @endif
+                                @elseif (now() < $hibah->hibah_tgl_mulai && now() < $hibah->hibah_tgl_selesai)
+                                    <span class="badge badge-secondary">Belum Dibuka</span>
+                                @endif
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('s_hibah.pengaturan.edit', $hibah->id) }}"

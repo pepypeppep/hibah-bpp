@@ -75,12 +75,12 @@
                         <tr>
                             <td class="font-weight-bold">Status</td>
                             <td>
-                                @if ($hibah->hibah_tgl_mulai < now())
-                                    <span class="badge badge-secondary">Belum Dibuka</span>
-                                @elseif (now() > $hibah->hibah_tgl_selesai)
-                                    <span class="badge badge-danger">Ditutup</span>
-                                @else
+                                @if (now() >= $hibah->hibah_tgl_mulai && now() <= $hibah->hibah_tgl_selesai)
                                     <span class="badge badge-warning">Berlangsung</span>
+                                @elseif (now() > $hibah->hibah_tgl_mulai && now() > $hibah->hibah_tgl_selesai)
+                                    <span class="badge badge-danger">Ditutup</span>
+                                @elseif (now() < $hibah->hibah_tgl_mulai && now() < $hibah->hibah_tgl_selesai)
+                                    <span class="badge badge-secondary">Belum Dibuka</span>
                                 @endif
                             </td>
                         </tr>
@@ -110,7 +110,7 @@
                 <h3 class="card-title">Kriteria Penilaian Proposal</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 1]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -126,16 +126,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>Pengusul: First Author (nilai 1)</td>
-                            <td class="text-center">20</td>
-                            <td class="text-center">0 - 1</td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        @if (count($proposals) != 0)
+                            @foreach ($proposals as $no => $proposal)
+                            <tr>
+                                <td class="text-center" style="width: 5%">{{ $no+1 }}</td>
+                                <td style="width: 60%">{{ $proposal->kriteria }}</td>
+                                <td class="text-center" style="width: 5%">{{ $proposal->bobot }}</td>
+                                <td class="text-center" style="width: 10%">{{ $proposal->range_awal.' - '.$proposal->range_akhir }}</td>
+                                <td style="width: 10%">
+                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5">
+                                    <div class="alert alert-danger">Tidak ada data!</div>
+                                </td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -152,7 +162,7 @@
                 <h3 class="card-title">Kriteria Penilaian Laporan Kemajuan</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 2]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -168,16 +178,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>Pengusul: First Author (nilai 1)</td>
-                            <td class="text-center">20</td>
-                            <td class="text-center">0 - 1</td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        @if (count($kemajuans) != 0)
+                            @foreach ($kemajuans as $no => $kemajuan)
+                            <tr>
+                                <td class="text-center" style="width: 5%">{{ $no+1 }}</td>
+                                <td style="width: 60%">{{ $kemajuan->kriteria }}</td>
+                                <td class="text-center" style="width: 5%">{{ $kemajuan->bobot }}</td>
+                                <td class="text-center" style="width: 10%">{{ $kemajuan->range_awal.' - '.$kemajuan->range_akhir }}</td>
+                                <td style="width: 10%">
+                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5">
+                                    <div class="alert alert-danger">Tidak ada data!</div>
+                                </td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -194,7 +214,7 @@
                 <h3 class="card-title">Kriteria Penilaian Laporan Akhir</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 3]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -209,17 +229,28 @@
                             <th></th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>Pengusul: First Author (nilai 1)</td>
-                            <td class="text-center">20</td>
-                            <td class="text-center">0 - 1</td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        @if (count($akhirs) != 0)
+                            @foreach ($akhirs as $no => $akhir)
+                            <tr>
+                                <td class="text-center" style="width: 5%">{{ $no+1 }}</td>
+                                <td style="width: 60%">{{ $akhir->kriteria }}</td>
+                                <td class="text-center" style="width: 5%">{{ $akhir->bobot }}</td>
+                                <td class="text-center" style="width: 10%">{{ $akhir->range_awal.' - '.$akhir->range_akhir }}</td>
+                                <td style="width: 10%">
+                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5">
+                                    <div class="alert alert-danger">Tidak ada data!</div>
+                                </td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -236,7 +267,7 @@
                 <h3 class="card-title">Kriteria Penilaian Luaran</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 4]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -252,16 +283,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>Pengusul: First Author (nilai 1)</td>
-                            <td class="text-center">20</td>
-                            <td class="text-center">0 - 1</td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        @if (count($luarans) != 0)
+                            @foreach ($luarans as $no => $luaran)
+                            <tr>
+                                <td class="text-center" style="width: 5%">{{ $no+1 }}</td>
+                                <td style="width: 60%">{{ $luaran->kriteria }}</td>
+                                <td class="text-center" style="width: 5%">{{ $luaran->bobot }}</td>
+                                <td class="text-center" style="width: 10%">{{ $luaran->range_awal.' - '.$luaran->range_akhir }}</td>
+                                <td style="width: 10%">
+                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5">
+                                    <div class="alert alert-danger">Tidak ada data!</div>
+                                </td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

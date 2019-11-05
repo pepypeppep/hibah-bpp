@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Http\Controllers\Controller;
 use App\Models\Hibah;
+use App\Models\Criteria;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HibahPengaturanController extends Controller
 {
@@ -33,12 +34,14 @@ class HibahPengaturanController extends Controller
 
         if (!is_null(request('status'))) {
             if (request('status') == 1) {
-                $hibahs->where('hibah_tgl_mulai', '<', now());
+                $hibahs->where('hibah_tgl_mulai', '>', now())
+                        ->where('hibah_tgl_selesai', '>', now());
             } elseif (request('status') == 2) {
-                $hibahs->where('hibah_tgl_mulai', '>=', now())
-                                ->where('hibah_tgl_selesai', '<=', now());
+                $hibahs->where('hibah_tgl_mulai', '<=', now())
+                        ->where('hibah_tgl_selesai', '>=', now());
             } elseif (request('status') == 3) {
-                $hibahs->where('hibah_tgl_selesai', '>', now());
+                $hibahs->where('hibah_tgl_mulai', '<', now())
+                        ->where('hibah_tgl_selesai', '<', now());
             }
         }
 
@@ -55,6 +58,44 @@ class HibahPengaturanController extends Controller
     public function create()
     {
         return view('staff.hibah.pengaturan.create');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function criteria($id, $criteria)
+    {
+        return view('staff.hibah.pengaturan.kriteria.create', [
+                'criteria' => $criteria,
+                'hibah_id' => $id
+            ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function criteriaStore(Request $request, $id)
+    {
+        $length = count($request->kriteria);
+
+        for ($i=0; $i < $length ; $i++) {
+            $data = new Criteria;
+            $data->hibah_id = $id;
+            $data->tipe_dokumen = $request->tipe_dokumen;
+            $data->kriteria = $request->kriteria[$i];
+            $data->bobot = $request->bobot[$i];
+            $data->range_awal = $request->range_awal[$i];
+            $data->range_akhir = $request->range_akhir[$i];
+            $data->save();
+        }
+
+        return view('staff.hibah.pengaturan.show', [
+            'hibah' => Hibah::find($id)
+        ]);
     }
 
     /**
@@ -97,7 +138,11 @@ class HibahPengaturanController extends Controller
     public function show($id)
     {
         return view('staff.hibah.pengaturan.show', [
-            'hibah' => Hibah::find($id)
+            'hibah' => Hibah::find($id),
+            'proposals' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 1)->get(),
+            'kemajuans' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 2)->get(),
+            'akhirs' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 3)->get(),
+            'luarans' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 4)->get(),
         ]);
     }
 
