@@ -109,6 +109,9 @@ class KriteriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Criteria::find($id);
+        $data->delete();
+
+        return redirect()->back();
     }
 }

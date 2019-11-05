@@ -65,4 +65,5 @@ Route::group(['prefix' => 'staff'], function () {
     Route::post('pengaturan/{id}/add_penilaian/{criteria}/store', 'Staff\KriteriaController@store')->name('s_hibah.pengaturan.criteria.store');
     Route::get('pengaturan/update_penilaian/{id}/edit', 'Staff\KriteriaController@edit')->name('s_hibah.pengaturan.criteria.edit');
     Route::put('pengaturan/update_penilaian/{id}/update', 'Staff\KriteriaController@update')->name('s_hibah.pengaturan.criteria.update');
+    Route::get('pengaturan/penilaian/{id}', 'Staff\KriteriaController@destroy')->name('s_hibah.pengaturan.criteria.delete');
 });

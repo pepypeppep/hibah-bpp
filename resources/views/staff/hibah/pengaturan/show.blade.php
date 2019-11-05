@@ -135,9 +135,31 @@
                                 <td class="text-center" style="width: 10%">{{ $proposal->range_awal.' - '.$proposal->range_akhir }}</td>
                                 <td style="width: 10%">
                                     <a href="{{ route('s_hibah.pengaturan.criteria.edit', $proposal->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $proposal->id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteModal{{ $proposal->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Yakin data akan dihapus?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{{ route('s_hibah.pengaturan.criteria.delete', $proposal->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                        <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         @else
                             <tr>
@@ -186,10 +208,32 @@
                                 <td class="text-center" style="width: 5%">{{ $kemajuan->bobot }}</td>
                                 <td class="text-center" style="width: 10%">{{ $kemajuan->range_awal.' - '.$kemajuan->range_akhir }}</td>
                                 <td style="width: 10%">
-                                        <a href="{{ route('s_hibah.pengaturan.criteria.edit', $kemajuan->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    <a href="{{ route('s_hibah.pengaturan.criteria.edit', $kemajuan->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $kemajuan->id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteModal{{ $kemajuan->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Yakin data akan dihapus?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{{ route('s_hibah.pengaturan.criteria.delete', $kemajuan->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                        <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         @else
                             <tr>
@@ -240,9 +284,31 @@
                                 <td class="text-center" style="width: 10%">{{ $akhir->range_awal.' - '.$akhir->range_akhir }}</td>
                                 <td style="width: 10%">
                                     <a href="{{ route('s_hibah.pengaturan.criteria.edit', $akhir->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $akhir->id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteModal{{ $akhir->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Yakin data akan dihapus?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{{ route('s_hibah.pengaturan.criteria.delete', $akhir->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                        <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         @else
                             <tr>
@@ -292,9 +358,31 @@
                                 <td class="text-center" style="width: 10%">{{ $luaran->range_awal.' - '.$luaran->range_akhir }}</td>
                                 <td style="width: 10%">
                                     <a href="{{ route('s_hibah.pengaturan.criteria.edit', $luaran->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $luaran->id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteModal{{ $luaran->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Yakin data akan dihapus?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{{ route('s_hibah.pengaturan.criteria.delete', $luaran->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                        <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         @else
                             <tr>
