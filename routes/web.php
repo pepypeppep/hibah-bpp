@@ -59,8 +59,10 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('/pengaturan/{id}/show', 'Staff\HibahPengaturanController@show')->name('s_hibah.pengaturan.show');
     Route::get('/pengaturan/{id}/edit', 'Staff\HibahPengaturanController@edit')->name('s_hibah.pengaturan.edit');
     Route::post('/pengaturan/store', 'Staff\HibahPengaturanController@store')->name('s_hibah.pengaturan.store');
-    Route::post('/pengaturan/{id}/update', 'Staff\HibahPengaturanController@update')->name('s_hibah.pengaturan.update');
+    Route::put('/pengaturan/{id}/update', 'Staff\HibahPengaturanController@update')->name('s_hibah.pengaturan.update');
 
-    Route::get('pengaturan/{id}/add_penilaian/{criteria}', 'Staff\HibahPengaturanController@criteria')->name('s_hibah.pengaturan.criteria');
-    Route::post('pengaturan/{id}/add_penilaian/{criteria}/store', 'Staff\HibahPengaturanController@criteriaStore')->name('s_hibah.pengaturan.criteria.store');
+    Route::get('pengaturan/{id}/add_penilaian/{criteria}', 'Staff\KriteriaController@create')->name('s_hibah.pengaturan.criteria');
+    Route::post('pengaturan/{id}/add_penilaian/{criteria}/store', 'Staff\KriteriaController@store')->name('s_hibah.pengaturan.criteria.store');
+    Route::get('pengaturan/update_penilaian/{id}/edit', 'Staff\KriteriaController@edit')->name('s_hibah.pengaturan.criteria.edit');
+    Route::put('pengaturan/update_penilaian/{id}/update', 'Staff\KriteriaController@update')->name('s_hibah.pengaturan.criteria.update');
 });

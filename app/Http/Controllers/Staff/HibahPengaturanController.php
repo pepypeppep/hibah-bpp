@@ -61,44 +61,6 @@ class HibahPengaturanController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function criteria($id, $criteria)
-    {
-        return view('staff.hibah.pengaturan.kriteria.create', [
-                'criteria' => $criteria,
-                'hibah_id' => $id
-            ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function criteriaStore(Request $request, $id)
-    {
-        $length = count($request->kriteria);
-
-        for ($i=0; $i < $length ; $i++) {
-            $data = new Criteria;
-            $data->hibah_id = $id;
-            $data->tipe_dokumen = $request->tipe_dokumen;
-            $data->kriteria = $request->kriteria[$i];
-            $data->bobot = $request->bobot[$i];
-            $data->range_awal = $request->range_awal[$i];
-            $data->range_akhir = $request->range_akhir[$i];
-            $data->save();
-        }
-
-        return view('staff.hibah.pengaturan.show', [
-            'hibah' => Hibah::find($id)
-        ]);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

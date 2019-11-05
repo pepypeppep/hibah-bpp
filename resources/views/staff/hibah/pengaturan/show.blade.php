@@ -134,7 +134,7 @@
                                 <td class="text-center" style="width: 5%">{{ $proposal->bobot }}</td>
                                 <td class="text-center" style="width: 10%">{{ $proposal->range_awal.' - '.$proposal->range_akhir }}</td>
                                 <td style="width: 10%">
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ route('s_hibah.pengaturan.criteria.edit', $proposal->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                     <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -186,7 +186,7 @@
                                 <td class="text-center" style="width: 5%">{{ $kemajuan->bobot }}</td>
                                 <td class="text-center" style="width: 10%">{{ $kemajuan->range_awal.' - '.$kemajuan->range_akhir }}</td>
                                 <td style="width: 10%">
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ route('s_hibah.pengaturan.criteria.edit', $kemajuan->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                     <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -239,7 +239,7 @@
                                 <td class="text-center" style="width: 5%">{{ $akhir->bobot }}</td>
                                 <td class="text-center" style="width: 10%">{{ $akhir->range_awal.' - '.$akhir->range_akhir }}</td>
                                 <td style="width: 10%">
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ route('s_hibah.pengaturan.criteria.edit', $akhir->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                     <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -291,7 +291,7 @@
                                 <td class="text-center" style="width: 5%">{{ $luaran->bobot }}</td>
                                 <td class="text-center" style="width: 10%">{{ $luaran->range_awal.' - '.$luaran->range_akhir }}</td>
                                 <td style="width: 10%">
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ route('s_hibah.pengaturan.criteria.edit', $luaran->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                     <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>

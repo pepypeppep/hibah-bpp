@@ -31,15 +31,15 @@
                                     <input type="text" name="kriteria[]" class="form-control" placeholder="Kriteria Penilaian" required>
                                 </td>
                                 <td class="text-center">
-                                    <input type="number" name="bobot[]" class="form-control" placeholder="Bobot">
+                                    <input type="number" name="bobot[]" class="form-control" placeholder="Bobot" required>
                                 </td>
                                 <td class="text-center">
                                     <div class="input-group">
-                                        <input type="number" name="range_awal[]" class="form-control" placeholder="min">
+                                        <input type="number" name="range_awal[]" class="form-control" placeholder="min" required>
                                         <div class="input-group-append input-group-prepend">
                                             <span class="input-group-text"> - </span>
                                         </div>
-                                        <input type="number" name="range_akhir[]" class="form-control" placeholder="max">
+                                        <input type="number" name="range_akhir[]" class="form-control" placeholder="max" required>
                                     </div>
                                 </td>
                                 <td class="text-center">
@@ -53,7 +53,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-save"></i> Simpan</button>
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-ricycle"></i> Kembali</a>
+                    <a href="{{ route('s_hibah.pengaturan.show', $hibah_id) }}" class="btn btn-sm btn-warning"><i class="fas fa-undo"></i> Kembali</a>
                 </div>
         </form>
         </div>
