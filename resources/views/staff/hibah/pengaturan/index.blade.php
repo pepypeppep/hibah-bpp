@@ -397,6 +397,9 @@
                 </table>
             </div>
             <!-- /.card-body -->
+            {{-- <div class="card-footer"> --}}
+                {{ $hibahs->links() }}
+            {{-- </div> --}}
         </div>
         <!-- /.card -->
         <!-- /.row -->

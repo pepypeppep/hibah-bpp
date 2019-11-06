@@ -46,7 +46,7 @@ class HibahPengaturanController extends Controller
         }
 
         return view('staff.hibah.pengaturan.index', [
-            'hibahs'=> $hibahs->paginate(10)
+            'hibahs'=> $hibahs->orderBy('created_at', 'DESC')->paginate(10)
         ]);
     }
 

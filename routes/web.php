@@ -15,32 +15,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return redirect()->route('hibah.daftar.index');
+
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/', function () {
+        return redirect()->route('hibah.daftar.index');
+    });
+    Route::get('daftar', 'Dashboard\HibahController@index')->name('hibah.daftar.index');
+    Route::get('daftar/create', function () {
+        return view('dashboard.hibah.daftar.create');
+    })->name('hibah.daftar.create');
+    Route::get('daftar/upload', function () {
+        return view('dashboard.hibah.daftar.upload');
+    })->name('hibah.daftar.upload');
+
+    Route::get('riwayat', function () {
+        return view('dashboard.hibah.riwayat.index');
+    })->name('hibah.riwayat.index');
+    Route::get('riwayat/1', function () {
+        return view('dashboard.hibah.riwayat.show');
+    })->name('hibah.riwayat.show');
+    Route::get('riwayat/1/edit', function () {
+        return view('dashboard.hibah.riwayat.edit');
+    })->name('hibah.riwayat.edit');
+    Route::get('riwayat/1/upload', function () {
+        return view('dashboard.hibah.riwayat.upload');
+    })->name('hibah.riwayat.upload');
 });
-
-Route::get('/dashboard/daftar', function () {
-    return view('dashboard.hibah.daftar.index');
-})->name('hibah.daftar.index');
-Route::get('/dashboard/daftar/create', function () {
-    return view('dashboard.hibah.daftar.create');
-})->name('hibah.daftar.create');
-Route::get('/dashboard/daftar/upload', function () {
-    return view('dashboard.hibah.daftar.upload');
-})->name('hibah.daftar.upload');
-
-Route::get('/dashboard/riwayat', function () {
-    return view('dashboard.hibah.riwayat.index');
-})->name('hibah.riwayat.index');
-Route::get('/dashboard/riwayat/1', function () {
-    return view('dashboard.hibah.riwayat.show');
-})->name('hibah.riwayat.show');
-Route::get('/dashboard/riwayat/1/edit', function () {
-    return view('dashboard.hibah.riwayat.edit');
-})->name('hibah.riwayat.edit');
-Route::get('/dashboard/riwayat/1/upload', function () {
-    return view('dashboard.hibah.riwayat.upload');
-})->name('hibah.riwayat.upload');
 
 
 Route::group(['prefix' => 'staff'], function () {
