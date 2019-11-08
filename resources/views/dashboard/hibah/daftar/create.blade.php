@@ -165,7 +165,7 @@
                                             <label>Unit</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select name="unit_id" id="pegawai_unit_id" class="form-control select2" style="width: 100%;">
+                                            <select name="pegawai_unit_id" id="pegawai_unit_id" class="form-control select2" style="width: 100%;">
                                                 <option value="" {{ request('unit_id') == '' ? 'selected' : ''  }}>Tampilkan
                                                     Semua</option>
                                                 <option value='67' {{ request('unit_id') == 67 ? 'selected' : ''  }}>
@@ -466,32 +466,47 @@
         $('.select2').select2()
 
         $('#cari_pegawai').click(function(){
-			var nama_pegawai = $('#nama_pegawai').val();
+            $('#tablePegawai tr').remove()
+			var nama_pegawai = $('#nama_pegawai').val()
+            var pegawai_unit_id = $('#pegawai_unit_id').val()
+            if (pegawai_unit_id != '') {
+                unit_id = pegawai_unit_id;
+            }else{
+                unit_id = 0;
+            }
             var no = 1;
 			$.ajax({
 				type: 'GET',
 				url: document.location.origin + "/api/pegawai/search",
 				data: {
 					'nama': nama_pegawai,
+                    'unit_id': unit_id
 				},
 				success: function(data){
                     // console.log(data)
-                    $.each(data, function(k, v) {
-                        // console.log(data[k].nama)
+                    if (data.length != 0){
+                        $.each(data, function(k, v) {
+                            // console.log(data[k].nama)
+                            $('#tablePegawai').append(
+                                '<tr>\n\
+                                    <td>'+no+'</td>\n\
+                                    <td>'+data[k].NIP+'</td>\n\
+                                    <td>'+data[k].nama+'</td>\n\
+                                    <td>'+data[k].unit_id+'</td>\n\
+                                    <td>\n\
+                                        <button type="button" class="btn btn-info btn-sm" onclick="addPegawai('+data[k].id+');">Pilih <i class="fas fa-chevron-right"></i></button>\n\
+                                    </td>\n\
+                                </tr>'
+                            );
+                            no++;
+                        });
+                    }else{
                         $('#tablePegawai').append(
                             '<tr>\n\
-                                <td>'+no+'</td>\n\
-                                <td>'+data[k].NIP+'</td>\n\
-                                <td>'+data[k].nama+'</td>\n\
-                                <td>'+data[k].unit_id+'</td>\n\
-                                <td>\n\
-                                    <button type="button" class="btn btn-info btn-sm" onclick="addPegawai('+data[k].id+');">Pilih <i class="fas fa-chevron-right"></i></button>\n\
-                                </td>\n\
+                                <td>Data tidak ditemukan.</td>\n\
                             </tr>'
                         );
-                        no++;
-                    });
-					// $('#video-content').html(data)
+                    }
 				}
 			});
 		});
