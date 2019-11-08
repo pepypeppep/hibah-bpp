@@ -66,18 +66,18 @@
                                     <button type="button" data-toggle="modal" data-target="#pegawaiModal" class="btn btn-info btn-sm">Tambah</button>
                                     <table id="table_anggota_pegawai" class="table">
                                         <tr>
-                                            <td>1</td>
+                                            <td id="pegawaiNo">1</td>
                                             <td>Jeffri Junianto
                                                 <input type="hidden" name="pegawai_id[]" value="id">
                                             </td>
                                             <td>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input set_ketua" id="checkKetua">
-                                                    <label class="form-check-label" for="checkKetua"> Ketua</label>
+                                                    <input type="checkbox" class="form-check-input set_ketua" id="checkKetuaid" onclick="checkKetua()">
+                                                    <label class="form-check-label" for="checkKetuaid" onclick="checkKetua()"> Ketua</label>
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                                {{-- <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> --}}
                                             </td>
                                         </tr>
                                     </table>
@@ -165,7 +165,7 @@
                                             <label>Unit</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select name="unit_id" class="form-control select2" style="width: 100%;">
+                                            <select name="unit_id" id="pegawai_unit_id" class="form-control select2" style="width: 100%;">
                                                 <option value="" {{ request('unit_id') == '' ? 'selected' : ''  }}>Tampilkan
                                                     Semua</option>
                                                 <option value='67' {{ request('unit_id') == 67 ? 'selected' : ''  }}>
@@ -499,6 +499,13 @@
     });
 
     function addPegawai(id_pegawai){
+        //Reset Modal Pegawai
+        $("#pegawaiModal .close").click()
+        $('#tablePegawai tr').remove()
+        $("#pegawai_unit_id option:selected").remove()
+        $('#nama_pegawai').val('')
+
+        var pegawaiNo = parseInt($('#pegawaiNo').text())+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/pegawai/add",
@@ -508,24 +515,40 @@
             success: function(data){
                 // console.log(data)
                 $('#table_anggota_pegawai').append(
-                    '<tr>\n\
-                        <td>1</td>\n\
+                    '<tr id="table_row_pegawai'+data.id+'">\n\
+                        <td>'+pegawaiNo+'</td>\n\
                         <td>'+data.nama+'\n\
                             <input type="hidden" name="pegawai_id[]" value="'+data.id+'">\n\
                         </td>\n\
                         <td>\n\
                             <div class="form-check">\n\
-                                <input type="checkbox" class="form-check-input set_ketua" id="checkKetua">\n\
-                                <label class="form-check-label" for="checkKetua"> Ketua</label>\n\
+                                <input type="checkbox" class="form-check-input set_ketua" id="checkKetua'+data.id+'" onclick="checkKetua()">\n\
+                                <label class="form-check-label" for="checkKetua'+data.id+'" onclick="checkKetua()"> Ketua</label>\n\
                             </div>\n\
                         </td>\n\
                         <td>\n\
-                            <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>\n\
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removePegawai('+data.id+')"><i class="fas fa-trash"></i></button>\n\
                         </td>\n\
                     </tr>'
                 );
             }
-    });
-}
+        });
+    }
+
+    //Check Ketua
+    function checkKetua(){
+        var set_ketua = $('.set_ketua').filter(':checked').length
+        if (set_ketua == 1){
+            $('.set_ketua:not(:checked)').attr('disabled', true);
+        }else if (set_ketua == 0){
+            $('.set_ketua:not(:checked)').attr('disabled', false);
+        }
+        // console.log(set_ketua)
+    }
+
+    //Remove Row Pegawai
+    function removePegawai(id){
+        $('#table_row_pegawai'+id).remove()
+    }
 </script>
 @endpush
