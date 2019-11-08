@@ -16,7 +16,9 @@ class HibahController extends Controller
     public function index()
     {
         return view('dashboard.hibah.daftar.index', [
-            'hibahs' => Hibah::orderBy('hibah_tgl_mulai', 'DESC')->paginate(10)
+            'hibahs' => Hibah::where('hibah_tgl_mulai', '<=', now())
+                            ->where('hibah_tgl_selesai', '>=', now())
+                            ->orderBy('hibah_tgl_mulai', 'DESC')->paginate(10)
         ]);
     }
 

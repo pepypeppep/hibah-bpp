@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('pegawai/search', 'API\PegawaiController@search')->name('pegawai.search');
+Route::get('pegawai/add', 'API\PegawaiController@add')->name('pegawai.add');
