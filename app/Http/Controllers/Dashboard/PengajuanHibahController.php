@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Models\Hibah;
+use App\Models\AnggotaStaff;
 use Illuminate\Http\Request;
+use App\Models\PengajuanHibah;
+use App\Models\AnggotaMahasiswa;
+use App\Models\AnggotaNonCivitas;
+use App\Http\Controllers\Controller;
 
-class HibahController extends Controller
+class PengajuanHibahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +18,7 @@ class HibahController extends Controller
      */
     public function index()
     {
-        return view('dashboard.hibah.daftar.index', [
-            'hibahs' => Hibah::where('hibah_tgl_mulai', '<=', now())
-                            ->where('hibah_tgl_selesai', '>=', now())
-                            ->orderBy('hibah_tgl_mulai', 'DESC')->paginate(10)
-        ]);
+        //
     }
 
     /**
@@ -38,9 +37,31 @@ class HibahController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $data = new PengajuanHibah;
+        $data->hibah_id = $id;
+        $data->judul = $request->judul;
+        $data->abstrak = $request->abstrak;
+        $data->save();
+
+        $staff = new AnggotaStaff;
+        $staff->pengajuan_hibah_id = $data->id;
+        $staff->user_id = $request->user_id;
+        $staff->ketua = $request->set_ketua;
+        $staff->save();
+
+        $staff = new AnggotaMahasiswa;
+        $staff->pengajuan_hibah_id = $data->id;
+        $staff->user_id = $request->user_id;
+        $staff->ketua = $request->set_ketua;
+        $staff->save();
+
+        $staff = new AnggotaNonCivitas;
+        $staff->pengajuan_hibah_id = $data->id;
+        $staff->nama = $request->nama;
+        $staff->instansi = $request->instansi;
+        $staff->save();
     }
 
     /**
@@ -51,9 +72,7 @@ class HibahController extends Controller
      */
     public function show($id)
     {
-        return view('dashboard.hibah.daftar.create', [
-            'hibah' => Hibah::find($id)
-        ]);
+        //
     }
 
     /**

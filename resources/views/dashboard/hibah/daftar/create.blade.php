@@ -21,105 +21,106 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Hibah</label>
+                        <form method="POST" action="{{ route('') }}">
+                            @csrf
+                            <div class="form-group">
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Hibah</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <span>[{{ $hibah->hibah_kategori_id }}] {{ $hibah->hibah_judul }}</span>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <span>[Publikasi] Bantuan Penulisan Book Chapter Universitas Gadjah Mada Tahun Anggaran 2019 ( Periode Oktober)</span>
-                                    <input type="hidden" name="hibah_id" class="form-control">
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Unit Penyelenggara</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <span>{{ $hibah->unit_id }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Unit Penyelenggara</label>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Judul</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" name="judul" class="form-control" placeholder="Judul Hibah">
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <span>Badan Penerbit dan Publikasi</span>
-                                    <input type="hidden" name="unit_id" class="form-control">
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Abstrak</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="mb-3">
+                                            <textarea class="textarea" name="abstrak" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Judul</label>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Anggota Pegawai <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <button type="button" data-toggle="modal" data-target="#pegawaiModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
+                                        <table id="table_anggota_pegawai" class="table mt-3">
+                                            <tr>
+                                                <td id="pegawaiNo">1</td>
+                                                <td>Jeffri Junianto
+                                                    <input type="hidden" name="user_id[]" value="id">
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input set_ketua" id="checkKetuaid" onclick="checkKetua()">
+                                                        <label class="form-check-label" for="checkKetuaid" onclick="checkKetua()"> Ketua</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    {{-- <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> --}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <input type="text" name="judul" class="form-control" placeholder="Judul Hibah">
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Anggota Mahasiswa</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <button type="button" data-toggle="modal" data-target="#mahasiswaModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
+                                        <table id="table_anggota_mahasiswa" class="table mt-3">
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Abstrak</label>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Anggota Non Sivitas UGM</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <button type="button" data-toggle="modal" data-target="#nonCivitasModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
+                                        <table id="table_anggota_noncivitas" class="table mt-3">
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <div class="mb-3">
-                                        <textarea class="textarea" name="abstrak" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right"></div>
+                                    <div class="col-md-10">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="agreement" name="agreement">
+                                            <label class="form-check-label" for="agreement">Saya menyetujui syarat dan ketentuan yang berlaku yang telah tertera di panduan.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right"></div>
+                                    <div class="col-md-10 text-right">
+                                        {{-- <button type="submit" class="btn btn-success">Selanjutnya</button> --}}
+                                        <a href="{{ route('hibah.daftar.upload') }}" type="submit" class="btn btn-success">Selanjutnya</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Anggota Pegawai <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="col-md-10">
-                                    <button type="button" data-toggle="modal" data-target="#pegawaiModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
-                                    <table id="table_anggota_pegawai" class="table mt-3">
-                                        <tr>
-                                            <td id="pegawaiNo">1</td>
-                                            <td>Jeffri Junianto
-                                                <input type="hidden" name="user_id[]" value="id">
-                                            </td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input set_ketua" id="checkKetuaid" onclick="checkKetua()">
-                                                    <label class="form-check-label" for="checkKetuaid" onclick="checkKetua()"> Ketua</label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {{-- <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> --}}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Anggota Mahasiswa</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <button type="button" data-toggle="modal" data-target="#mahasiswaModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
-                                    <table id="table_anggota_mahasiswa" class="table mt-3">
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Anggota Non Sivitas UGM</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <button type="button" data-toggle="modal" data-target="#nonCivitasModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
-                                    <table id="table_anggota_noncivitas" class="table mt-3">
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right"></div>
-                                <div class="col-md-10">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="agreement" name="agreement">
-                                        <label class="form-check-label" for="agreement">Saya menyetujui syarat dan ketentuan yang berlaku yang telah tertera di panduan.</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right"></div>
-                                <div class="col-md-10 text-right">
-                                    {{-- <button type="submit" class="btn btn-success">Selanjutnya</button> --}}
-                                    <a href="{{ route('hibah.daftar.upload') }}" type="submit" class="btn btn-success">Selanjutnya</a>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.card -->
@@ -801,6 +802,9 @@
     var idGen =new Generator();
 
     $(function () {
+        //Disabled Tambah Non Civitas Button
+        $('#tambahNonCivitas').attr('disabled',true);
+
         // Summernote
         $('.textarea').summernote()
 
@@ -903,6 +907,23 @@
 				}
 			});
 		});
+
+        //Check nama and instansi non civitas
+        $('#nama_noncivitas').keyup(function(){
+            if ($(this).val() == '' || $('#instansi').val() == '') {
+                $('#tambahNonCivitas').attr('disabled',true);
+            }else{
+                $('#tambahNonCivitas').attr('disabled',false);
+            }
+        })
+
+        $('#instansi').keyup(function(){
+            if ($(this).val() == '' || $('#nama_noncivitas').val() == '') {
+                $('#tambahNonCivitas').attr('disabled',true);
+            }else{
+                $('#tambahNonCivitas').attr('disabled',false);
+            }
+        })
 
     });
 

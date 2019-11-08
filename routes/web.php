@@ -21,9 +21,7 @@ Route::group(['prefix' => 'dashboard'], function () {
         return redirect()->route('hibah.daftar.index');
     });
     Route::get('daftar', 'Dashboard\HibahController@index')->name('hibah.daftar.index');
-    Route::get('daftar/create', function () {
-        return view('dashboard.hibah.daftar.create');
-    })->name('hibah.daftar.create');
+    Route::get('daftar/pengajuan/{id}/create', 'Dashboard\HibahController@show')->name('hibah.daftar.create');
     Route::get('daftar/upload', function () {
         return view('dashboard.hibah.daftar.upload');
     })->name('hibah.daftar.upload');

@@ -358,7 +358,7 @@
                                 <a href="{{ $hibah->hibah_panduan }}">Download</a>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('hibah.daftar.create') }}" class="btn btn-sm btn-info">Pengajuan</a>
+                                <a href="{{ route('hibah.daftar.create', $hibah->id) }}" class="btn btn-sm btn-info">Pengajuan</a>
                             </td>
                         </tr>
                         @endforeach
