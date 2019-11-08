@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('pegawai/search', 'API\PegawaiController@search')->name('pegawai.search');
 Route::get('pegawai/add', 'API\PegawaiController@add')->name('pegawai.add');
+Route::get('mahasiswa/search', 'API\MahasiswaController@search')->name('mahasiswa.search');
+Route::get('mahasiswa/add', 'API\MahasiswaController@add')->name('mahasiswa.add');
+Route::get('noncivitas/add', 'API\NonCivitasController')->name('noncivitas.add');
