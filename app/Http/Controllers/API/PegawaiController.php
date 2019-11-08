@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Pegawai;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,10 +11,11 @@ class PegawaiController extends Controller
     public function search(Request $request)
     {
         if ($request->unit_id != 0) {
-            $pegawais = Pegawai::where('unit_id', $request->unit_id)
-                                ->where('nama', 'like', '%' . $request->nama . '%')->get();
+            $pegawais = User::where('unit_id', $request->unit_id)
+                                ->where('name', 'like', '%' . $request->nama . '%')
+                                ->where('staff',2)->get();
         }else{
-            $pegawais = Pegawai::where('nama', 'like', '%' . $request->nama . '%')->get();
+            $pegawais = User::where('name', 'like', '%' . $request->nama . '%')->where('staff',2)->get();
         }
 
         // $data = array();
@@ -29,7 +30,7 @@ class PegawaiController extends Controller
 
     public function add(Request $request)
     {
-        $pegawai = Pegawai::find($request->id);
+        $pegawai = User::find($request->id);
 
         return $pegawai;
     }

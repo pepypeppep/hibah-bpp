@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <button type="button" data-toggle="modal" data-target="#pegawaiModal" class="btn btn-info btn-sm">Tambah</button>
-                                    <table id="table_anggota_pegawai" class="table">
+                                    <table id="table_anggota_pegawai" class="table mt-3">
                                         <tr>
                                             <td id="pegawaiNo">1</td>
                                             <td>Jeffri Junianto
@@ -491,7 +491,7 @@
                                 '<tr>\n\
                                     <td>'+no+'</td>\n\
                                     <td>'+data[k].NIP+'</td>\n\
-                                    <td>'+data[k].nama+'</td>\n\
+                                    <td>'+data[k].name+'</td>\n\
                                     <td>'+data[k].unit_id+'</td>\n\
                                     <td>\n\
                                         <button type="button" class="btn btn-info btn-sm" onclick="addPegawai('+data[k].id+');">Pilih <i class="fas fa-chevron-right"></i></button>\n\
@@ -532,7 +532,7 @@
                 $('#table_anggota_pegawai').append(
                     '<tr id="table_row_pegawai'+data.id+'">\n\
                         <td>'+pegawaiNo+'</td>\n\
-                        <td>'+data.nama+'\n\
+                        <td>'+data.name+'\n\
                             <input type="hidden" name="pegawai_id[]" value="'+data.id+'">\n\
                         </td>\n\
                         <td>\n\

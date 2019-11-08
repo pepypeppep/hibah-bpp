@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Pegawai;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class PegawaiTableSeeder extends Seeder
@@ -16,25 +16,41 @@ class PegawaiTableSeeder extends Seeder
             [
                 'unit_id' => 70,
                 'NIP' => '123',
-                'nama' => 'Riskita Sari'
+                'name' => 'Riskita Sari',
+                'email' => 'riskita@ugm.ac.id',
+                'password' => bcrypt(12345),
+                'staff' => 2,
+                'mahasiswa' => 1,
             ],
             [
                 'unit_id' => 70,
                 'NIP' => '456',
-                'nama' => 'Rangga Kala'
+                'name' => 'Rangga Kala',
+                'email' => 'rangga@ugm.ac.id',
+                'password' => bcrypt(12345),
+                'staff' => 2,
+                'mahasiswa' => 1,
             ],
             [
                 'unit_id' => 74,
                 'NIP' => '789',
-                'nama' => 'BPP UGM'
+                'name' => 'BPP UGM',
+                'email' => 'bpp@ugm.ac.id',
+                'password' => bcrypt(12345),
+                'staff' => 2,
+                'mahasiswa' => 1,
             ],
         ];
 
         foreach ($pegawais as $key => $value) {
-            $data = new Pegawai;
+            $data = new User;
             $data->unit_id = $value['unit_id'];
             $data->NIP = $value['NIP'];
-            $data->nama = $value['nama'];
+            $data->name = $value['name'];
+            $data->email = $value['email'];
+            $data->password = $value['password'];
+            $data->staff = $value['staff'];
+            $data->mahasiswa = $value['mahasiswa'];
             $data->save();
         }
     }
