@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HibahTableSeeder::class);
         $this->call(PegawaiTableSeeder::class);
         $this->call(HibahKategoriTableSeeder::class);
+        $this->call(UnitTableSeeder::class);
     }
 }

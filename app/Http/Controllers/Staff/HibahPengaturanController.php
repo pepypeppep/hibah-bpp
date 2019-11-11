@@ -7,6 +7,7 @@ use App\Models\Criteria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\HibahKategori;
+use App\Models\Unit;
 
 class HibahPengaturanController extends Controller
 {
@@ -17,7 +18,7 @@ class HibahPengaturanController extends Controller
      */
     public function index(Request $request)
     {
-        $hibahs = Hibah::with('category')->orderBy('created_at');
+        $hibahs = Hibah::with('category','unit')->orderBy('created_at');
 
         $data = $request->validate([
             'judul' => 'string|nullable',
@@ -47,7 +48,9 @@ class HibahPengaturanController extends Controller
         }
 
         return view('staff.hibah.pengaturan.index', [
-            'hibahs'=> $hibahs->orderBy('created_at', 'DESC')->paginate(10)
+            'hibahs'=> $hibahs->orderBy('created_at', 'DESC')->paginate(10),
+            'categories' => HibahKategori::get(),
+            'units' => Unit::get()
         ]);
     }
 
@@ -59,7 +62,8 @@ class HibahPengaturanController extends Controller
     public function create()
     {
         return view('staff.hibah.pengaturan.create', [
-            'categories' => HibahKategori::get()
+            'categories' => HibahKategori::get(),
+            'units' => Unit::get()
         ]);
     }
 
@@ -120,7 +124,9 @@ class HibahPengaturanController extends Controller
     public function edit($id)
     {
         return view('staff.hibah.pengaturan.edit', [
-            'hibah' => Hibah::find($id)
+            'hibah' => Hibah::find($id),
+            'categories' => HibahKategori::get(),
+            'units' => Unit::get()
         ]);
     }
 
