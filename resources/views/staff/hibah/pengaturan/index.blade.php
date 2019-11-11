@@ -366,7 +366,7 @@
                         <tr>
                             <td>{{ $no+1 }}</td>
                             <td>
-                                <b>{{ $hibah->hibah_kategori_id }}</b><br>
+                                <b>{{ $hibah->category->nama }}</b><br>
                                 {{ $hibah->hibah_judul }}
                             </td>
                             <td>{{ Carbon\Carbon::parse($hibah->hibah_tgl_publish)->format('d M Y') }}</td>

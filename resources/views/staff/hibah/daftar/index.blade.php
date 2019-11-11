@@ -170,7 +170,7 @@
                                 <a href="{{ route('s_hibah.daftar.show') }}" class="btn btn-sm btn-default">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ route('hibah.daftar.create') }}" class="btn btn-sm btn-danger">
+                                <a href="" class="btn btn-sm btn-danger">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>

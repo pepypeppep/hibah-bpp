@@ -15,10 +15,10 @@ class HibahTableSeeder extends Seeder
         $hibahs = [
             [
                 'hibah_judul' => 'Example',
-                'hibah_kategori_id' => 1,
+                'hibah_kategori_id' => 8,
                 'hibah_tgl_publish' => '2019-11-01 00:00:00',
                 'hibah_tgl_mulai' => '2019-11-01 00:00:00',
-                'hibah_tgl_selesai' => '2019-11-09 00:00:00',
+                'hibah_tgl_selesai' => '2019-11-15 00:00:00',
                 'hibah_tgl_mulai_laporankemajuan' => null,
                 'hibah_tgl_selesai_laporankemajuan' => null,
                 'hibah_tgl_mulai_laporanfinal' => null,

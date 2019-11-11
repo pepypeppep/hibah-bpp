@@ -42,10 +42,9 @@
                                     <div class="col-md-9">
                                         <select name="hibah_kategori" class="form-control select2" style="width: 100%;" required>
                                             <option value="">-</option>
-                                            <option value="7">Penelitian</option>
-                                            <option value="8">Pengabdian</option>
-                                            <option value="9">Publikasi</option>
-                                            <option value="10">Pendidikan</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->nama }}</option>
+                                            @endforeach
                                         </select>
                                         <span class="invalid-feedback">
                                             Form isian Kategori dibutuhkan.

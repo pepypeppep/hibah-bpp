@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePengajuanHibahsTable extends Migration
+class CreateUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreatePengajuanHibahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengajuan_hibahs', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('hibah_id')->unsigned()->index();
-            $table->string('judul');
-            $table->string('abstrak');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreatePengajuanHibahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengajuan_hibahs');
+        Schema::dropIfExists('units');
     }
 }

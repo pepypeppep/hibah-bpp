@@ -6,6 +6,7 @@ use App\Models\Hibah;
 use App\Models\Criteria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\HibahKategori;
 
 class HibahPengaturanController extends Controller
 {
@@ -16,7 +17,7 @@ class HibahPengaturanController extends Controller
      */
     public function index(Request $request)
     {
-        $hibahs = Hibah::orderBy('created_at');
+        $hibahs = Hibah::with('category')->orderBy('created_at');
 
         $data = $request->validate([
             'judul' => 'string|nullable',
@@ -57,7 +58,9 @@ class HibahPengaturanController extends Controller
      */
     public function create()
     {
-        return view('staff.hibah.pengaturan.create');
+        return view('staff.hibah.pengaturan.create', [
+            'categories' => HibahKategori::get()
+        ]);
     }
 
     /**

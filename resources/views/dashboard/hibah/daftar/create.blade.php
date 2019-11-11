@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('') }}">
+                        <form method="POST" action="{{ route('hibah.daftar.pengajuan.store', $hibah->id) }}">
                             @csrf
                             <div class="form-group">
                                 <div class="row mb-3">
@@ -37,7 +37,7 @@
                                         <label>Unit Penyelenggara</label>
                                     </div>
                                     <div class="col-md-10">
-                                        <span>{{ $hibah->unit_id }}</span>
+                                        <span>{{ dd($hibah) }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -45,7 +45,7 @@
                                         <label>Judul</label>
                                     </div>
                                     <div class="col-md-10">
-                                        <input type="text" name="judul" class="form-control" placeholder="Judul Hibah">
+                                        <input type="text" name="judul" class="form-control" placeholder="Judul Hibah" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -107,7 +107,7 @@
                                     <div class="col-md-2 text-right"></div>
                                     <div class="col-md-10">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="agreement" name="agreement">
+                                            <input type="checkbox" class="form-check-input" id="agreement" name="agreement" required>
                                             <label class="form-check-label" for="agreement">Saya menyetujui syarat dan ketentuan yang berlaku yang telah tertera di panduan.</label>
                                         </div>
                                     </div>
@@ -115,8 +115,8 @@
                                 <div class="row mb-3">
                                     <div class="col-md-2 text-right"></div>
                                     <div class="col-md-10 text-right">
-                                        {{-- <button type="submit" class="btn btn-success">Selanjutnya</button> --}}
-                                        <a href="{{ route('hibah.daftar.upload') }}" type="submit" class="btn btn-success">Selanjutnya</a>
+                                        <button type="submit" class="btn btn-success">Selanjutnya</button>
+                                        {{-- <a href="{{ route('hibah.daftar.upload') }}" type="submit" class="btn btn-success">Selanjutnya</a> --}}
                                     </div>
                                 </div>
                             </div>

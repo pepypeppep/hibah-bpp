@@ -16,7 +16,7 @@ class HibahController extends Controller
     public function index()
     {
         return view('dashboard.hibah.daftar.index', [
-            'hibahs' => Hibah::where('hibah_tgl_mulai', '<=', now())
+            'hibahs' => Hibah::with('unit','category')->where('hibah_tgl_mulai', '<=', now())
                             ->where('hibah_tgl_selesai', '>=', now())
                             ->orderBy('hibah_tgl_mulai', 'DESC')->paginate(10)
         ]);
@@ -52,7 +52,7 @@ class HibahController extends Controller
     public function show($id)
     {
         return view('dashboard.hibah.daftar.create', [
-            'hibah' => Hibah::find($id)
+            'hibah' => Hibah::with('unit')->find($id)
         ]);
     }
 

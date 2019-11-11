@@ -15,6 +15,8 @@ class CreateAnggotaNonCivitasTable extends Migration
     {
         Schema::create('anggota_non_civitas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama');
+            $table->string('instansi');
             $table->timestamps();
         });
     }
