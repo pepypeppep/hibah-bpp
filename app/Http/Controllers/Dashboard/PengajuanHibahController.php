@@ -39,30 +39,39 @@ class PengajuanHibahController extends Controller
      */
     public function store(Request $request, $id)
     {
-        dd($request->toArray());
+        // dd($request->toArray());
         $data = new PengajuanHibah;
         $data->hibah_id = $id;
         $data->judul = $request->judul;
         $data->abstrak = $request->abstrak;
         $data->save();
 
-        $staff = new AnggotaStaff;
-        $staff->pengajuan_hibah_id = $data->id;
-        $staff->user_id = $request->user_id;
-        $staff->ketua = $request->set_ketua;
-        $staff->save();
+        $staffTotal = count($request->pegawai_id);
+        for ($i=0; $i < $staffTotal; $i++) {
+            $staff = new AnggotaStaff;
+            $staff->pengajuan_hibah_id = $data->id;
+            $staff->user_id = $request->pegawai_id[$i];
+            $staff->ketua = $request->set_ketua;
+            $staff->save();
+        }
 
-        $staff = new AnggotaMahasiswa;
-        $staff->pengajuan_hibah_id = $data->id;
-        $staff->user_id = $request->user_id;
-        $staff->ketua = $request->set_ketua;
-        $staff->save();
+        $mshTotal = count($request->mahasiwa_id);
+        for ($i=0; $i < $mshTotal; $i++) {
+            $mhs = new AnggotaMahasiswa;
+            $mhs->pengajuan_hibah_id = $data->id;
+            $mhs->user_id = $request->mahasiwa_id[$i];
+            $mhs->ketua = $request->set_ketua;
+            $mhs->save();
+        }
 
-        $staff = new AnggotaNonCivitas;
-        $staff->pengajuan_hibah_id = $data->id;
-        $staff->nama = $request->nama;
-        $staff->instansi = $request->instansi;
-        $staff->save();
+        $noncivitasTotal = count($request->get_nama_noncivitas);
+        for ($i=0; $i < $noncivitasTotal; $i++) {
+            $noncivitas = new AnggotaNonCivitas;
+            $noncivitas->pengajuan_hibah_id = $data->id;
+            $noncivitas->nama = $request->get_nama_noncivitas[$i];
+            $noncivitas->instansi = $request->get_instansi[$i];
+            $noncivitas->save();
+        }
     }
 
     /**

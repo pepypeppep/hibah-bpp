@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hibah;
+use App\Models\HibahKategori;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class HibahController extends Controller
@@ -13,12 +15,28 @@ class HibahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $hibahs = Hibah::with('category','unit')->orderBy('created_at');
+
+        $data = $request->validate([
+            'judul' => 'string|nullable',
+            'hibah_kategori_id' => 'integer|nullable',
+            'unit_id' => 'integer|nullable',
+        ]);
+
+        $filtered = collect($data)->filter(function ($value, $key) {
+            return $value;
+        });
+
+        foreach ($filtered->all() as $key => $value) {
+            $hibahs->where($key, $value);
+        }
+
         return view('dashboard.hibah.daftar.index', [
-            'hibahs' => Hibah::with('unit','category')->where('hibah_tgl_mulai', '<=', now())
-                            ->where('hibah_tgl_selesai', '>=', now())
-                            ->orderBy('hibah_tgl_mulai', 'DESC')->paginate(10)
+            'hibahs' => $hibahs->orderBy('created_at', 'DESC')->paginate(10),
+            'categories' => HibahKategori::get(),
+            'units' => Unit::get()
         ]);
     }
 
@@ -52,7 +70,8 @@ class HibahController extends Controller
     public function show($id)
     {
         return view('dashboard.hibah.daftar.create', [
-            'hibah' => Hibah::with('unit')->find($id)
+            'hibah' => Hibah::with('unit', 'category')->find($id),
+            'units' => Unit::get()
         ]);
     }
 

@@ -63,7 +63,7 @@
                         <tr>
                             <td class="font-weight-bold">Penyelenggara</td>
                             <td>
-                                {{ $hibah->unit_id }}
+                                {{ $hibah->unit->nama }}
                             </td>
                         </tr>
                         <tr>
