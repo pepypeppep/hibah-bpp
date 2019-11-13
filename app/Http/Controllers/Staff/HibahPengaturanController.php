@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Staff;
 
+use App\Models\Unit;
 use App\Models\Hibah;
 use App\Models\Criteria;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\HibahKategori;
-use App\Models\Unit;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class HibahPengaturanController extends Controller
 {
@@ -77,8 +78,12 @@ class HibahPengaturanController extends Controller
     {
         $request->validate([
             'hibah_judul' => 'required|max:255',
-            // 'hibah_panduan' => 'required|mimes:pdf',
+            'hibah_panduan' => 'required|mimes:pdf',
         ]);
+
+        $fileName = uniqid().'.'.$request->hibah_panduan->getClientOriginalExtension();
+        $filePath = storage_path() . '/app/public/hibah/panduan/';
+        $request->hibah_panduan->move($filePath, $fileName);
 
         $data = new Hibah;
         $data->hibah_judul = $request->hibah_judul;
@@ -94,6 +99,8 @@ class HibahPengaturanController extends Controller
         $data->unit_id = $request->hibah_unit_id;
         $data->hibah_panduan = $request->hibah_panduan;
         $data->save();
+
+        Session::flash('flash_message', '<strong class="mr-auto">Successfully</strong> created.');
 
         return redirect()->route('s_hibah.pengaturan.index');
     }

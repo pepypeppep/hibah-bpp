@@ -39,7 +39,6 @@ class PengajuanHibahController extends Controller
      */
     public function store(Request $request, $id)
     {
-        // dd($request->toArray());
         //Save Pengajuan Hibah
         $data = new PengajuanHibah;
         $data->hibah_id = $id;

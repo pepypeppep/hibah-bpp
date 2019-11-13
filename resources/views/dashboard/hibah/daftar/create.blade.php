@@ -115,7 +115,8 @@
                                 <div class="row mb-3">
                                     <div class="col-md-2 text-right"></div>
                                     <div class="col-md-10 text-right">
-                                        <button type="submit" class="btn btn-success">Selanjutnya</button>
+                                        <span class="text-danger" id="buttonAlert"><small>Belum ada ketua yang dipilih.</small></span>&emsp;
+                                        <button type="submit" class="btn btn-success" id="nextButton">Selanjutnya</button>
                                         {{-- <a href="{{ route('hibah.daftar.upload') }}" type="submit" class="btn btn-success">Selanjutnya</a> --}}
                                     </div>
                                 </div>
@@ -337,6 +338,9 @@
     var idGen =new Generator();
 
     $(function () {
+        //Disabled Next Button
+        $('#nextButton').attr('disabled',true);
+
         //Disabled Tambah Non Civitas Button
         $('#tambahNonCivitas').attr('disabled',true);
 
@@ -501,8 +505,12 @@
         var set_ketua = $('.set_ketua').filter(':checked').length
         if (set_ketua == 1){
             $('.set_ketua:not(:checked)').attr('disabled', true);
+            $('#nextButton').attr('disabled',false);
+            $('#buttonAlert').hide();
         }else if (set_ketua == 0){
             $('.set_ketua:not(:checked)').attr('disabled', false);
+            $('#nextButton').attr('disabled',true);
+            $('#buttonAlert').show();
         }
         // console.log(set_ketua)
     }
