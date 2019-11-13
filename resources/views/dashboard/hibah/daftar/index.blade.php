@@ -118,7 +118,7 @@
                             <td>{{ Carbon\Carbon::parse($hibah->hibah_tgl_selesai)->format('d M Y') }}</td>
                             <td>{{ $hibah->unit->nama }}</td>
                             <td class="text-center">
-                                <a href="{{ $hibah->hibah_panduan }}">Download</a>
+                                <a href="{{ asset('storage/hibah/panduan/'.$hibah->hibah_panduan) }}">Download</a>
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('hibah.daftar.create', $hibah->id) }}" class="btn btn-sm btn-info">Pengajuan</a>
