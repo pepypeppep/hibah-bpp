@@ -6,6 +6,13 @@
 
 @section('content')
 <section class="content">
+    @if(Session::has('flash_message'))
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+        <div class="toast-body pt-4 pb-4 bg-success">
+                {!! session('flash_message') !!}
+        </div>
+    </div>
+    @endif
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -69,7 +76,7 @@
                         <tr>
                             <td class="font-weight-bold">Panduan</td>
                             <td>
-                                <a href="{{ $hibah->hibah_panduan }}" class="btn btn-sm btn-outline-danger"><i class="fas fa-file"></i> Unduh Panduan</a>
+                                <a href="{{ asset('storage/hibah/panduan/'.$hibah->hibah_panduan) }}" class="btn btn-sm btn-outline-danger"><i class="fas fa-file"></i> Unduh Panduan</a>
                             </td>
                         </tr>
                         <tr>
@@ -416,6 +423,8 @@
 
         //Initialize Select2 Elements
         $('.select2').select2()
+
+        $('.toast').toast('show');
     });
 </script>
 @endpush

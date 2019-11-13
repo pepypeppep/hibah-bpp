@@ -7,7 +7,7 @@
 @section('content')
 <section class="content">
     @if(Session::has('flash_message'))
-    <div class="toast mt-5" data-autohide="true" data-delay="1000" data-animation="true" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" data-animation="true" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
         <div class="toast-body pt-4 pb-4 bg-success">
                 {!! session('flash_message') !!}
         </div>

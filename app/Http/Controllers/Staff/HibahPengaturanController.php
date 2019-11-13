@@ -97,10 +97,10 @@ class HibahPengaturanController extends Controller
         $data->hibah_tgl_selesai_laporanfinal = $request->hibah_tgl_selesai_laporanfinal;
         $data->hibah_tgl_pengumuman = $request->hibah_tgl_pengumuman;
         $data->unit_id = $request->hibah_unit_id;
-        $data->hibah_panduan = $request->hibah_panduan;
+        $data->hibah_panduan = $fileName;
         $data->save();
 
-        Session::flash('flash_message', '<strong class="mr-auto">Successfully</strong> created.');
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> hibah baru berhasil ditambahkan.');
 
         return redirect()->route('s_hibah.pengaturan.index');
     }

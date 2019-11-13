@@ -6,6 +6,7 @@ use App\Models\Hibah;
 use App\Models\Criteria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class KriteriaController extends Controller
 {
@@ -53,6 +54,8 @@ class KriteriaController extends Controller
             $data->save();
         }
 
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> kriteria penilaian berhasil ditambahkan.');
+
         return redirect()->route('s_hibah.pengaturan.show', $id);
     }
 
@@ -98,6 +101,8 @@ class KriteriaController extends Controller
         $data->range_akhir = $request->range_akhir;
         $data->save();
 
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> kriteria penilaian berhasil diubah.');
+
         return redirect()->route('s_hibah.pengaturan.show', $hibah_id);
     }
 
@@ -111,6 +116,8 @@ class KriteriaController extends Controller
     {
         $data = Criteria::find($id);
         $data->delete();
+
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> kriteria penilaian berhasil dihapus.');
 
         return redirect()->back();
     }
