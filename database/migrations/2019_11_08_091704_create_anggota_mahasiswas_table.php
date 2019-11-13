@@ -15,7 +15,7 @@ class CreateAnggotaMahasiswasTable extends Migration
     {
         Schema::create('anggota_mahasiswas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('hibah_id')->unsigned()->index();
+            $table->bigInteger('pengajuan_hibah_id')->unsigned()->index();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->enum('ketua',[0,1])->default(0);
             $table->timestamps();
