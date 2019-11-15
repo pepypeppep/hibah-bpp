@@ -22,10 +22,9 @@ Route::group(['prefix' => 'dashboard'], function () {
     });
     Route::get('daftar', 'Dashboard\HibahController@index')->name('hibah.daftar.index');
     Route::get('daftar/pengajuan/{id}/create', 'Dashboard\HibahController@show')->name('hibah.daftar.create');
-    Route::get('daftar/upload', function () {
-        return view('dashboard.hibah.daftar.upload');
-    })->name('hibah.daftar.upload');
     Route::post('daftar/pengajuan/{id}/store', 'Dashboard\PengajuanHibahController@store')->name('hibah.daftar.pengajuan.store');
+    Route::get('daftar/upload/{id}/create', 'Dashboard\PengajuanHibahController@upload')->name('hibah.daftar.upload');
+    Route::post('daftar/upload/{id}/store', 'Dashboard\PengajuanHibahController@doUpload')->name('hibah.daftar.doupload');
 
     Route::get('riwayat', function () {
         return view('dashboard.hibah.riwayat.index');

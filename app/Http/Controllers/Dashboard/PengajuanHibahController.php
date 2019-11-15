@@ -8,6 +8,7 @@ use App\Models\PengajuanHibah;
 use App\Models\AnggotaMahasiswa;
 use App\Models\AnggotaNonCivitas;
 use App\Http\Controllers\Controller;
+use App\Models\HibahBerkas;
 
 class PengajuanHibahController extends Controller
 {
@@ -92,6 +93,7 @@ class PengajuanHibahController extends Controller
             $mhsw->save();
         }
 
+        return redirect()->route('hibah.daftar.upload', $data->id);
     }
 
     /**
@@ -137,5 +139,34 @@ class PengajuanHibahController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function upload($id)
+    {
+        return view('dashboard.hibah.daftar.upload', [
+            'hibah' => PengajuanHibah::find($id)
+        ]);
+    }
+
+    public function doUpload(Request $request, $id)
+    {
+        $request->validate([
+            'hibah_dokumen_pengajuan' => 'required|mimes:pdf',
+        ]);
+
+        $data = new HibahBerkas;
+        $data->pengajuan_hibah_id = $id;
+        $data->jenis_dokumen_id = $request->jenis_dokumen_id;
+        if (!is_null($request->dokumen_nama)) {
+            $fileName = uniqid().'_'.$request->dokumen_nama.'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
+            $filePath = storage_path() . '/app/public/hibah/panduan/';
+            $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+        }else{
+            $fileName = uniqid().'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
+            $filePath = storage_path() . '/app/public/hibah/panduan/';
+            $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+        }
+        $data->hibah_dokumen_pengajuan = $fileName;
+        $data->save();
     }
 }

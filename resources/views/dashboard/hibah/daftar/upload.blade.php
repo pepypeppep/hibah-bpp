@@ -17,43 +17,46 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Jenis Dokumen <span class="text-warning">*</span></label>
+                        <form method="POST" action="{{ route('hibah.daftar.doupload', $hibah->id) }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Jenis Dokumen <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select class="form-control" name="jenis_dokumen_id" required>
+                                            <option value="0">Proposal</option>
+                                            <option value="1">Dokumen Pendukung</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <select class="form-control" name="doc_type">
-                                        <option value="0">Proposal</option>
-                                        <option value="1">Dokumen Pendukung</option>
-                                    </select>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Nama Berkas</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="dokumen_nama">
+                                        <small class="text-muted">Masukan nama berkas jika berkas lebih dari satu.</small>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
+                                        <label>Upload Proposal <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="file" class="form-control-file" name="hibah_dokumen_pengajuan" required>
+                                        <small class="text-muted">Berkas wajib berekstensi .pdf dan ukuran maksimal 2 megabytes.</small>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right"></div>
+                                    <div class="col-md-10 text-right">
+                                        <button type="submit" class="btn btn-success">Selanjutnya</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Nama Berkas</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" name="doc_name">
-                                    <small class="text-muted">Masukan nama berkas jika berkas lebih dari satu.</small>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right">
-                                    <label>Upload Proposal <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="col-md-10">
-                                    <input type="file" class="form-control" name="document">
-                                    <small class="text-muted">Berkas wajib berekstensi .pdf dan ukuran maksimal 2 megabytes.</small>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2 text-right"></div>
-                                <div class="col-md-10 text-right">
-                                    <a href="form2" class="btn btn-success" role="tab" data-toggle="tab">Selanjutnya</a>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.card -->
