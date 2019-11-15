@@ -182,5 +182,19 @@ class PengajuanHibahController extends Controller
         }
         $data->hibah_dokumen_pengajuan = $fileName;
         $data->save();
+
+        return redirect()->route('hibah.daftar.upload', $id);
+    }
+
+    public function doDelete($id)
+    {
+        $data = HibahBerkas::find($id);
+        $path = storage_path() . '/app/public/hibah/berkas_pengajuan/' . $data->hibah_dokumen_pengajuan;
+            if(file_exists($path)){
+                unlink($path);
+            }
+        $data->delete();
+
+        return redirect()->back();
     }
 }

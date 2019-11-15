@@ -1,5 +1,9 @@
 @extends('dashboard.layouts.app')
 
+@section('title', 'Upload Dokumen Pengajuan Hibah')
+
+@section('header', 'Upload Dokumen Pengajuan Hibah')
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -58,16 +62,16 @@
                             </div>
                         </form>
                     </div>
-                    @if (!is_null($berkas))
+                    @if (count($berkas) != 0)
                         <div class="card-body">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td>No</td>
-                                        <td>Jenis Dokumen</td>
-                                        <td>Nama Dokumen</td>
-                                        <td>Dokumen Wajib</td>
-                                        <td>Aksi</td>
+                                        <th>No</th>
+                                        <th>Jenis Dokumen</th>
+                                        <th>Nama Dokumen</th>
+                                        <th>Dokumen Wajib</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,11 +84,30 @@
                                         </td>
                                         <td>{{ $bks->jenis_dokumen_id == 0 ? 'Ya' : 'Tidak' }}</td>
                                         <td>
-                                            <a href="" class="btn btn-sm btn-danger">
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $bks->id }}">
                                                 <i class="fas fa-trash"></i>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
+                                    <div class="modal fade" id="deleteModal{{ $bks->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Konfirmasi</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Apakah Saudara yakin akan menghapus dokumen ini ?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Tidak</button>
+                                                    <a href="{{ route('hibah.daftar.dodelete', $bks->id) }}" class="btn btn-sm btn-danger">Ya</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @endforeach
                                 </tbody>
                             </table>
