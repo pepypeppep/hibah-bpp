@@ -144,7 +144,9 @@ class PengajuanHibahController extends Controller
     public function upload($id)
     {
         return view('dashboard.hibah.daftar.upload', [
-            'hibah' => PengajuanHibah::find($id)
+            'hibah' => PengajuanHibah::find($id),
+            'berkas' => HibahBerkas::where('pengajuan_hibah_id', $id)->get(),
+            'cek_berkas' => HibahBerkas::where('pengajuan_hibah_id', $id)->where('jenis_dokumen_id', 1)->count()
         ]);
     }
 
@@ -158,13 +160,25 @@ class PengajuanHibahController extends Controller
         $data->pengajuan_hibah_id = $id;
         $data->jenis_dokumen_id = $request->jenis_dokumen_id;
         if (!is_null($request->dokumen_nama)) {
-            $fileName = uniqid().'_'.$request->dokumen_nama.'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
-            $filePath = storage_path() . '/app/public/hibah/panduan/';
-            $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+            if ($request->jenis_dokumen_id == 0) {
+                $fileName = 'PROPOSAL_'.$request->dokumen_nama.'_'.uniqid().'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
+                $filePath = storage_path() . '/app/public/hibah/berkas_pengajuan/';
+                $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+            }else{
+                $fileName = 'DOKUMEN_PENDUKUNG_'.$request->dokumen_nama.'_'.uniqid().'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
+                $filePath = storage_path() . '/app/public/hibah/berkas_pengajuan/';
+                $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+            }
         }else{
-            $fileName = uniqid().'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
-            $filePath = storage_path() . '/app/public/hibah/panduan/';
-            $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+            if ($request->jenis_dokumen_id == 0) {
+                $fileName = 'PROPOSAL_'.uniqid().'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
+                $filePath = storage_path() . '/app/public/hibah/berkas_pengajuan/';
+                $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+            }else{
+                $fileName = 'DOKUMEN_PENDUKUNG_'.uniqid().'.'.$request->hibah_dokumen_pengajuan->getClientOriginalExtension();
+                $filePath = storage_path() . '/app/public/hibah/berkas_pengajuan/';
+                $request->hibah_dokumen_pengajuan->move($filePath, $fileName);
+            }
         }
         $data->hibah_dokumen_pengajuan = $fileName;
         $data->save();

@@ -51,12 +51,52 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-2 text-right"></div>
-                                    <div class="col-md-10 text-right">
-                                        <button type="submit" class="btn btn-success">Selanjutnya</button>
+                                    <div class="col-md-10">
+                                        <button type="submit" class="btn btn-info">Upload</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    @if (!is_null($berkas))
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>Jenis Dokumen</td>
+                                        <td>Nama Dokumen</td>
+                                        <td>Dokumen Wajib</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($berkas as $no => $bks)
+                                    <tr>
+                                        <td>{{ $no+1 }}</td>
+                                        <td>{{ $bks->jenis_dokumen_id == 0 ? 'Proposal' : 'Dokumen Pendukung' }}</td>
+                                        <td>
+                                            <a href="{{ asset('storage/berkas_pengajuan/'.$bks->hibah_dokumen_pengajuan) }}">{{ $bks->hibah_dokumen_pengajuan }}</a>
+                                        </td>
+                                        <td>{{ $bks->jenis_dokumen_id == 0 ? 'Ya' : 'Tidak' }}</td>
+                                        <td>
+                                            <a href="" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+                    <div class="card-body text-right">
+                        @if ($cek_berkas == 0)
+                        <small class="text-danger">Belum ada dokumen wajib yang diunggah (proposal)</small>&emsp;
+                        @endif
+                        <a href="#" class="{{ $cek_berkas == 0 ? 'disabled' : '' }}">
+                            <button type="button" class="btn btn-success" {{ $cek_berkas == 0 ? 'disabled' : '' }}>Selanjutnya</button>
+                        </a>
                     </div>
                 </div>
                 <!-- /.card -->
@@ -92,6 +132,12 @@
 @push('styles')
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
+    <style>
+        .disabled {
+            pointer-events: none;
+            cursor: default;
+        }
+    </style>
 @endpush
 @push('scripts')
 <!-- Summernote -->

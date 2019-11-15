@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-2 text-right">
-                                        <label>Judul</label>
+                                        <label>Judul<span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-10">
                                         <input type="text" name="judul" class="form-control" placeholder="Judul Hibah" required>
