@@ -26,6 +26,8 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('daftar/upload/{slug}/create', 'Dashboard\PengajuanHibahController@upload')->where('slug', '[\w\d\-\_]+')->name('hibah.daftar.upload');
     Route::post('daftar/upload/{id}/store', 'Dashboard\PengajuanHibahController@doUpload')->name('hibah.daftar.doupload');
     Route::get('daftar/berkas/{id}/delete', 'Dashboard\PengajuanHibahController@doDelete')->name('hibah.daftar.dodelete');
+    Route::get('daftar/penguncian_data/{slug}', 'Dashboard\PengajuanHibahController@lock')->name('hibah.daftar.lock');
+    Route::put('daftar/penguncian_data/{id}/lock', 'Dashboard\PengajuanHibahController@doLock')->name('hibah.daftar.doLock');
 
     Route::get('riwayat', function () {
         return view('dashboard.hibah.riwayat.index');

@@ -204,4 +204,20 @@ class PengajuanHibahController extends Controller
 
         return redirect()->back();
     }
+
+    public function lock($slug) {
+        $hibah = PengajuanHibah::where('slug', $slug)->first();
+
+        return view('dashboard.hibah.daftar.lock', [
+            'hibah' => $hibah
+        ]);
+    }
+
+    public function doLock(Request $request, $id) {
+        $data = PengajuanHibah::find($id);
+        $data->hibah_status = $request->hibah_status;
+        $data->save();
+
+        return redirect()->route('hibah.riwayat.index');
+    }
 }

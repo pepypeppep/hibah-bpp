@@ -117,7 +117,7 @@
                         @if ($cek_berkas == 0)
                         <small class="text-danger">Belum ada dokumen wajib yang diunggah (proposal)</small>&emsp;
                         @endif
-                        <a href="#" class="{{ $cek_berkas == 0 ? 'disabled' : '' }}">
+                        <a href="{{ route('hibah.daftar.lock', $hibah->slug) }}" class="{{ $cek_berkas == 0 ? 'disabled' : '' }}">
                             <button type="button" class="btn btn-success" {{ $cek_berkas == 0 ? 'disabled' : '' }}>Selanjutnya</button>
                         </a>
                     </div>
