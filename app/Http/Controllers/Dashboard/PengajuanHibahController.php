@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Unit;
+use App\Models\Hibah;
+use App\Models\HibahBerkas;
 use App\Models\AnggotaStaff;
 use Illuminate\Http\Request;
 use App\Models\PengajuanHibah;
 use App\Models\AnggotaMahasiswa;
 use App\Models\AnggotaNonCivitas;
 use App\Http\Controllers\Controller;
-use App\Models\HibahBerkas;
 
 class PengajuanHibahController extends Controller
 {
@@ -27,9 +29,12 @@ class PengajuanHibahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($slug)
     {
-        //
+        return view('dashboard.hibah.daftar.create', [
+            'hibah' => Hibah::with('unit', 'category')->where('slug', $slug)->first(),
+            'units' => Unit::get()
+        ]);
     }
 
     /**
@@ -43,6 +48,7 @@ class PengajuanHibahController extends Controller
         //Save Pengajuan Hibah
         $data = new PengajuanHibah;
         $data->hibah_id = $id;
+        $data->slug = sha1(now());
         $data->judul = $request->judul;
         $data->abstrak = $request->abstrak;
         $data->save();
@@ -93,7 +99,7 @@ class PengajuanHibahController extends Controller
             $mhsw->save();
         }
 
-        return redirect()->route('hibah.daftar.upload', $data->id);
+        return redirect()->route('hibah.daftar.upload', $data->slug);
     }
 
     /**
@@ -141,12 +147,13 @@ class PengajuanHibahController extends Controller
         //
     }
 
-    public function upload($id)
+    public function upload($slug)
     {
+        $hibah = PengajuanHibah::where('slug', $slug)->first();
         return view('dashboard.hibah.daftar.upload', [
-            'hibah' => PengajuanHibah::find($id),
-            'berkas' => HibahBerkas::where('pengajuan_hibah_id', $id)->get(),
-            'cek_berkas' => HibahBerkas::where('pengajuan_hibah_id', $id)->where('jenis_dokumen_id', 1)->count()
+            'hibah' => $hibah,
+            'berkas' => HibahBerkas::where('pengajuan_hibah_id', $hibah->id)->get(),
+            'cek_berkas' => HibahBerkas::where('pengajuan_hibah_id', $hibah->id)->where('jenis_dokumen_id', 1)->count()
         ]);
     }
 
@@ -183,7 +190,7 @@ class PengajuanHibahController extends Controller
         $data->hibah_dokumen_pengajuan = $fileName;
         $data->save();
 
-        return redirect()->route('hibah.daftar.upload', $id);
+        return redirect()->route('hibah.daftar.upload', PengajuanHibah::find($id)->slug);
     }
 
     public function doDelete($id)

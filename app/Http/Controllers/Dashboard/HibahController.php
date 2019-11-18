@@ -69,10 +69,7 @@ class HibahController extends Controller
      */
     public function show($id)
     {
-        return view('dashboard.hibah.daftar.create', [
-            'hibah' => Hibah::with('unit', 'category')->find($id),
-            'units' => Unit::get()
-        ]);
+        //
     }
 
     /**

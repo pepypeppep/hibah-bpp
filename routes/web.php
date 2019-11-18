@@ -21,9 +21,9 @@ Route::group(['prefix' => 'dashboard'], function () {
         return redirect()->route('hibah.daftar.index');
     });
     Route::get('daftar', 'Dashboard\HibahController@index')->name('hibah.daftar.index');
-    Route::get('daftar/pengajuan/{id}/create', 'Dashboard\HibahController@show')->name('hibah.daftar.create');
+    Route::get('daftar/pengajuan/{slug}/create', 'Dashboard\PengajuanHibahController@create')->where('slug', '[\w\d\-\_]+')->name('hibah.daftar.create');
     Route::post('daftar/pengajuan/{id}/store', 'Dashboard\PengajuanHibahController@store')->name('hibah.daftar.pengajuan.store');
-    Route::get('daftar/upload/{id}/create', 'Dashboard\PengajuanHibahController@upload')->name('hibah.daftar.upload');
+    Route::get('daftar/upload/{slug}/create', 'Dashboard\PengajuanHibahController@upload')->where('slug', '[\w\d\-\_]+')->name('hibah.daftar.upload');
     Route::post('daftar/upload/{id}/store', 'Dashboard\PengajuanHibahController@doUpload')->name('hibah.daftar.doupload');
     Route::get('daftar/berkas/{id}/delete', 'Dashboard\PengajuanHibahController@doDelete')->name('hibah.daftar.dodelete');
 
@@ -64,5 +64,5 @@ Route::group(['prefix' => 'staff'], function () {
     Route::post('pengaturan/{id}/add_penilaian/{criteria}/store', 'Staff\KriteriaController@store')->name('s_hibah.pengaturan.criteria.store');
     Route::get('pengaturan/update_penilaian/{slug}/edit', 'Staff\KriteriaController@edit')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.criteria.edit');
     Route::put('pengaturan/update_penilaian/{id}/update', 'Staff\KriteriaController@update')->name('s_hibah.pengaturan.criteria.update');
-    Route::get('pengaturan/penilaian/{slug}', 'Staff\KriteriaController@destroy')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.criteria.delete');
+    Route::get('pengaturan/penilaian/{id}', 'Staff\KriteriaController@destroy')->name('s_hibah.pengaturan.criteria.delete');
 });
