@@ -2,6 +2,13 @@
 
 @section('content')
 <section class="content">
+    @if(Session::has('flash_message'))
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" data-animation="true" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+        <div class="toast-body pt-4 pb-4 bg-success">
+                {!! session('flash_message') !!}
+        </div>
+    </div>
+    @endif
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default" style="border-left: 4px solid #17a2b8; background: #f1fbfd52">
@@ -119,6 +126,8 @@
 
         //Initialize Select2 Elements
         $('.select2').select2()
+
+        $('.toast').toast('show');
     });
 </script>
 @endpush

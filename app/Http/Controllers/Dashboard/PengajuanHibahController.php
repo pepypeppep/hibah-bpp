@@ -11,6 +11,7 @@ use App\Models\PengajuanHibah;
 use App\Models\AnggotaMahasiswa;
 use App\Models\AnggotaNonCivitas;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PengajuanHibahController extends Controller
 {
@@ -190,6 +191,8 @@ class PengajuanHibahController extends Controller
         $data->hibah_dokumen_pengajuan = $fileName;
         $data->save();
 
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> berkas berhasil diunggah.');
+
         return redirect()->route('hibah.daftar.upload', PengajuanHibah::find($id)->slug);
     }
 
@@ -201,6 +204,8 @@ class PengajuanHibahController extends Controller
                 unlink($path);
             }
         $data->delete();
+
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> berkas berhasil dihapus.');
 
         return redirect()->back();
     }
@@ -217,6 +222,8 @@ class PengajuanHibahController extends Controller
         $data = PengajuanHibah::find($id);
         $data->hibah_status = $request->hibah_status;
         $data->save();
+
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> Pengajuan hibah berhasil dibuat.');
 
         return redirect()->route('hibah.riwayat.index');
     }
