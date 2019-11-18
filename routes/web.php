@@ -43,9 +43,8 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('/', function () {
         return redirect()->route('s_hibah.daftar.index');
     });
-    Route::get('daftar', function () {
-        return view('staff.hibah.daftar.index');
-    })->name('s_hibah.daftar.index');
+
+    Route::get('daftar', 'Staff\HibahController@index')->name('s_hibah.daftar.index');
     Route::get('daftar/1/show', function () {
         return view('staff.hibah.daftar.show');
     })->name('s_hibah.daftar.show');

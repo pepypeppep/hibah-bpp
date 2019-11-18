@@ -10,4 +10,9 @@ class PengajuanHibah extends Model
     {
         return $this->belongsTo(Hibah::class);
     }
+
+    public function berkas()
+    {
+        return $this->hasMany(HibahBerkas::class);
+    }
 }

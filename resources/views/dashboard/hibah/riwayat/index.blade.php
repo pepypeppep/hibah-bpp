@@ -118,9 +118,9 @@
                             </td>
                             <td class="text-center">
                                 @if ($hibah->hibah_status == 0)
-                                <a href="" class="btn btn-outline-danger btn-sm" title="Ajukan" onclick="document.getElementById('form_pub').submit();">
+                                <button type="button" class="btn btn-outline-danger btn-sm" title="Ajukan" onclick="document.getElementById('form_pub').submit();">
                                     <i class="fas fa-lock"></i>
-                                </a>
+                                </button>
                                 <form method="POST" action="{{ route('hibah.daftar.doLock', $hibah->id) }}" id="form_pub">
                                     @csrf
                                     @method('PUT')

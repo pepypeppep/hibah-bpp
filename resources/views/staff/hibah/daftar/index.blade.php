@@ -1,5 +1,9 @@
 @extends('staff.layouts.app')
 
+@section('title', 'Daftar Pengajuan Hibah')
+
+@section('header', 'Daftar Pengajuan Hibah')
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -140,31 +144,62 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($hibahs as $no => $hibah)
                         <tr>
-                            <td>1</td>
+                            <td>{{ $no+1 }}</td>
                             <td>
-                                <b>Publikasi</b><br>
-                                Penulisan Book Chapter
+                                <b>{{ $hibah->hibah->category->nama }}</b><br>
+                                {{ $hibah->hibah->hibah_judul }}
                             </td>
-                            <td>Hibah Inovasi Tenaga Pendidik UGM</td>
+                            <td>{{ $hibah->judul }}</td>
                             <td>
-                                <span><b>Unit: </b> Fakultas Psikologi</span><br>
-                                <span><b>Pengusul di Simaster: </b> Dr. Ir. Dia</span>
+                                <span><b>Unit: </b> {{ $hibah->hibah->unit->nama }}</span><br>
+                                <span><b>Pengusul di Simaster: </b> <br>
+
+                                </span>
                             </td>
                             <td class="text-center">
-                                <a href="#"><i class="fas fa-file"></i></a>
+                                @foreach ($hibah->berkas as $berkas)
+                                    <a href="{{ asset('/storage/hibah/pengajuan_hibah'.$berkas) }}"><i class="fas fa-file"></i></a>
+                                @endforeach
                             </td>
                             <td class="text-center">
                                 -
                             </td>
                             <td class="text-center">
-                                <span class="badge badge-secondary">Diajukan</span>
+                                @if ($hibah->status_pengajuan == 1)
+                                    <h6><span class="badge badge-secondary">Diajukan</span></h6>
+                                @elseif ($hibah->status_pengajuan == 2)
+                                    <h6><span class="badge badge-info">Penilaian</span></h6>
+                                @elseif ($hibah->status_pengajuan == 3)
+                                    <h6><span class="badge badge-success">Diterima</span></h6>
+                                @elseif ($hibah->status_pengajuan == 4)
+                                    <h6><span class="badge badge-danger">Ditolak</span></h6>
+                                @elseif ($hibah->status_pengajuan == 0)
+                                    <h6><span class="badge badge-light">Belum Diajukan</span></h6>
+                                @endif
                             </td>
                             <td class="text-center">
-                                <span class="badge badge-secondary">Belum Terbit</span>
+                                @if ($hibah->status_terbit == 0)
+                                    <h6>--</h6>
+                                @elseif ($hibah->status_terbit == 1)
+                                    <h6><span class="badge badge-secondary">Belum Terbit</span></h6>
+                                @else
+                                    <h6><span class="badge badge-success">Sudah Terbit</span></h6>
+                                @endif
                             </td>
                             <td class="text-center">
-                                <span class="badge badge-warning">Verifikasi</span>
+                                @if ($hibah->status_pencairan == 1)
+                                    <h6><span class="badge badge-secondary">Diajukan</span></h6>
+                                @elseif ($hibah->status_pencairan == 2)
+                                    <h6><span class="badge badge-warning">Verifikasi</span></h6>
+                                @elseif ($hibah->status_pencairan == 3)
+                                    <h6><span class="badge badge-success">Dicairkan</span></h6>
+                                @elseif ($hibah->status_pencairan == 4)
+                                    <h6><span class="badge badge-danger">Ditolak</span></h6>
+                                @elseif ($hibah->status_pencairan == 0)
+                                    <h6>--</h6>
+                                @endif
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('s_hibah.daftar.show') }}" class="btn btn-sm btn-default">
@@ -175,6 +210,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

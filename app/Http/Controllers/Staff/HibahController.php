@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Models\PengajuanHibah;
 use Illuminate\Http\Request;
 
 class HibahController extends Controller
@@ -14,7 +15,9 @@ class HibahController extends Controller
      */
     public function index()
     {
-        //
+        return view('staff.hibah.daftar.index', [
+            'hibahs' => PengajuanHibah::with('hibah', 'hibah.unit', 'hibah.category', 'berkas')->get()
+        ]);
     }
 
     /**
