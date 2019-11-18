@@ -32,6 +32,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('riwayat', 'Dashboard\PengajuanHibahController@index')->name('hibah.riwayat.index');
     Route::get('riwayat/{slug}/show', 'Dashboard\PengajuanHibahController@show')->where('slug', '[\w\d\-\_]+')->name('hibah.riwayat.show');
     Route::get('riwayat/{slug}/edit', 'Dashboard\PengajuanHibahController@edit')->where('slug', '[\w\d\-\_]+')->name('hibah.riwayat.edit');
+    Route::put('riwayat/{id}/update', 'Dashboard\PengajuanHibahController@update')->name('hibah.riwayat.update');
     Route::get('riwayat/1/upload', function () {
         return view('dashboard.hibah.riwayat.upload');
     })->name('hibah.riwayat.upload');

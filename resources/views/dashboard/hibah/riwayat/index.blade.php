@@ -88,8 +88,10 @@
                                     <h6><span class="badge badge-info">Penilaian</span></h6>
                                 @elseif ($hibah->status_pengajuan == 3)
                                     <h6><span class="badge badge-success">Diterima</span></h6>
-                                @elseif ($hibah->status_pengajuan == 0)
+                                @elseif ($hibah->status_pengajuan == 4)
                                     <h6><span class="badge badge-danger">Ditolak</span></h6>
+                                @elseif ($hibah->status_pengajuan == 0)
+                                <h6><span class="badge badge-light">Belum Diajukan</span></h6>
                                 @endif
                             </td>
                             <td class="text-center">
@@ -124,13 +126,13 @@
                                     @method('PUT')
                                     <input type="hidden" name="hibah_status" value="1">
                                 </form>
-                                @endif
                                 <a href="{{ route('hibah.riwayat.edit', $hibah->slug) }}" class="btn btn-outline-warning btn-sm" title="Ubah">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a href="{{ route('hibah.daftar.upload', $hibah->slug) }}" class="btn btn-outline-info btn-sm" title="Upload Dokumen">
                                     <i class="fas fa-file"></i>
                                 </a>
+                                @endif
                                 <a href="{{ route('hibah.riwayat.show', $hibah->slug) }}" class="btn btn-outline-secondary btn-sm" title="Detail Pengajuan">
                                     <i class="fas fa-share"></i>
                                 </a>

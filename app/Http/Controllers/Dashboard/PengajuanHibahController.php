@@ -132,10 +132,14 @@ class PengajuanHibahController extends Controller
      */
     public function edit($slug)
     {
-        $hibah = PengajuanHibah::with('hibah')->where('slug', $slug)->first();
+        $hibah = PengajuanHibah::with('hibah', 'hibah.unit', 'hibah.category')->where('slug', $slug)->first();
 
         return view('dashboard.hibah.riwayat.edit', [
-            'hibah' => $hibah
+            'hibah' => $hibah,
+            'units' => Unit::get(),
+            'pegawais' => AnggotaStaff::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
+            'mahasiswas' => AnggotaMahasiswa::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
+            'noncivitas' => AnggotaNonCivitas::where('pengajuan_hibah_id', $hibah->id)->get()
         ]);
     }
 
@@ -148,7 +152,66 @@ class PengajuanHibahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Save Pengajuan Hibah
+        $data = PengajuanHibah::find($id);
+        $data->hibah_id = $id;
+        $data->judul = $request->judul;
+        $data->abstrak = $request->abstrak;
+        $data->save();
+
+        //Clear Anggota Pegawai
+        AnggotaStaff::where('pengajuan_hibah_id', $id)->delete();
+        //Save Anggota Pegawai
+        if (!is_null($request->pegawai_id)) {
+            $staffTotal = count($request->pegawai_id);
+            for ($i=0; $i < $staffTotal; $i++) {
+                $staff = new AnggotaStaff;
+                $staff->pengajuan_hibah_id = $data->id;
+                $staff->user_id = $request->pegawai_id[$i];
+                $staff->save();
+            }
+        }
+
+        //Clear Anggota Mahasiswa
+        AnggotaMahasiswa::where('pengajuan_hibah_id', $id)->delete();
+        //Save Anggota Mahasiswa
+        if (!is_null($request->mahasiwa_id)) {
+            $mshTotal = count($request->mahasiwa_id);
+            for ($i=0; $i < $mshTotal; $i++) {
+                $mhs = new AnggotaMahasiswa;
+                $mhs->pengajuan_hibah_id = $data->id;
+                $mhs->user_id = $request->mahasiwa_id[$i];
+                $mhs->save();
+            }
+        }
+
+        //Clear Anggota Mahasiswa
+        AnggotaNonCivitas::where('pengajuan_hibah_id', $id)->delete();
+        //Save Anggota Non Civitas
+        if (!is_null($request->get_nama_noncivitas)) {
+            $noncivitasTotal = count($request->get_nama_noncivitas);
+            for ($i=0; $i < $noncivitasTotal; $i++) {
+                $noncivitas = new AnggotaNonCivitas;
+                $noncivitas->pengajuan_hibah_id = $data->id;
+                $noncivitas->nama = $request->get_nama_noncivitas[$i];
+                $noncivitas->instansi = $request->get_instansi[$i];
+                $noncivitas->save();
+            }
+        }
+
+        //Set Ketua
+        //Find on Pegawai
+        $stf = AnggotaStaff::where('user_id', $request->set_ketua[0])->first();
+        $mhsw = AnggotaMahasiswa::where('user_id', $request->set_ketua[0])->first();
+        if (!is_null($stf)) {
+            $stf->ketua = 2;
+            $stf->save();
+        } else {
+            $mhsw->ketua = 2;
+            $mhsw->save();
+        }
+
+        return redirect()->route('hibah.daftar.upload', $data->slug);
     }
 
     /**

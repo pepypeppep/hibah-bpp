@@ -97,7 +97,7 @@
                             <td class="font-weight-bold col-md-2">Anggota Non Sivitas UGM</td>
                             <td>
                                 @foreach ($noncivitas as $nc)
-                                    {{ $mhs->nama.' ('.$mhs->instansi.'), ' }}
+                                    {{ $nc->nama.' ('.$nc->instansi.'), ' }}
                                 @endforeach
                             </td>
                         </tr>
