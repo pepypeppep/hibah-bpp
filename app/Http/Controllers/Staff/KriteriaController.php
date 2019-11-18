@@ -25,11 +25,12 @@ class KriteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id, $criteria)
+    public function create($slug, $criteria)
     {
+        $hibah = Hibah::where('slug', $slug)->first();
         return view('staff.hibah.pengaturan.kriteria.create', [
                 'criteria' => $criteria,
-                'hibah_id' => $id
+                'hibah_id' => $hibah->id
             ]);
     }
 
@@ -56,7 +57,7 @@ class KriteriaController extends Controller
 
         Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> kriteria penilaian berhasil ditambahkan.');
 
-        return redirect()->route('s_hibah.pengaturan.show', $id);
+        return redirect()->route('s_hibah.pengaturan.show', Hibah::find($id)->slug);
     }
 
     /**

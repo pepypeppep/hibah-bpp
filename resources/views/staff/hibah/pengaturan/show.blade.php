@@ -117,7 +117,7 @@
                 <h3 class="card-title">Kriteria Penilaian Proposal</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 1]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->slug, 1]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -191,7 +191,7 @@
                 <h3 class="card-title">Kriteria Penilaian Laporan Kemajuan</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 2]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->slug, 2]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -265,7 +265,7 @@
                 <h3 class="card-title">Kriteria Penilaian Laporan Akhir</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 3]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->slug, 3]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -340,7 +340,7 @@
                 <h3 class="card-title">Kriteria Penilaian Luaran</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->id, 4]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
+                    <a href="{{ route('s_hibah.pengaturan.criteria', [$hibah->slug, 4]) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Kriteria Penilaian</a>
                 </div>
             </div>
             <!-- /.card-header -->

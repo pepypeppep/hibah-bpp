@@ -15,6 +15,7 @@ class CreatePengajuanHibahsTable extends Migration
     {
         Schema::create('pengajuan_hibahs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('slug');
             $table->bigInteger('hibah_id')->unsigned()->index();
             $table->string('judul');
             $table->string('abstrak')->nullable();

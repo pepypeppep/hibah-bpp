@@ -55,14 +55,14 @@ Route::group(['prefix' => 'staff'], function () {
 
     Route::get('/pengaturan', 'Staff\HibahPengaturanController@index')->name('s_hibah.pengaturan.index');
     Route::get('/pengaturan/create', 'Staff\HibahPengaturanController@create')->name('s_hibah.pengaturan.create');
-    Route::get('/pengaturan/{id}/show', 'Staff\HibahPengaturanController@show')->name('s_hibah.pengaturan.show');
-    Route::get('/pengaturan/{id}/edit', 'Staff\HibahPengaturanController@edit')->name('s_hibah.pengaturan.edit');
+    Route::get('/pengaturan/{slug}/show', 'Staff\HibahPengaturanController@show')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.show');
+    Route::get('/pengaturan/{slug}/edit', 'Staff\HibahPengaturanController@edit')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.edit');
     Route::post('/pengaturan/store', 'Staff\HibahPengaturanController@store')->name('s_hibah.pengaturan.store');
     Route::put('/pengaturan/{id}/update', 'Staff\HibahPengaturanController@update')->name('s_hibah.pengaturan.update');
 
-    Route::get('pengaturan/{id}/add_penilaian/{criteria}', 'Staff\KriteriaController@create')->name('s_hibah.pengaturan.criteria');
+    Route::get('pengaturan/{slug}/add_penilaian/{criteria}', 'Staff\KriteriaController@create')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.criteria');
     Route::post('pengaturan/{id}/add_penilaian/{criteria}/store', 'Staff\KriteriaController@store')->name('s_hibah.pengaturan.criteria.store');
-    Route::get('pengaturan/update_penilaian/{id}/edit', 'Staff\KriteriaController@edit')->name('s_hibah.pengaturan.criteria.edit');
+    Route::get('pengaturan/update_penilaian/{slug}/edit', 'Staff\KriteriaController@edit')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.criteria.edit');
     Route::put('pengaturan/update_penilaian/{id}/update', 'Staff\KriteriaController@update')->name('s_hibah.pengaturan.criteria.update');
-    Route::get('pengaturan/penilaian/{id}', 'Staff\KriteriaController@destroy')->name('s_hibah.pengaturan.criteria.delete');
+    Route::get('pengaturan/penilaian/{slug}', 'Staff\KriteriaController@destroy')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.criteria.delete');
 });

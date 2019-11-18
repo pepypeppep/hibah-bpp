@@ -87,6 +87,7 @@ class HibahPengaturanController extends Controller
 
         $data = new Hibah;
         $data->hibah_judul = $request->hibah_judul;
+        $data->slug = sha1(now());
         $data->hibah_kategori_id = $request->hibah_kategori;
         $data->hibah_tgl_publish = $request->hibah_tgl_publish;
         $data->hibah_tgl_mulai = $request->hibah_tgl_mulai;
@@ -111,14 +112,15 @@ class HibahPengaturanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
+        $hibah = Hibah::where('slug', $slug)->first();
         return view('staff.hibah.pengaturan.show', [
-            'hibah' => Hibah::find($id),
-            'proposals' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 1)->get(),
-            'kemajuans' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 2)->get(),
-            'akhirs' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 3)->get(),
-            'luarans' => Criteria::where('hibah_id', $id)->where('tipe_dokumen', 4)->get(),
+            'hibah' => $hibah,
+            'proposals' => Criteria::where('hibah_id', $hibah->id)->where('tipe_dokumen', 1)->get(),
+            'kemajuans' => Criteria::where('hibah_id', $hibah->id)->where('tipe_dokumen', 2)->get(),
+            'akhirs' => Criteria::where('hibah_id', $hibah->id)->where('tipe_dokumen', 3)->get(),
+            'luarans' => Criteria::where('hibah_id', $hibah->id)->where('tipe_dokumen', 4)->get(),
         ]);
     }
 
@@ -128,10 +130,11 @@ class HibahPengaturanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
+        $hibah = Hibah::where('slug', $slug)->first();
         return view('staff.hibah.pengaturan.edit', [
-            'hibah' => Hibah::find($id),
+            'hibah' => Hibah::find($hibah->id),
             'categories' => HibahKategori::get(),
             'units' => Unit::get()
         ]);
@@ -146,7 +149,34 @@ class HibahPengaturanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'hibah_judul' => 'required|max:255',
+        ]);
+
+        $data = Hibah::find($id);
+        $data->hibah_judul = $request->hibah_judul;
+        $data->hibah_kategori_id = $request->hibah_kategori;
+        $data->hibah_tgl_publish = $request->hibah_tgl_publish;
+        $data->hibah_tgl_mulai = $request->hibah_tgl_mulai;
+        $data->hibah_tgl_selesai = $request->hibah_tgl_selesai;
+        $data->hibah_tgl_mulai_laporankemajuan = $request->hibah_tgl_mulai_laporankemajuan;
+        $data->hibah_tgl_selesai_laporankemajuan = $request->hibah_tgl_selesai_laporankemajuan;
+        $data->hibah_tgl_mulai_laporanfinal = $request->hibah_tgl_mulai_laporanfinal;
+        $data->hibah_tgl_selesai_laporanfinal = $request->hibah_tgl_selesai_laporanfinal;
+        $data->hibah_tgl_pengumuman = $request->hibah_tgl_pengumuman;
+        $data->unit_id = $request->hibah_unit_id;
+        if(!is_null($request->hibah_panduan)) {
+            $fileName = uniqid().'.'.$request->hibah_panduan->getClientOriginalExtension();
+            $filePath = storage_path() . '/app/public/hibah/panduan/';
+            $request->hibah_panduan->move($filePath, $fileName);
+
+            $data->hibah_panduan = $fileName;
+        }
+        $data->save();
+
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> hibah berhasil diubah.');
+
+        return redirect()->route('s_hibah.pengaturan.index');
     }
 
     /**

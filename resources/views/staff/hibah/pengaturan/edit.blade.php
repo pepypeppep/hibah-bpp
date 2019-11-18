@@ -24,6 +24,7 @@
                         <form method="POST" action="{{ route('s_hibah.pengaturan.update', $hibah->id) }}"
                             enctype="multipart/form-data" class="needs-validation" novalidate>
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <div class="row mb-3">
                                     <div class="col-md-3 text-right">

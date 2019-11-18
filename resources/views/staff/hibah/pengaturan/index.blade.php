@@ -152,11 +152,11 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('s_hibah.pengaturan.edit', $hibah->id) }}"
+                                <a href="{{ route('s_hibah.pengaturan.edit', $hibah->slug) }}"
                                     class="btn btn-sm btn-warning">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="{{ route('s_hibah.pengaturan.show', $hibah->id) }}" class="btn btn-sm btn-default">
+                                <a href="{{ route('s_hibah.pengaturan.show', $hibah->slug) }}" class="btn btn-sm btn-default">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
