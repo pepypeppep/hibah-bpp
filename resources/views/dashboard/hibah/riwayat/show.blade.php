@@ -1,5 +1,9 @@
 @extends('dashboard.layouts.app')
 
+@section('title', 'Detail Pengajuan Hibah')
+
+@section('header', 'Detail Pengajuan Hibah')
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -10,7 +14,7 @@
                     <div class="col-md-12">
                         <h5 class="text-warning">Informasi Batas Perubahan Data</h5>
                         <p>Saudara masih diperbolehkan melakukan penguncian data dan perubahan data pengajuan Hibah
-                            sampai dengan Kamis, 31 Oktober 2019 | 15:55 .</p>
+                            sampai dengan {{ Carbon\Carbon::parse($hibah->hibah->hibah_tgl_selesai)->format('d M Y').' | '.Carbon\Carbon::parse($hibah->hibah->hibah_tgl_selesai)->format('H:i') }} .</p>
                         <!-- /.form-group -->
                     </div>
                     <!-- /.col -->
@@ -41,35 +45,61 @@
                     <tbody>
                         <tr>
                             <td class="font-weight-bold col-md-2">Nama Hibah</td>
-                            <td>ISI</td>
+                            <td>{{ $hibah->hibah->hibah_judul }}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold col-md-2">Kategori Hibah</td>
-                            <td>ISI</td>
+                            <td>{{ $hibah->hibah->category->nama }}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold col-md-2">Unit Penyelenggara</td>
-                            <td>ISI</td>
+                            <td>{{ $hibah->hibah->unit->nama }}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold col-md-2">Judul Yang Diajukan</td>
-                            <td>ISI</td>
+                            <td>{{ $hibah->judul }}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold col-md-2">Abstrak</td>
-                            <td>ISI</td>
+                            <td>{!! $hibah->abstrak !!}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold col-md-2">Anggota Pegawai</td>
-                            <td>ISI</td>
+                            <td>
+                                @foreach ($pegawais as $peg)
+                                    @if ($peg->ketua == 1)
+                                        <span class="font-weight-bold">{{ $peg->user->name }}</span>
+                                        <sup class="font-weight-bold">(Ketua)</sup>
+                                    @else
+                                        <span>{{ $peg->user->name }}</span>
+                                        <sup>(Anggota)</sup>
+                                    @endif
+                                    ,
+                                @endforeach
+                            </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold col-md-2">Anggota Mahasiswa</td>
-                            <td>ISI</td>
+                            <td>
+                                @foreach ($mahasiswas as $mhs)
+                                    @if ($mhs->ketua == 1)
+                                        <span class="font-weight-bold">{{ $mhs->user->name }}</span>
+                                        <sup class="font-weight-bold">(Ketua)</sup>
+                                    @else
+                                        <span>{{ $mhs->user->name }}</span>
+                                        <sup>(Anggota)</sup>
+                                    @endif
+                                    ,
+                                @endforeach
+                            </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold col-md-2">Anggota Non Sivitas UGM</td>
-                            <td>ISI</td>
+                            <td>
+                                @foreach ($noncivitas as $nc)
+                                    {{ $mhs->nama.' ('.$mhs->instansi.'), ' }}
+                                @endforeach
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,14 +130,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($berkas as $no => $bks)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td class="text-center">Proposal</td>
+                            <td class="text-center">{{ $no+1 }}</td>
+                            <td class="text-center">{{ $bks->jenis_dokumen_id == 0 ? 'Proposal' : 'Dokumen Pendukung' }}</td>
                             <td class="text-center">
-                                <a href="#">nama.pdf</a>
+                                <a href="{{ asset('storage/berkas_pengajuan/'.$bks->hibah_dokumen_pengajuan) }}">
+                                    {{ $bks->hibah_dokumen_pengajuan }}
+                                </a>
                             </td>
-                            <td class="text-center">Ya</td>
+                            <td class="text-center">{{ $bks->jenis_dokumen_id == 0 ? 'Ya' : 'Tidak' }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

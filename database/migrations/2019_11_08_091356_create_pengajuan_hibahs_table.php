@@ -20,6 +20,9 @@ class CreatePengajuanHibahsTable extends Migration
             $table->string('judul');
             $table->string('abstrak')->nullable();
             $table->enum('hibah_status', [0, 1]);
+            $table->enum('status_pengajuan', [0, 1, 2, 3]);
+            $table->enum('status_terbit', [0, 1]);
+            $table->enum('status_pencairan', [0, 1, 2, 3]);
             $table->timestamps();
         });
     }

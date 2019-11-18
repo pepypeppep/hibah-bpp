@@ -29,15 +29,9 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('daftar/penguncian_data/{slug}', 'Dashboard\PengajuanHibahController@lock')->name('hibah.daftar.lock');
     Route::put('daftar/penguncian_data/{id}/lock', 'Dashboard\PengajuanHibahController@doLock')->name('hibah.daftar.doLock');
 
-    Route::get('riwayat', function () {
-        return view('dashboard.hibah.riwayat.index');
-    })->name('hibah.riwayat.index');
-    Route::get('riwayat/1', function () {
-        return view('dashboard.hibah.riwayat.show');
-    })->name('hibah.riwayat.show');
-    Route::get('riwayat/1/edit', function () {
-        return view('dashboard.hibah.riwayat.edit');
-    })->name('hibah.riwayat.edit');
+    Route::get('riwayat', 'Dashboard\PengajuanHibahController@index')->name('hibah.riwayat.index');
+    Route::get('riwayat/{slug}/show', 'Dashboard\PengajuanHibahController@show')->where('slug', '[\w\d\-\_]+')->name('hibah.riwayat.show');
+    Route::get('riwayat/{slug}/edit', 'Dashboard\PengajuanHibahController@edit')->where('slug', '[\w\d\-\_]+')->name('hibah.riwayat.edit');
     Route::get('riwayat/1/upload', function () {
         return view('dashboard.hibah.riwayat.upload');
     })->name('hibah.riwayat.upload');

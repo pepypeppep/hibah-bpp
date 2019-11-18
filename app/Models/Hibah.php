@@ -15,4 +15,9 @@ class Hibah extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function pengajuanHibah()
+    {
+        return $this->hasMany(PengajuanHibah::class);
+    }
 }

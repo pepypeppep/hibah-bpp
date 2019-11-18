@@ -22,7 +22,9 @@ class PengajuanHibahController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.hibah.riwayat.index', [
+            'hibahs' => PengajuanHibah::with('hibah')->get()
+        ]);
     }
 
     /**
@@ -109,9 +111,17 @@ class PengajuanHibahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $hibah = PengajuanHibah::with('hibah', 'hibah.unit', 'hibah.category')->where('slug', $slug)->first();
+
+        return view('dashboard.hibah.riwayat.show', [
+            'hibah' => $hibah,
+            'pegawais' => AnggotaStaff::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
+            'mahasiswas' => AnggotaMahasiswa::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
+            'noncivitas' => AnggotaNonCivitas::where('pengajuan_hibah_id', $hibah->id)->get(),
+            'berkas' => HibahBerkas::where('pengajuan_hibah_id', $hibah->id)->get()
+        ]);
     }
 
     /**
@@ -120,9 +130,13 @@ class PengajuanHibahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $hibah = PengajuanHibah::with('hibah')->where('slug', $slug)->first();
+
+        return view('dashboard.hibah.riwayat.edit', [
+            'hibah' => $hibah
+        ]);
     }
 
     /**
@@ -221,6 +235,11 @@ class PengajuanHibahController extends Controller
     public function doLock(Request $request, $id) {
         $data = PengajuanHibah::find($id);
         $data->hibah_status = $request->hibah_status;
+        if ($request->hibah_status == 0) {
+            $data->status_pengajuan = 1;
+        }elseif ($request->hibah_status == 1) {
+            $data->status_pengajuan = 2;
+        }
         $data->save();
 
         Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> Pengajuan hibah berhasil dibuat.');
