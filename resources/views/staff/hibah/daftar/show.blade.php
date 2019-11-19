@@ -10,7 +10,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header bg-info">
-                <h3 class="card-title">Data Pengajuan Hibah</h3>
+                <h3 class="card-title"><b>Data Pengajuan</b> Hibah</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
@@ -152,14 +152,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-center">1</td>
+                            <td colspan="5">
+                                <div class="alert alert-danger">Tidak ada data!</div>
+                            </td>
+                            {{-- <td class="text-center">1</td>
                             <td>Pengusul: First Author (nilai 1)</td>
                             <td class="text-center">20</td>
                             <td class="text-center">0 - 1</td>
                             <td>
                                 <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                            </td>
+                            </td> --}}
                         </tr>
                     </tbody>
                 </table>
@@ -177,7 +180,7 @@
                 <h3 class="card-title"><b>Tambah</b> Reviewer</h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0 mt-3">
+            <div class="card-body mt-3">
                 <form method="POST" action="">
                     @csrf
                     <div class="row">
@@ -211,7 +214,6 @@
                             <input type="text" class="form-control" name="reviewer_name" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-sm"></button>
                 </form>
             </div>
             <!-- /.card-body -->
@@ -224,7 +226,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header bg-info">
-                <h3 class="card-title">Reviewer Proposal</h3>
+                <h3 class="card-title"><b>Reviewer</b> Proposal</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
@@ -235,6 +237,7 @@
                             <th>Nama Reviewer</th>
                             <th>Unit</th>
                             <th>Nilai Review</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -243,7 +246,161 @@
                             <td>Prof. Aku</td>
                             <td class="text-center">Fakultas Farmasi</td>
                             <td class="text-center">7,8</td>
+                            <td class="text-center">
+                                <a href="" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </a>
+                            </td>
                         </tr>
+                        <tr>
+                            <td colspan="3">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="text-center">
+                                <span>0</span>
+                            </td>
+                            <td></td>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <div class="card-header bg-info">
+                <h3 class="card-title"><b>Reviewer</b> Laporan Kemajuan</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <table class="table table-condensed">
+                    <thead class="text-center">
+                        <tr>
+                            <th style="width: 10px">No</th>
+                            <th>Nama Reviewer</th>
+                            <th>Unit</th>
+                            <th>Nilai Review</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>Prof. Aku</td>
+                            <td class="text-center">Fakultas Farmasi</td>
+                            <td class="text-center">7,8</td>
+                            <td class="text-center">
+                                <a href="" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="text-center">
+                                <span>0</span>
+                            </td>
+                            <td></td>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <div class="card-header bg-info">
+                <h3 class="card-title"><b>Reviewer</b> Akhir</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <table class="table table-condensed">
+                    <thead class="text-center">
+                        <tr>
+                            <th style="width: 10px">No</th>
+                            <th>Nama Reviewer</th>
+                            <th>Unit</th>
+                            <th>Nilai Review</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>Prof. Aku</td>
+                            <td class="text-center">Fakultas Farmasi</td>
+                            <td class="text-center">7,8</td>
+                            <td class="text-center">
+                                <a href="" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="text-center">
+                                <span>0</span>
+                            </td>
+                            <td></td>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <div class="card-header bg-info">
+                <h3 class="card-title"><b>Reviewer</b> Luaran</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <table class="table table-condensed">
+                    <thead class="text-center">
+                        <tr>
+                            <th style="width: 10px">No</th>
+                            <th>Nama Reviewer</th>
+                            <th>Unit</th>
+                            <th>Nilai Review</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>Prof. Aku</td>
+                            <td class="text-center">Fakultas Farmasi</td>
+                            <td class="text-center">7,8</td>
+                            <td class="text-center">
+                                <a href="" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="text-center">
+                                <span>0</span>
+                            </td>
+                            <td></td>
                     </tbody>
                 </table>
             </div>
