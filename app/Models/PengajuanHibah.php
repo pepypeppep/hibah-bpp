@@ -11,6 +11,16 @@ class PengajuanHibah extends Model
         return $this->belongsTo(Hibah::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function proposal()
+    {
+        return $this->hasMany(HibahBerkas::class)->where('jenis_dokumen_id', 1);
+    }
+
     public function berkas()
     {
         return $this->hasMany(HibahBerkas::class);

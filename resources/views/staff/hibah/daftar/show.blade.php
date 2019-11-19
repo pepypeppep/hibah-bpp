@@ -1,5 +1,9 @@
 @extends('staff.layouts.app')
 
+@section('title', 'Detail Pengajuan Hibah')
+
+@section('header', 'Detail Pengajuan Hibah')
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -15,47 +19,65 @@
                         <tr>
                             <td class="font-weight-bold">Hibah Publikasi</td>
                             <td>
-                                Bantuan Penulisan Book Chapter
+                                {{ $hibah->hibah->category->nama }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Judul</td>
                             <td>
-                                itle
+                                {{ $hibah->judul }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Abstrak</td>
                             <td>
-                                Lorem Ipsum
+                                {!! $hibah->abstrak !!}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Ketua</td>
                             <td>
-                                Nama
+                                {{ $ketua[0]->user->name }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Anggota</td>
                             <td>
                                 <b>Pengusul di Simaster:</b><br>
-                                Aku
+                                {{ $hibah->user->name }}
                                 <br><br>
-                                <b>Non UGM:</b>
-                                Prof. Aku
+                                <b>Pegawai:</b><br>
+                                @foreach ($pegawais as $peg)
+                                    {{ $peg->user->name }},
+                                @endforeach
+                                <br><b>Mahasiswa:</b><br>
+                                @foreach ($mahasiswas as $mhs)
+                                   {{ $mhs->user->name }},
+                                @endforeach
+                                <b>Non UGM:</b><br>
+                                @foreach ($noncivitas as $nc)
+                                    {{ $nc->nama }},
+                                @endforeach
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Unit</td>
                             <td>
-                                Perpustakaan
+                                {{ $hibah->hibah->unit->nama }}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Status</td>
                             <td>
-                                <span class="badge badge-secondary">Diajukan</span>
+                                @if ($hibah->status_pengajuan == 1)
+                                    <h6><span class="badge badge-secondary">Diajukan</span></h6>
+                                @elseif ($hibah->status_pengajuan == 2)
+                                    <h6><span class="badge badge-info">Penilaian</span></h6>
+                                @elseif ($hibah->status_pengajuan == 3)
+                                    <h6><span class="badge badge-success">Diterima</span></h6>
+                                @elseif ($hibah->status_pengajuan == 4)
+                                    <h6><span class="badge badge-danger">Ditolak</span></h6>
+                                @endif
                             </td>
                         </tr>
                     </tbody>
@@ -71,7 +93,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header bg-info">
-                <h3 class="card-title">Berkas Pengajuan</h3>
+                <h3 class="card-title"><b>Berkas</b> Pengajuan</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
@@ -82,19 +104,25 @@
                             <th>Nama Berkas</th>
                             <th>Jenis Berkas</th>
                             <th>Berkas Wajib</th>
-                            <th>Akasi</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($hibah->berkas as $no => $bks)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>Proposal_123.pdf</td>
-                            <td class="text-center">Proposal</td>
-                            <td class="text-center">Ya</td>
+                            <td class="text-center">{{ $no+1 }}</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Tampilkan</a>
+                                <a href="{{ asset('/storage/hibah/berkas_pengajuan/'.$bks->hibah_dokumen_pengajuan) }}">
+                                    {{ $bks->hibah_dokumen_pengajuan }}
+                                </a>
+                            </td>
+                            <td class="text-center">{{ $bks->jenis_dokumen_id == 0 ? 'Proposal' : 'Dokumen Pendukung' }}</td>
+                            <td class="text-center">{{ $bks->jenis_dokumen_id == 0 ? 'Ya' : 'Tidak' }}</td>
+                            <td>
+                                <a href="{{ asset('/storage/hibah/berkas_pengajuan/'.$bks->hibah_dokumen_pengajuan) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Tampilkan</a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -108,7 +136,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header bg-info">
-                <h3 class="card-title">Luaran Pengajuan</h3>
+                <h3 class="card-title"><b>Luaran</b> Pengajuan</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
@@ -146,7 +174,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header bg-info">
-                <h3 class="card-title">Tambah Reviewer</h3>
+                <h3 class="card-title"><b>Tambah</b> Reviewer</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0 mt-3">
@@ -229,7 +257,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header bg-info">
-                <h3 class="card-title">Komentar Reviewer</h3>
+                <h3 class="card-title"><b>Komentar</b> Reviewer</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
@@ -256,7 +284,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header bg-info">
-                <h3 class="card-title">Status Pengajuan</h3>
+                <h3 class="card-title"><b>Status</b> Pengajuan</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">

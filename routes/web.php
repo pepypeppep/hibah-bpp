@@ -45,9 +45,7 @@ Route::group(['prefix' => 'staff'], function () {
     });
 
     Route::get('daftar', 'Staff\HibahController@index')->name('s_hibah.daftar.index');
-    Route::get('daftar/1/show', function () {
-        return view('staff.hibah.daftar.show');
-    })->name('s_hibah.daftar.show');
+    Route::get('daftar/{slug}/show', 'Staff\HibahController@show')->where('slug', '[\w\d\-\_]+')->name('s_hibah.daftar.show');
 
     Route::get('/pengaturan', 'Staff\HibahPengaturanController@index')->name('s_hibah.pengaturan.index');
     Route::get('/pengaturan/create', 'Staff\HibahPengaturanController@create')->name('s_hibah.pengaturan.create');

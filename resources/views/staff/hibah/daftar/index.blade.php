@@ -159,9 +159,7 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                @foreach ($hibah->berkas as $berkas)
-                                    <a href="{{ asset('/storage/hibah/pengajuan_hibah'.$berkas) }}"><i class="fas fa-file"></i></a>
-                                @endforeach
+                                <a href="{{ asset('/storage/hibah/berkas_pengajuan/'.$hibah->proposal[0]->hibah_dokumen_pengajuan) }}"><i class="fas fa-file"></i></a>
                             </td>
                             <td class="text-center">
                                 -
@@ -202,7 +200,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('s_hibah.daftar.show') }}" class="btn btn-sm btn-default">
+                                <a href="{{ route('s_hibah.daftar.show', $hibah->slug) }}" class="btn btn-sm btn-default">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="" class="btn btn-sm btn-danger">

@@ -17,6 +17,7 @@ class CreatePengajuanHibahsTable extends Migration
             $table->bigIncrements('id');
             $table->string('slug');
             $table->bigInteger('hibah_id')->unsigned()->index();
+            $table->bigInteger('user_id')->unsigned()->index();
             $table->string('judul');
             $table->string('abstrak')->nullable();
             $table->enum('hibah_status', [0, 1]);

@@ -51,6 +51,7 @@ class PengajuanHibahController extends Controller
         //Save Pengajuan Hibah
         $data = new PengajuanHibah;
         $data->hibah_id = $id;
+        $data->user_id = 3;
         $data->slug = sha1(now());
         $data->judul = $request->judul;
         $data->abstrak = $request->abstrak;
