@@ -85,13 +85,15 @@
                                 @if ($hibah->status_pengajuan == 1)
                                     <h6><span class="badge badge-secondary">Diajukan</span></h6>
                                 @elseif ($hibah->status_pengajuan == 2)
-                                    <h6><span class="badge badge-info">Penilaian</span></h6>
+                                    <h6><span class="badge badge-warning">Sedang Diriview</span></h6>
                                 @elseif ($hibah->status_pengajuan == 3)
-                                    <h6><span class="badge badge-success">Diterima</span></h6>
+                                    <h6><span class="badge badge-info">Sudah Dinilai</span></h6>
                                 @elseif ($hibah->status_pengajuan == 4)
+                                    <h6><span class="badge badge-success">Diterima</span></h6>
+                                @elseif ($hibah->status_pengajuan == 5)
                                     <h6><span class="badge badge-danger">Ditolak</span></h6>
                                 @elseif ($hibah->status_pengajuan == 0)
-                                <h6><span class="badge badge-light">Belum Diajukan</span></h6>
+                                    <h6><span class="badge badge-light">Belum Diajukan</span></h6>
                                 @endif
                             </td>
                             <td class="text-center">

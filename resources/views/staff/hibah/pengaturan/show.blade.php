@@ -94,11 +94,11 @@
                         <tr>
                             <td class="font-weight-bold">Total Pengajuan</td>
                             <td>
-                                <span class="badge badge-success">0 Diterima</span>
-                                <span class="badge badge-danger">0 Ditolak</span>
-                                <span class="badge badge-info">0 Sudah Dinilai</span>
-                                <span class="badge badge-warning">0 Sedang Diriview</span>
-                                <span class="badge badge-secondary">0 Diajukan</span>
+                                <span class="badge badge-success">{{ $diterima }} Diterima</span>
+                                <span class="badge badge-danger">{{ $ditolak }} Ditolak</span>
+                                <span class="badge badge-info">{{ $dinilai }} Sudah Dinilai</span>
+                                <span class="badge badge-warning">{{ $direview }} Sedang Direview</span>
+                                <span class="badge badge-secondary">{{ $diajukan }} Diajukan</span>
                             </td>
                         </tr>
                     </tbody>

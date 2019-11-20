@@ -8,6 +8,7 @@ use App\Models\Criteria;
 use Illuminate\Http\Request;
 use App\Models\HibahKategori;
 use App\Http\Controllers\Controller;
+use App\Models\PengajuanHibah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -122,6 +123,11 @@ class HibahPengaturanController extends Controller
             'kemajuans' => Criteria::where('hibah_id', $hibah->id)->where('tipe_dokumen', 2)->get(),
             'akhirs' => Criteria::where('hibah_id', $hibah->id)->where('tipe_dokumen', 3)->get(),
             'luarans' => Criteria::where('hibah_id', $hibah->id)->where('tipe_dokumen', 4)->get(),
+            'diajukan' => PengajuanHibah::where('hibah_id', $hibah->id)->where('status_pengajuan', 2)->count(),
+            'direview' => PengajuanHibah::where('hibah_id', $hibah->id)->where('status_pengajuan', 3)->count(),
+            'dinilai' => PengajuanHibah::where('hibah_id', $hibah->id)->where('status_pengajuan', 4)->count(),
+            'diterima' => PengajuanHibah::where('hibah_id', $hibah->id)->where('status_pengajuan', 5)->count(),
+            'ditolak' => PengajuanHibah::where('hibah_id', $hibah->id)->where('status_pengajuan', 6)->count(),
         ]);
     }
 
