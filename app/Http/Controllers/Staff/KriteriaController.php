@@ -30,7 +30,7 @@ class KriteriaController extends Controller
         $hibah = Hibah::where('slug', $slug)->first();
         return view('staff.hibah.pengaturan.kriteria.create', [
                 'criteria' => $criteria,
-                'hibah_id' => $hibah->id
+                'hibah_id' => $hibah->slug
             ]);
     }
 

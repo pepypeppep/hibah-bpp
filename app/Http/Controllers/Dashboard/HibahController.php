@@ -17,7 +17,10 @@ class HibahController extends Controller
      */
     public function index(Request $request)
     {
-        $hibahs = Hibah::with('category','unit')->orderBy('created_at');
+        $hibahs = Hibah::with('category','unit')
+                        ->where('hibah_tgl_mulai', '<=', now())
+                        ->where('hibah_tgl_selesai', '>=', now())
+                        ->orderBy('created_at');
 
         $data = $request->validate([
             'judul' => 'string|nullable',

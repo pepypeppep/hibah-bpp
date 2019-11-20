@@ -54,7 +54,7 @@
                                 @foreach ($mahasiswas as $mhs)
                                    {{ $mhs->user->name }},
                                 @endforeach
-                                <b>Non UGM:</b><br>
+                                <br><b>Non UGM:</b><br>
                                 @foreach ($noncivitas as $nc)
                                     {{ $nc->nama }},
                                 @endforeach
