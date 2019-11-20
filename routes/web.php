@@ -63,4 +63,6 @@ Route::group(['prefix' => 'staff', 'middleware' => ['role:staff']], function () 
     Route::get('pengaturan/update_penilaian/{slug}/edit', 'Staff\KriteriaController@edit')->where('slug', '[\w\d\-\_]+')->name('s_hibah.pengaturan.criteria.edit');
     Route::put('pengaturan/update_penilaian/{id}/update', 'Staff\KriteriaController@update')->name('s_hibah.pengaturan.criteria.update');
     Route::get('pengaturan/penilaian/{id}', 'Staff\KriteriaController@destroy')->name('s_hibah.pengaturan.criteria.delete');
+
+    Route::post('reviewer/{id}/store', 'Staff\ReviewController@store')->name('s_hibah.review.store');
 });

@@ -6,6 +6,20 @@
 
 @section('content')
 <section class="content">
+    @if(Session::has('flash_message'))
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+        <div class="toast-body pt-4 pb-4 bg-success">
+                {!! session('flash_message') !!}
+        </div>
+    </div>
+    @endif
+    @if(Session::has('flash_error'))
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+        <div class="toast-body pt-4 pb-4 bg-danger">
+                {!! session('flash_error') !!}
+        </div>
+    </div>
+    @endif
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -72,11 +86,15 @@
                                 @if ($hibah->status_pengajuan == 1)
                                     <h6><span class="badge badge-secondary">Diajukan</span></h6>
                                 @elseif ($hibah->status_pengajuan == 2)
-                                    <h6><span class="badge badge-info">Penilaian</span></h6>
+                                    <h6><span class="badge badge-warning">Sedang Diriview</span></h6>
                                 @elseif ($hibah->status_pengajuan == 3)
-                                    <h6><span class="badge badge-success">Diterima</span></h6>
+                                    <h6><span class="badge badge-info">Sudah Dinilai</span></h6>
                                 @elseif ($hibah->status_pengajuan == 4)
+                                    <h6><span class="badge badge-success">Diterima</span></h6>
+                                @elseif ($hibah->status_pengajuan == 5)
                                     <h6><span class="badge badge-danger">Ditolak</span></h6>
+                                @elseif ($hibah->status_pengajuan == 0)
+                                    <h6><span class="badge badge-light">Belum Diajukan</span></h6>
                                 @endif
                             </td>
                         </tr>
@@ -181,7 +199,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body mt-3">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('s_hibah.review.store', $hibah->id) }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-3 text-right">
@@ -189,19 +207,19 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="text_type" id="text_type1" value="Proposal">
+                                <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type1" value="1">
                                 <label class="form-check-label" for="text_type1"> Proposal</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="text_type" id="text_type2" value="Proposal">
+                                <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type2" value="2">
                                 <label class="form-check-label" for="text_type2"> Laporan Kemajuan</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="text_type" id="text_type3" value="Proposal">
+                                <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type3" value="3">
                                 <label class="form-check-label" for="text_type3"> Laporan Akhir</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="text_type" id="text_type4" value="Proposal">
+                                <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type4" value="4">
                                 <label class="form-check-label" for="text_type4"> Luaran</label>
                             </div>
                         </div>
@@ -211,7 +229,7 @@
                             <label>Cari Dosen</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="reviewer_name" required>
+                            <select name="reviewer_id" id="reviewer_id" class="form-control select2" style="width: 100%;" required></select>
                         </div>
                     </div>
                 </form>
@@ -505,6 +523,32 @@
 
         //Initialize Select2 Elements
         $('.select2').select2()
+
+        $('#reviewer_id').select2({
+            placeholder: 'Nama Reviewer...',
+            ajax: {
+                type: 'GET',
+                url: document.location.origin + "/api/reviewer/search",
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (item) {
+                            return {
+                                text: item.email,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('#reviewer_id').on("select2:select", function() {
+            console.log("select2:select");
+            $(this).parents('form').submit();
+        });
     });
 </script>
 @endpush
