@@ -265,7 +265,7 @@
                             <td class="text-center">{{ $no+1 }}</td>
                             <td>{{ $rv->user->name }}</td>
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
-                            <td class="text-center">{{ $rv->total }}</td>
+                            <td class="text-center reviewer1">{{ $rv->total }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
@@ -298,7 +298,7 @@
                                 <strong>Total</strong>
                             </td>
                             <td class="text-center">
-                                <span>0</span>
+                                <span id="total1">0</span>
                             </td>
                             <td></td>
                         </tr>
@@ -337,7 +337,7 @@
                             <td class="text-center">{{ $no+1 }}</td>
                             <td>{{ $rv->user->name }}</td>
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
-                            <td class="text-center">{{ $rv->total }}</td>
+                            <td class="text-center reviewer2">{{ $rv->total }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
@@ -370,7 +370,7 @@
                                 <strong>Total</strong>
                             </td>
                             <td class="text-center">
-                                <span>0</span>
+                                <span id="total2">0</span>
                             </td>
                             <td></td>
                         </tr>
@@ -409,7 +409,7 @@
                             <td class="text-center">{{ $no+1 }}</td>
                             <td>{{ $rv->user->name }}</td>
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
-                            <td class="text-center">{{ $rv->total }}</td>
+                            <td class="text-center reviewer3">{{ $rv->total }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
@@ -442,7 +442,7 @@
                                 <strong>Total</strong>
                             </td>
                             <td class="text-center">
-                                <span>0</span>
+                                <span id="total3">0</span>
                             </td>
                             <td></td>
                         </tr>
@@ -481,7 +481,7 @@
                             <td class="text-center">{{ $no+1 }}</td>
                             <td>{{ $rv->user->name }}</td>
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
-                            <td class="text-center">{{ $rv->total }}</td>
+                            <td class="text-center reviewer4">{{ $rv->total }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
@@ -514,7 +514,7 @@
                                 <strong>Total</strong>
                             </td>
                             <td class="text-center">
-                                <span>0</span>
+                                <span id="total4">0</span>
                             </td>
                             <td></td>
                         </tr>
@@ -618,6 +618,30 @@
 
 <script>
     $(function () {
+        var total1 = 0;
+        $('.reviewer1').each(function(){
+            total1 += parseInt($(this).text());
+        });
+        $('#total1').text(total1)
+
+        var total2 = 0;
+        $('.reviewer2').each(function(){
+            total2 += parseInt($(this).text());
+        });
+        $('#total2').text(total2)
+
+        var total3 = 0;
+        $('.reviewer3').each(function(){
+            total3 += parseInt($(this).text());
+        });
+        $('#total3').text(total3)
+
+        var total4 = 0;
+        $('.reviewer4').each(function(){
+            total4 += parseInt($(this).text());
+        });
+        $('#total4').text(total4)
+
         //Initialize Select2 Elements
         $('.select2bs4').select2({
             theme: 'bootstrap4'
