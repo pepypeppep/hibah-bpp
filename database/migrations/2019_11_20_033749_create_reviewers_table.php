@@ -18,7 +18,7 @@ class CreateReviewersTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->bigInteger('pengajuan_hibah_id')->unsigned()->index();
             $table->bigInteger('tipe_dokumen');
-            $table->integer('total')->nullable();
+            $table->integer('total')->default(0);
             $table->text('komentar')->nullable();
             $table->timestamps();
         });

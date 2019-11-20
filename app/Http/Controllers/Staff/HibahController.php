@@ -8,6 +8,7 @@ use App\Models\PengajuanHibah;
 use App\Models\AnggotaMahasiswa;
 use App\Models\AnggotaNonCivitas;
 use App\Http\Controllers\Controller;
+use App\Models\Reviewer;
 
 class HibahController extends Controller
 {
@@ -72,7 +73,11 @@ class HibahController extends Controller
             'ketua' => $ketua,
             'pegawais' => AnggotaStaff::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
             'mahasiswas' => AnggotaMahasiswa::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
-            'noncivitas' => AnggotaNonCivitas::where('pengajuan_hibah_id', $hibah->id)->get()
+            'noncivitas' => AnggotaNonCivitas::where('pengajuan_hibah_id', $hibah->id)->get(),
+            'reviewer1' => Reviewer::with('user', 'user.unit')->where('tipe_dokumen', 1)->get(),
+            'reviewer2' => Reviewer::where('tipe_dokumen', 2)->get(),
+            'reviewer3' => Reviewer::where('tipe_dokumen', 3)->get(),
+            'reviewer4' => Reviewer::where('tipe_dokumen', 4)->get(),
         ]);
     }
 

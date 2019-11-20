@@ -240,6 +240,7 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 
+    @if (count($reviewer1) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -259,17 +260,39 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($reviewer1 as $no => $rv)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>Prof. Aku</td>
-                            <td class="text-center">Fakultas Farmasi</td>
-                            <td class="text-center">7,8</td>
+                            <td class="text-center">{{ $no+1 }}</td>
+                            <td>{{ $rv->user->name }}</td>
+                            <td class="text-center">{{ $rv->user->unit->nama }}</td>
+                            <td class="text-center">{{ $rv->total }}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal{{ $rv->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Yakin data akan dihapus?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{ route('s_hibah.review.delete', $rv->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                    <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                         <tr>
                             <td colspan="3">
                                 <strong>Total</strong>
@@ -278,6 +301,7 @@
                                 <span>0</span>
                             </td>
                             <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -286,7 +310,9 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endif
 
+    @if (count($reviewer2) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -306,17 +332,39 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($reviewer2 as $no => $rv)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>Prof. Aku</td>
-                            <td class="text-center">Fakultas Farmasi</td>
-                            <td class="text-center">7,8</td>
+                            <td class="text-center">{{ $no+1 }}</td>
+                            <td>{{ $rv->user->name }}</td>
+                            <td class="text-center">{{ $rv->user->unit->nama }}</td>
+                            <td class="text-center">{{ $rv->total }}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal{{ $rv->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Yakin data akan dihapus?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{ route('s_hibah.review.delete', $rv->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                    <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                         <tr>
                             <td colspan="3">
                                 <strong>Total</strong>
@@ -325,6 +373,7 @@
                                 <span>0</span>
                             </td>
                             <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -333,7 +382,9 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endif
 
+    @if (count($reviewer3) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -353,17 +404,39 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($reviewer3 as $no => $rv)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>Prof. Aku</td>
-                            <td class="text-center">Fakultas Farmasi</td>
-                            <td class="text-center">7,8</td>
+                            <td class="text-center">{{ $no+1 }}</td>
+                            <td>{{ $rv->user->name }}</td>
+                            <td class="text-center">{{ $rv->user->unit->nama }}</td>
+                            <td class="text-center">{{ $rv->total }}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal{{ $rv->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Yakin data akan dihapus?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{ route('s_hibah.review.delete', $rv->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                    <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                         <tr>
                             <td colspan="3">
                                 <strong>Total</strong>
@@ -372,6 +445,7 @@
                                 <span>0</span>
                             </td>
                             <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -380,7 +454,9 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endif
 
+    @if (count($reviewer4) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -400,17 +476,39 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($reviewer4 as $no => $rv)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>Prof. Aku</td>
-                            <td class="text-center">Fakultas Farmasi</td>
-                            <td class="text-center">7,8</td>
+                            <td class="text-center">{{ $no+1 }}</td>
+                            <td>{{ $rv->user->name }}</td>
+                            <td class="text-center">{{ $rv->user->unit->nama }}</td>
+                            <td class="text-center">{{ $rv->total }}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal{{ $rv->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Konfirmasi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Yakin data akan dihapus?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{ route('s_hibah.review.delete', $rv->id) }}" class="btn btn-danger col-md-2">Ya</a>
+                                    <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Tidak</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                         <tr>
                             <td colspan="3">
                                 <strong>Total</strong>
@@ -419,6 +517,7 @@
                                 <span>0</span>
                             </td>
                             <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -427,7 +526,9 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endif
 
+    @if (count($reviewer1) != 0 || count($reviewer2) != 0 || count($reviewer3) != 0 || count($reviewer4) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -454,6 +555,7 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endif
 
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->

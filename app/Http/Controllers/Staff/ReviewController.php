@@ -99,6 +99,11 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Reviewer::find($id);
+        $data->delete();
+
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> reviewer berhasil dihapus.');
+
+        return redirect()->back();
     }
 }

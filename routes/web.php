@@ -65,4 +65,5 @@ Route::group(['prefix' => 'staff', 'middleware' => ['role:staff']], function () 
     Route::get('pengaturan/penilaian/{id}', 'Staff\KriteriaController@destroy')->name('s_hibah.pengaturan.criteria.delete');
 
     Route::post('reviewer/{id}/store', 'Staff\ReviewController@store')->name('s_hibah.review.store');
+    Route::get('reviewer/{id}/delete', 'Staff\ReviewController@destroy')->name('s_hibah.review.delete');
 });

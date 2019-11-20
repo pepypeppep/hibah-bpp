@@ -39,6 +39,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function unit()
+    {
+        return $this->belongsTo('App\Models\Unit');
+    }
+
     public function anggotaStaffs()
     {
         return $this->hasMany('App\Models\AnggotaStaff', 'anggota_staff_id', 'id');
@@ -50,6 +55,11 @@ class User extends Authenticatable
     }
 
     public function pengajuanHibah()
+    {
+        return $this->hasMany('App\Models\PengajuanHibah');
+    }
+
+    public function reviewers()
     {
         return $this->hasMany('App\Models\PengajuanHibah');
     }

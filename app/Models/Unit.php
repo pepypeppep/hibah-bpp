@@ -10,4 +10,9 @@ class Unit extends Model
     {
         return $this->hasMany(Hibah::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany('App\User');
+    }
 }
