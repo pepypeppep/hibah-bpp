@@ -22,9 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->bigInteger('unit_id');
             $table->string('NIP');
-            $table->enum('mahasiswa',[0,1])->default(1);
             $table->enum('alumni',[0,1])->default(0);
-            $table->enum('staff',[0,1])->default(0);
             $table->timestamps();
         });
     }

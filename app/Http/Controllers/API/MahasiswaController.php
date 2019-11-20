@@ -11,11 +11,17 @@ class MahasiswaController extends Controller
     public function search(Request $request)
     {
         if ($request->unit_id != 0) {
-            $mahasiswas = User::where('unit_id', $request->unit_id)
+            $mahasiswas = User::with('roles')->where('unit_id', $request->unit_id)
                                 ->where('name', 'like', '%' . $request->nama . '%')
-                                ->where('mahasiswa',2)->get();
+                                ->whereHas('roles', function ($query) {
+                                    return $query->where('id', 4);
+                                })->get();
         }else{
-            $mahasiswas = User::where('name', 'like', '%' . $request->nama . '%')->where('mahasiswa',2)->get();
+            $mahasiswas = User::with('roles')
+                                ->where('name', 'like', '%' . $request->nama . '%')
+                                ->whereHas('roles', function ($query) {
+                                    return $query->where('id', 4);
+                                })->get();
         }
 
         return $mahasiswas;

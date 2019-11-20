@@ -32,6 +32,7 @@ class HibahTableSeeder extends Seeder
         foreach ($hibahs as $value) {
             $data = new Hibah;
             $data->hibah_judul = $value['hibah_judul'];
+            $data->user_id = 1;
             $data->slug = sha1(now());
             $data->hibah_kategori_id = $value['hibah_kategori_id'];
             $data->hibah_tgl_publish = $value['hibah_tgl_publish'];

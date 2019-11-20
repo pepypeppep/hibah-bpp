@@ -16,6 +16,10 @@ Route::get('/', function () {
 });
 
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/', function () {
         return redirect()->route('hibah.daftar.index');
@@ -39,7 +43,7 @@ Route::group(['prefix' => 'dashboard'], function () {
 });
 
 
-Route::group(['prefix' => 'staff'], function () {
+Route::group(['prefix' => 'staff', 'middleware' => ['role:staff']], function () {
     Route::get('/', function () {
         return redirect()->route('s_hibah.daftar.index');
     });
@@ -60,7 +64,3 @@ Route::group(['prefix' => 'staff'], function () {
     Route::put('pengaturan/update_penilaian/{id}/update', 'Staff\KriteriaController@update')->name('s_hibah.pengaturan.criteria.update');
     Route::get('pengaturan/penilaian/{id}', 'Staff\KriteriaController@destroy')->name('s_hibah.pengaturan.criteria.delete');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

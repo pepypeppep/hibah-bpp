@@ -11,6 +11,7 @@ use App\Models\PengajuanHibah;
 use App\Models\AnggotaMahasiswa;
 use App\Models\AnggotaNonCivitas;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PengajuanHibahController extends Controller
@@ -23,7 +24,7 @@ class PengajuanHibahController extends Controller
     public function index()
     {
         return view('dashboard.hibah.riwayat.index', [
-            'hibahs' => PengajuanHibah::with('hibah')->get()
+            'hibahs' => PengajuanHibah::where('user_id', Auth::user()->id)->with('hibah')->get()
         ]);
     }
 

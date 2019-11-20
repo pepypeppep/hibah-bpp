@@ -15,6 +15,7 @@ class CreateHibahsTable extends Migration
     {
         Schema::create('hibahs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->index();
             $table->string('slug');
             $table->string('hibah_judul');
             $table->bigInteger('hibah_kategori_id')->unsigned()->index();

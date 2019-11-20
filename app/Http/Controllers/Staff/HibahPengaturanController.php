@@ -8,6 +8,7 @@ use App\Models\Criteria;
 use Illuminate\Http\Request;
 use App\Models\HibahKategori;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class HibahPengaturanController extends Controller
@@ -49,7 +50,7 @@ class HibahPengaturanController extends Controller
         }
 
         return view('staff.hibah.pengaturan.index', [
-            'hibahs'=> $hibahs->orderBy('created_at', 'DESC')->paginate(10),
+            'hibahs'=> $hibahs->where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(10),
             'categories' => HibahKategori::get(),
             'units' => Unit::get()
         ]);

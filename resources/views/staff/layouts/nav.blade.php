@@ -30,16 +30,19 @@
         <li class="nav-item dropdown" style="border-left: 2px solid rgba(0, 0, 0, 0.18)">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span>&nbsp;Badan Penerbit dan Publikasi</span>
+                <span>&nbsp;{{ Auth::user()->name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">
                     <i class="fas fa-users mr-2"></i> Ganti Password
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">
                     <i class="fas fa-users mr-2"></i> Logout
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </li>
         <!-- Messages Dropdown Menu -->

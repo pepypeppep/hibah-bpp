@@ -200,7 +200,7 @@
                                                 <option value="" {{ request('unit_id') == '' ? 'selected' : ''  }}>Tampilkan
                                                     Semua</option>
                                                 @foreach ($units as $unit)
-                                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                                    <option value="{{ $unit->id }}">{{ $unit->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
