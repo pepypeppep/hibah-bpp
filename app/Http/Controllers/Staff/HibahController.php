@@ -74,10 +74,13 @@ class HibahController extends Controller
             'pegawais' => AnggotaStaff::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
             'mahasiswas' => AnggotaMahasiswa::with('user')->where('pengajuan_hibah_id', $hibah->id)->get(),
             'noncivitas' => AnggotaNonCivitas::where('pengajuan_hibah_id', $hibah->id)->get(),
-            'reviewer1' => Reviewer::with('user', 'user.unit')->where('tipe_dokumen', 1)->get(),
-            'reviewer2' => Reviewer::where('tipe_dokumen', 2)->get(),
-            'reviewer3' => Reviewer::where('tipe_dokumen', 3)->get(),
-            'reviewer4' => Reviewer::where('tipe_dokumen', 4)->get(),
+            'reviewer1' => Reviewer::with('user', 'user.unit')->where('pengajuan_hibah_id', $hibah->id)->where('tipe_dokumen', 1)->get(),
+            'reviewer2' => Reviewer::with('user', 'user.unit')->where('pengajuan_hibah_id', $hibah->id)->where('tipe_dokumen', 2)->get(),
+            'reviewer3' => Reviewer::with('user', 'user.unit')->where('pengajuan_hibah_id', $hibah->id)->where('tipe_dokumen', 3)->get(),
+            'reviewer4' => Reviewer::with('user', 'user.unit')->where('pengajuan_hibah_id', $hibah->id)->where('tipe_dokumen', 4)->get(),
+            'komentars' => Reviewer::with('user', 'user.unit')
+                                ->where('pengajuan_hibah_id', $hibah->id)
+                                ->where('komentar', '!=', '')->get()
         ]);
     }
 

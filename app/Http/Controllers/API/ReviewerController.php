@@ -14,7 +14,7 @@ class ReviewerController extends Controller
             $reviewers = User::with('roles')
                                 ->where('name', 'like', '%' . $request->q . '%')
                                 ->whereHas('roles', function ($query) {
-                                    return $query->where('id', 2);
+                                    return $query->where('id', 1)->orWhere('id', 2)->orWhere('id', 3);
                                 })->get();
 
             return response()->json($reviewers);

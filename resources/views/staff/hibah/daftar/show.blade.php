@@ -528,7 +528,7 @@
     </div><!-- /.container-fluid -->
     @endif
 
-    @if (count($reviewer1) != 0 || count($reviewer2) != 0 || count($reviewer3) != 0 || count($reviewer4) != 0)
+    @if (count($komentars) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -539,14 +539,16 @@
             <div class="card-body p-0">
                 <table class="table table-condensed">
                     <tbody>
+                        @foreach ($komentars as $no => $komen)
                         <tr>
-                            <td class="text-center">1</td>
+                            <td class="text-center">{{ $no+1 }}</td>
                             <td>
-                                <span class="text-info">Nama</span><br>
-                                <p>Komentar lorem ipsum</p>
-                                <span class="text-muted">5 Oktober 2019</span>
+                                <span class="text-info">{{ $komen->user->name }}</span><br>
+                                <span>{{ $komen->komentar }}</span><br>
+                                <span class="text-muted">{{ Carbon\Carbon::parse($komen->updated_at)->format('d M Y H:i') }} WIB</span>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -557,6 +559,7 @@
     </div><!-- /.container-fluid -->
     @endif
 
+    @if (count($komentars) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -608,6 +611,7 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endif
 </section>
 @endsection
 
@@ -670,6 +674,8 @@
                 cache: true
             }
         });
+
+        $('.toast').toast('show');
 
         $('#reviewer_id').on("select2:select", function() {
             console.log("select2:select");
