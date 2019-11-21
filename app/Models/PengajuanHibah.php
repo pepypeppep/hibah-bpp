@@ -25,4 +25,9 @@ class PengajuanHibah extends Model
     {
         return $this->hasMany(HibahBerkas::class);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Reviewer::class);
+    }
 }

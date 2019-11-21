@@ -10,4 +10,9 @@ class Reviewer extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function pengajuanHibah()
+    {
+        return $this->belongsTo(PengajuanHibah::class);
+    }
 }
