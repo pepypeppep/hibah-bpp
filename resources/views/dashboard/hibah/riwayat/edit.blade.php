@@ -71,7 +71,7 @@
                                         <button type="button" data-toggle="modal" data-target="#pegawaiModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
                                         <table id="table_anggota_pegawai" class="table mt-3">
                                             @foreach ($pegawais as $no => $peg)
-                                            <tr>
+                                            <tr id="table_row_pegawai{{ $peg->user_id }}">
                                                 <td id="pegawaiNo">{{ $no+1 }}</td>
                                                 <td>{{ $peg->user->name }}
                                                     <input type="hidden" name="pegawai_id[]" value="{{ $peg->user_id }}">
@@ -83,7 +83,9 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    {{-- <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> --}}
+                                                    @if (Auth::user()->id != $peg->user_id)
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="removePegawai({{ $peg->user_id }})"><i class="fas fa-trash"></i></button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -98,8 +100,8 @@
                                         <button type="button" data-toggle="modal" data-target="#mahasiswaModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
                                         <table id="table_anggota_mahasiswa" class="table mt-3">
                                             @foreach ($mahasiswas as $no => $mhs)
-                                            <tr>
-                                                <td id="pegawaiNo">{{ $no+1 }}</td>
+                                            <tr id="table_row_mahasiswa{{ $mhs->user_id }}">
+                                                <td id="mahasiswaNo">{{ $no+1 }}</td>
                                                 <td>{{ $mhs->user->name }}
                                                     <input type="hidden" name="mahasiswa_id[]" value="{{ $mhs->user_id }}">
                                                 </td>
@@ -110,7 +112,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeMahasiswa({{ $mhs->user_id }})"><i class="fas fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -125,15 +127,15 @@
                                         <button type="button" data-toggle="modal" data-target="#nonCivitasModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
                                         <table id="table_anggota_noncivitas" class="table mt-3">
                                             @foreach ($noncivitas as $no => $nc)
-                                            <tr>
+                                            <tr id="table_row_noncivitas{{ $nc->id }}">
                                                 <td>{{ $no+1 }}</td>
-                                                <td>{{ $nc->nama.' ('.$nc->instansi.')' }}
+                                                <td>{{ $nc->nama }}
                                                     <input type="hidden" name="get_nama_noncivitas[]" value="{{ $nc->nama }}">
                                                     <input type="hidden" name="get_instansi[]" value="{{ $nc->instansi }}">
                                                 </td>
-                                                <td></td>
+                                                <td>{{ ' ('.$nc->instansi.')' }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeNonCivitas({{ $nc->id }})"><i class="fas fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -365,6 +367,9 @@
     var idGen =new Generator();
 
     $(function () {
+        //Disabled non ketua
+        $('.set_ketua:not(:checked)').attr('disabled', true);
+
         //Hide Alert
         $('#buttonAlert').hide();
 
@@ -406,7 +411,7 @@
                                     <td>'+no+'</td>\n\
                                     <td>'+data[k].NIP+'</td>\n\
                                     <td>'+data[k].name+'</td>\n\
-                                    <td>'+data[k].unit_id+'</td>\n\
+                                    <td>'+data[k].unit.nama+'</td>\n\
                                     <td>\n\
                                         <button type="button" class="btn btn-info btn-sm" onclick="addPegawai('+data[k].id+');">Pilih <i class="fas fa-chevron-right"></i></button>\n\
                                     </td>\n\
@@ -452,7 +457,7 @@
                                     <td>'+no+'</td>\n\
                                     <td>'+data[k].NIP+'</td>\n\
                                     <td>'+data[k].name+'</td>\n\
-                                    <td>'+data[k].unit_id+'</td>\n\
+                                    <td>'+data[k].unit.nama+'</td>\n\
                                     <td>\n\
                                         <button type="button" class="btn btn-info btn-sm" onclick="addMahasiswa('+data[k].id+');">Pilih <i class="fas fa-chevron-right"></i></button>\n\
                                     </td>\n\
@@ -547,7 +552,7 @@
     function resetModalPegawai(){
         $("#pegawaiModal .close").click()
         $('#tablePegawai tr').remove()
-        $("#pegawai_unit_id option:selected").remove()
+        $("#pegawai_unit_id").val()
         $('#nama_pegawai').val('')
     }
 
@@ -560,7 +565,7 @@
         //Reset Modal Mahasiswa
         resetModalMahasiswa()
 
-        var mahasiswaNo = parseInt($('#pegawaiNo').text())+parseInt(1);
+        var mahasiswaNo = parseInt($('#mahasiswaNo').text())+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/mahasiswa/add",
@@ -573,7 +578,7 @@
                     '<tr id="table_row_mahasiswa'+data.id+'">\n\
                         <td>'+mahasiswaNo+'</td>\n\
                         <td>'+data.name+'\n\
-                            <input type="hidden" name="mahasiwa_id[]" value="'+data.id+'">\n\
+                            <input type="hidden" name="mahasiswa_id[]" value="'+data.id+'">\n\
                         </td>\n\
                         <td>\n\
                             <div class="form-check">\n\
@@ -599,7 +604,7 @@
     function resetModalMahasiswa(){
         $("#mahasiswaModal .close").click()
         $('#tableMahasiswa tr').remove()
-        $("#mahasiswa_unit_id option:selected").remove()
+        $("#mahasiswa_unit_id").val()
         $('#nama_mahasiswa').val('')
     }
 

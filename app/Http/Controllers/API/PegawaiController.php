@@ -11,13 +11,13 @@ class PegawaiController extends Controller
     public function search(Request $request)
     {
         if ($request->unit_id != 0) {
-            $pegawais = User::with('roles')->where('unit_id', $request->unit_id)
+            $pegawais = User::with('roles','unit')->where('unit_id', $request->unit_id)
                                 ->where('name', 'like', '%' . $request->nama . '%')
                                 ->whereHas('roles', function ($query) {
                                     return $query->where('id', 1)->orWhere('id', 2)->orWhere('id', 3);
                                 })->get();
         }else{
-            $pegawais = User::with('roles')
+            $pegawais = User::with('roles','unit')
                                 ->where('name', 'like', '%' . $request->nama . '%')
                                 ->whereHas('roles', function ($query) {
                                     return $query->where('id', 1)->orWhere('id', 2)->orWhere('id', 3);

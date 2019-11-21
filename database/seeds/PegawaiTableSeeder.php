@@ -14,36 +14,6 @@ class PegawaiTableSeeder extends Seeder
      */
     public function run()
     {
-        $pegawais = [
-            [
-                'unit_id' => 70,
-                'NIP' => '123',
-                'name' => 'Riskita Sari',
-                'email' => 'riskita@ugm.ac.id',
-                'password' => bcrypt(12345),
-                'staff' => 2,
-                'mahasiswa' => 1,
-            ],
-            [
-                'unit_id' => 70,
-                'NIP' => '456',
-                'name' => 'Rangga Kala',
-                'email' => 'rangga@ugm.ac.id',
-                'password' => bcrypt(12345),
-                'staff' => 2,
-                'mahasiswa' => 1,
-            ],
-            [
-                'unit_id' => 74,
-                'NIP' => '789',
-                'name' => 'BPP UGM',
-                'email' => 'bpp@ugm.ac.id',
-                'password' => bcrypt(12345),
-                'staff' => 2,
-                'mahasiswa' => 1,
-            ],
-        ];
-
         // Dummy Staff
         $user = [
             'unit_id' => 74,
@@ -72,7 +42,7 @@ class PegawaiTableSeeder extends Seeder
 
         // Dummy Member
         $user = [
-            'unit_id' => 51,
+            'unit_id' => 71,
             'NIP' => '456',
             'name' => 'Riskita Kiky',
             'email' => 'kiky@ugm.ac.id',

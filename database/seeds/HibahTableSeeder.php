@@ -18,7 +18,7 @@ class HibahTableSeeder extends Seeder
                 'hibah_kategori_id' => 8,
                 'hibah_tgl_publish' => '2019-11-01 00:00:00',
                 'hibah_tgl_mulai' => '2019-11-01 00:00:00',
-                'hibah_tgl_selesai' => '2019-11-15 00:00:00',
+                'hibah_tgl_selesai' => '2019-11-30 00:00:00',
                 'hibah_tgl_mulai_laporankemajuan' => null,
                 'hibah_tgl_selesai_laporankemajuan' => null,
                 'hibah_tgl_mulai_laporanfinal' => null,

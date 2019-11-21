@@ -67,8 +67,8 @@
                                         <table id="table_anggota_pegawai" class="table mt-3">
                                             <tr>
                                                 <td id="pegawaiNo">1</td>
-                                                <td>Jeffri Junianto
-                                                    <input type="hidden" name="pegawai_id[]" value="3">
+                                                <td>{{ Auth::user()->name }}
+                                                    <input type="hidden" name="pegawai_id[]" value="{{ Auth::user()->id }}">
                                                 </td>
                                                 <td>
                                                     <div class="form-check">
@@ -381,7 +381,7 @@
                                     <td>'+no+'</td>\n\
                                     <td>'+data[k].NIP+'</td>\n\
                                     <td>'+data[k].name+'</td>\n\
-                                    <td>'+data[k].unit_id+'</td>\n\
+                                    <td>'+data[k].unit.nama+'</td>\n\
                                     <td>\n\
                                         <button type="button" class="btn btn-info btn-sm" onclick="addPegawai('+data[k].id+');">Pilih <i class="fas fa-chevron-right"></i></button>\n\
                                     </td>\n\
@@ -427,7 +427,7 @@
                                     <td>'+no+'</td>\n\
                                     <td>'+data[k].NIP+'</td>\n\
                                     <td>'+data[k].name+'</td>\n\
-                                    <td>'+data[k].unit_id+'</td>\n\
+                                    <td>'+data[k].unit.nama+'</td>\n\
                                     <td>\n\
                                         <button type="button" class="btn btn-info btn-sm" onclick="addMahasiswa('+data[k].id+');">Pilih <i class="fas fa-chevron-right"></i></button>\n\
                                     </td>\n\
@@ -523,7 +523,7 @@
     function resetModalPegawai(){
         $("#pegawaiModal .close").click()
         $('#tablePegawai tr').remove()
-        $("#pegawai_unit_id option:selected").remove()
+        $("#pegawai_unit_id").val()
         $('#nama_pegawai').val('')
     }
 
@@ -549,7 +549,7 @@
                     '<tr id="table_row_mahasiswa'+data.id+'">\n\
                         <td>'+mahasiswaNo+'</td>\n\
                         <td>'+data.name+'\n\
-                            <input type="hidden" name="mahasiwa_id[]" value="'+data.id+'">\n\
+                            <input type="hidden" name="mahasiswa_id[]" value="'+data.id+'">\n\
                         </td>\n\
                         <td>\n\
                             <div class="form-check">\n\
@@ -575,7 +575,7 @@
     function resetModalMahasiswa(){
         $("#mahasiswaModal .close").click()
         $('#tableMahasiswa tr').remove()
-        $("#mahasiswa_unit_id option:selected").remove()
+        $("#mahasiswa_unit_id").val()
         $('#nama_mahasiswa').val('')
     }
 

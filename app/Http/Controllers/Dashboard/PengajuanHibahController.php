@@ -70,12 +70,12 @@ class PengajuanHibahController extends Controller
         }
 
         //Save Anggota Mahasiswa
-        if (!is_null($request->mahasiwa_id)) {
-            $mshTotal = count($request->mahasiwa_id);
+        if (!is_null($request->mahasiswa_id)) {
+            $mshTotal = count($request->mahasiswa_id);
             for ($i=0; $i < $mshTotal; $i++) {
                 $mhs = new AnggotaMahasiswa;
                 $mhs->pengajuan_hibah_id = $data->id;
-                $mhs->user_id = $request->mahasiwa_id[$i];
+                $mhs->user_id = $request->mahasiswa_id[$i];
                 $mhs->save();
             }
         }
@@ -154,6 +154,7 @@ class PengajuanHibahController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->toArray());
         //Save Pengajuan Hibah
         $data = PengajuanHibah::find($id);
         $data->hibah_id = $id;
@@ -177,12 +178,12 @@ class PengajuanHibahController extends Controller
         //Clear Anggota Mahasiswa
         AnggotaMahasiswa::where('pengajuan_hibah_id', $id)->delete();
         //Save Anggota Mahasiswa
-        if (!is_null($request->mahasiwa_id)) {
-            $mshTotal = count($request->mahasiwa_id);
+        if (!is_null($request->mahasiswa_id)) {
+            $mshTotal = count($request->mahasiswa_id);
             for ($i=0; $i < $mshTotal; $i++) {
                 $mhs = new AnggotaMahasiswa;
                 $mhs->pengajuan_hibah_id = $data->id;
-                $mhs->user_id = $request->mahasiwa_id[$i];
+                $mhs->user_id = $request->mahasiswa_id[$i];
                 $mhs->save();
             }
         }
