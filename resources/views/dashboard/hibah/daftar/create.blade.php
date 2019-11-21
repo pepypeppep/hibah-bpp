@@ -66,7 +66,7 @@
                                         <button type="button" data-toggle="modal" data-target="#pegawaiModal" data-backdrop="static" data-keyboard="false" class="btn btn-info btn-sm">Tambah</button>
                                         <table id="table_anggota_pegawai" class="table mt-3">
                                             <tr>
-                                                <td id="pegawaiNo">1</td>
+                                                <td class="pegawaiNo">1</td>
                                                 <td>{{ Auth::user()->name }}
                                                     <input type="hidden" name="pegawai_id[]" value="{{ Auth::user()->id }}">
                                                 </td>
@@ -336,6 +336,11 @@
     };
     var idGen =new Generator();
 
+    //Set Numbering
+    var pegawaiNo = parseInt($('.pegawaiNo').length)
+    var mahasiswaNo = parseInt($('.mahasiswaNo').length)
+    var nonCivitasNo = parseInt($('.nonCivitasNo').length)
+
     $(function () {
         //Disabled Next Button
         $('#nextButton').attr('disabled',true);
@@ -469,7 +474,7 @@
         //Reset Modal Pegawai
         resetModalPegawai()
 
-        var pegawaiNo = parseInt($('#pegawaiNo').text())+parseInt(1);
+        pegawaiNo = pegawaiNo+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/pegawai/add",
@@ -480,7 +485,7 @@
                 // console.log(data)
                 $('#table_anggota_pegawai').append(
                     '<tr id="table_row_pegawai'+data.id+'">\n\
-                        <td>'+pegawaiNo+'</td>\n\
+                        <td class="pegawaiNo">'+pegawaiNo+'</td>\n\
                         <td>'+data.name+'\n\
                             <input type="hidden" name="pegawai_id[]" value="'+data.id+'">\n\
                         </td>\n\
@@ -536,7 +541,7 @@
         //Reset Modal Mahasiswa
         resetModalMahasiswa()
 
-        var mahasiswaNo = parseInt($('#pegawaiNo').text())+parseInt(1);
+        mahasiswaNo = mahasiswaNo+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/mahasiswa/add",
@@ -547,7 +552,7 @@
                 // console.log(data)
                 $('#table_anggota_mahasiswa').append(
                     '<tr id="table_row_mahasiswa'+data.id+'">\n\
-                        <td>'+mahasiswaNo+'</td>\n\
+                        <td class="mahasiswaNo">'+mahasiswaNo+'</td>\n\
                         <td>'+data.name+'\n\
                             <input type="hidden" name="mahasiswa_id[]" value="'+data.id+'">\n\
                         </td>\n\
@@ -587,7 +592,7 @@
     function addNonCivitas(){
         var nama_noncivitas = $('#nama_noncivitas').val()
         var instansi = $('#instansi').val()
-        var nonCivitasNo = parseInt($('#pegawaiNo').text())+parseInt(1);
+        nonCivitasNo = nonCivitasNo+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/noncivitas/add",
@@ -597,10 +602,10 @@
                 'id': idGen.getId()
             },
             success: function(data){
-                console.log(data)
+                // console.log(data)
                 $('#table_anggota_noncivitas').append(
                     '<tr id="table_row_noncivitas'+data.id+'">\n\
-                        <td>'+nonCivitasNo+'</td>\n\
+                        <td class="nonCivitasNo">'+nonCivitasNo+'</td>\n\
                         <td>'+data.nama+'\n\
                             <input type="hidden" name="get_nama_noncivitas[]" value="'+data.nama+'">\n\
                         </td>\n\

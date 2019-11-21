@@ -72,14 +72,14 @@
                                         <table id="table_anggota_pegawai" class="table mt-3">
                                             @foreach ($pegawais as $no => $peg)
                                             <tr id="table_row_pegawai{{ $peg->user_id }}">
-                                                <td id="pegawaiNo">{{ $no+1 }}</td>
+                                                <td class="pegawaiNo">{{ $no+1 }}</td>
                                                 <td>{{ $peg->user->name }}
                                                     <input type="hidden" name="pegawai_id[]" value="{{ $peg->user_id }}">
                                                 </td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input set_ketua" id="checkKetuaid" name="set_ketua[]" value="{{ $peg->user_id }}" onclick="checkKetua()" {{ $peg->ketua == 1 ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="checkKetuaid" onclick="checkKetua()"> Ketua</label>
+                                                        <input type="checkbox" class="form-check-input set_ketua" id="checkKetuaid{{ $peg->user_id }}" name="set_ketua[]" value="{{ $peg->user_id }}" onclick="checkKetua()" {{ $peg->ketua == 1 ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="checkKetuaid{{ $peg->user_id }}" onclick="checkKetua()"> Ketua</label>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -101,14 +101,14 @@
                                         <table id="table_anggota_mahasiswa" class="table mt-3">
                                             @foreach ($mahasiswas as $no => $mhs)
                                             <tr id="table_row_mahasiswa{{ $mhs->user_id }}">
-                                                <td id="mahasiswaNo">{{ $no+1 }}</td>
+                                                <td class="mahasiswaNo">{{ $no+1 }}</td>
                                                 <td>{{ $mhs->user->name }}
                                                     <input type="hidden" name="mahasiswa_id[]" value="{{ $mhs->user_id }}">
                                                 </td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input set_ketua" id="checkKetuaid" name="set_ketua[]" value="{{ $mhs->user_id }}" onclick="checkKetua()" {{ $mhs->ketua == 1 ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="checkKetuaid" onclick="checkKetua()"> Ketua</label>
+                                                        <input type="checkbox" class="form-check-input set_ketua" id="checkKetuaid{{ $mhs->user_id }}" name="set_ketua[]" value="{{ $mhs->user_id }}" onclick="checkKetua()" {{ $mhs->ketua == 1 ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="checkKetuaid{{ $mhs->user_id }}" onclick="checkKetua()"> Ketua</label>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -128,7 +128,7 @@
                                         <table id="table_anggota_noncivitas" class="table mt-3">
                                             @foreach ($noncivitas as $no => $nc)
                                             <tr id="table_row_noncivitas{{ $nc->id }}">
-                                                <td>{{ $no+1 }}</td>
+                                                <td class="nonCivitasNo">{{ $no+1 }}</td>
                                                 <td>{{ $nc->nama }}
                                                     <input type="hidden" name="get_nama_noncivitas[]" value="{{ $nc->nama }}">
                                                     <input type="hidden" name="get_instansi[]" value="{{ $nc->instansi }}">
@@ -366,6 +366,11 @@
     };
     var idGen =new Generator();
 
+    //Set Numbering
+    var pegawaiNo = parseInt($('.pegawaiNo').length)
+    var mahasiswaNo = parseInt($('.mahasiswaNo').length)
+    var nonCivitasNo = parseInt($('.nonCivitasNo').length)
+
     $(function () {
         //Disabled non ketua
         $('.set_ketua:not(:checked)').attr('disabled', true);
@@ -498,7 +503,7 @@
         //Reset Modal Pegawai
         resetModalPegawai()
 
-        var pegawaiNo = parseInt($('#pegawaiNo').text())+parseInt(1);
+        pegawaiNo = pegawaiNo+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/pegawai/add",
@@ -509,13 +514,13 @@
                 // console.log(data)
                 $('#table_anggota_pegawai').append(
                     '<tr id="table_row_pegawai'+data.id+'">\n\
-                        <td>'+pegawaiNo+'</td>\n\
+                        <td class="pegawaiNo">'+pegawaiNo+'</td>\n\
                         <td>'+data.name+'\n\
                             <input type="hidden" name="pegawai_id[]" value="'+data.id+'">\n\
                         </td>\n\
                         <td>\n\
                             <div class="form-check">\n\
-                                <input type="checkbox" class="form-check-input set_ketua" id="checkKetua'+data.id+'" name="set_ketua[]" value="'+data.id+'" onclick="checkKetua()">\n\
+                                <input type="checkbox" class="form-check-input set_ketua" id="checkKetua'+data.id+'" name="set_ketua[]" value="'+data.id+'" onclick="checkKetua()" disabled>\n\
                                 <label class="form-check-label" for="checkKetua'+data.id+'" onclick="checkKetua()"> Ketua</label>\n\
                             </div>\n\
                         </td>\n\
@@ -565,7 +570,7 @@
         //Reset Modal Mahasiswa
         resetModalMahasiswa()
 
-        var mahasiswaNo = parseInt($('#mahasiswaNo').text())+parseInt(1);
+        mahasiswaNo = mahasiswaNo+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/mahasiswa/add",
@@ -576,13 +581,13 @@
                 // console.log(data)
                 $('#table_anggota_mahasiswa').append(
                     '<tr id="table_row_mahasiswa'+data.id+'">\n\
-                        <td>'+mahasiswaNo+'</td>\n\
+                        <td class="mahasiswaNo">'+mahasiswaNo+'</td>\n\
                         <td>'+data.name+'\n\
                             <input type="hidden" name="mahasiswa_id[]" value="'+data.id+'">\n\
                         </td>\n\
                         <td>\n\
                             <div class="form-check">\n\
-                                <input type="checkbox" class="form-check-input set_ketua" id="checkKetua'+data.id+'" name="set_ketua[]" value="'+data.id+'" onclick="checkKetua()">\n\
+                                <input type="checkbox" class="form-check-input set_ketua" id="checkKetua'+data.id+'" name="set_ketua[]" value="'+data.id+'" onclick="checkKetua()" disabled>\n\
                                 <label class="form-check-label" for="checkKetua'+data.id+'" onclick="checkKetua()"> Ketua</label>\n\
                             </div>\n\
                         </td>\n\
@@ -616,7 +621,7 @@
     function addNonCivitas(){
         var nama_noncivitas = $('#nama_noncivitas').val()
         var instansi = $('#instansi').val()
-        var nonCivitasNo = parseInt($('#pegawaiNo').text())+parseInt(1);
+        nonCivitasNo = nonCivitasNo+parseInt(1);
         $.ajax({
             type: 'GET',
             url: document.location.origin + "/api/noncivitas/add",
@@ -626,10 +631,10 @@
                 'id': idGen.getId()
             },
             success: function(data){
-                console.log(data)
+                // console.log(data)
                 $('#table_anggota_noncivitas').append(
                     '<tr id="table_row_noncivitas'+data.id+'">\n\
-                        <td>'+nonCivitasNo+'</td>\n\
+                        <td class="nonCivitasNo">'+nonCivitasNo+'</td>\n\
                         <td>'+data.nama+'\n\
                             <input type="hidden" name="get_nama_noncivitas[]" value="'+data.nama+'">\n\
                         </td>\n\
