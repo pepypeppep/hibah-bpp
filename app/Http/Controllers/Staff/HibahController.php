@@ -12,6 +12,15 @@ use App\Models\Reviewer;
 
 class HibahController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:daftar_pengajuan_hibah-list');
+        $this->middleware('permission:daftar_pengajuan_hibah-create', ['only' => ['create','store']]);
+        $this->middleware('permission:daftar_pengajuan_hibah-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:daftar_pengajuan_hibah-detail', ['only' => ['show']]);
+        $this->middleware('permission:daftar_pengajuan_hibah-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -63,19 +63,19 @@ class PermissionTableSeeder extends Seeder
         $role->syncPermissions($permissionStaffs);
 
         //Assign Reviewer
-        $permissionReviewerArrays = [
-            // Hibah
-            'hibah-list',
-            'hibah-create',
-            'hibah-edit',
-            'hibah-delete',
-            'hibah-detail',
-        ];
+        // $permissionReviewerArrays = [
+        //     // Hibah
+        //     'hibah-list',
+        //     'hibah-create',
+        //     'hibah-edit',
+        //     'hibah-delete',
+        //     'hibah-detail',
+        // ];
 
-        $permissionReviewers = Permission::whereIn('name', $permissionReviewerArrays)->pluck('id');
+        // $permissionReviewers = Permission::whereIn('name', $permissionReviewerArrays)->pluck('id');
 
-        $role = Role::where('name', 'reviewer')->first();
-        $role->syncPermissions($permissionReviewers);
+        // $role = Role::where('name', 'reviewer')->first();
+        // $role->syncPermissions($permissionReviewers);
 
         //Assign Member
         $permissionMemberArrays = [

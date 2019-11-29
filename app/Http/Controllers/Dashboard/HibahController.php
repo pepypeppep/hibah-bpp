@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 
 class HibahController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:hibah-list');
+        $this->middleware('permission:hibah-create', ['only' => ['create','store']]);
+        $this->middleware('permission:hibah-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:hibah-detail', ['only' => ['show']]);
+        $this->middleware('permission:hibah-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

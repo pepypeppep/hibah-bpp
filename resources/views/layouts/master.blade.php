@@ -38,11 +38,11 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        @include('dashboard.layouts.nav')
+        @include('layouts.nav')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('dashboard.layouts.sidebar')
+        @include('layouts.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

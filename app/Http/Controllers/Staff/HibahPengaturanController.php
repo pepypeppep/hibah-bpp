@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Session;
 
 class HibahPengaturanController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:pengaturan_hibah-list');
+        $this->middleware('permission:pengaturan_hibah-create', ['only' => ['create','store']]);
+        $this->middleware('permission:pengaturan_hibah-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:pengaturan_hibah-detail', ['only' => ['show']]);
+        $this->middleware('permission:pengaturan_hibah-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

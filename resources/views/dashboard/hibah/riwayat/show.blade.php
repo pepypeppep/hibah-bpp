@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('layouts.master')
 
 @section('title', 'Detail Pengajuan Hibah')
 

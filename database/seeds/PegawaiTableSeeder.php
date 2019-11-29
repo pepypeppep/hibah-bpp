@@ -38,7 +38,7 @@ class PegawaiTableSeeder extends Seeder
 
         $user = User::create($user);
 
-        $user->assignRole(Role::where('name', 'reviewer')->first()->id);
+        $user->assignRole(Role::where('name', 'member')->first()->id);
 
         // Dummy Member
         $user = [
