@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('layouts.master')
 
 @section('title', 'Detail Pengajuan Hibah')
 
@@ -132,10 +132,12 @@
         </div>
     </div>
 
+    @if ($review[0]->tipe_dokumen == 1)
     <div class="container-fluid">
         <div class="card card-default">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('hibah.review.update', $getRoute) }}">
                 @csrf
+                @method('PUT')
                 <div class="card-header bg-info">
                     <h3 class="card-title"><b>Penilaian</b> Proposal</h3>
                 </div>
@@ -151,15 +153,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($review as $no => $rv)
                             <tr>
-                                <td>1</td>
-                                <td>Satu</td>
-                                <td>20</td>
-                                <td>1 s/d 100</td>
+                                <td>{{ $no+1 }}</td>
+                                <td>{{ $rv->kriteria }}</td>
+                                <td>{{ $rv->bobot }}</td>
+                                <td>{{ $rv->range_awal }} s/d {{ $rv->range_akhir }}</td>
                                 <td>
-                                    <input type="number" name="nilai" class="form-control">
+                                    <input type="number" name="nilai[]" class="form-control" required>
+                                    <input type="hidden" name="bobot[]" class="form-control" value="{{ $rv->bobot }}" required>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="row">
@@ -167,7 +172,7 @@
                             <strong>Keterangan</strong>
                         </div>
                         <div class="col-md-9">
-                            <textarea rows="5" name="komen" style="width: 100%"></textarea>
+                            <textarea rows="5" name="komentar" style="width: 100%" required></textarea>
                         </div>
                     </div>
                 </div>
@@ -177,6 +182,8 @@
             </form>
         </div>
     </div>
+    @endif
+    @if ($review[0]->tipe_dokumen == 2)
     <div class="container-fluid">
         <div class="card card-default">
             <form method="POST" action="">
@@ -196,15 +203,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($review as $no => $rv)
                             <tr>
-                                <td>1</td>
-                                <td>Satu</td>
-                                <td>20</td>
-                                <td>1 s/d 100</td>
+                                <td>{{ $no+1 }}</td>
+                                <td>{{ $rv->kriteria }}</td>
+                                <td>{{ $rv->bobot }}</td>
+                                <td>{{ $rv->range_awal }} s/d {{ $rv->range_akhir }}</td>
                                 <td>
-                                    <input type="number" name="nilai" class="form-control">
+                                    <input type="number" name="nilai[]" class="form-control">
+                                    <input type="hidden" name="bobot[]" class="form-control" value="{{ $rv->bobot }}" required>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="row">
@@ -212,7 +222,7 @@
                             <strong>Keterangan</strong>
                         </div>
                         <div class="col-md-9">
-                            <textarea rows="5" name="komen" style="width: 100%"></textarea>
+                            <textarea rows="5" name="komentar" style="width: 100%"></textarea>
                         </div>
                     </div>
                 </div>
@@ -222,6 +232,8 @@
             </form>
         </div>
     </div>
+    @endif
+    @if ($review[0]->tipe_dokumen == 3)
     <div class="container-fluid">
         <div class="card card-default">
             <form method="POST" action="">
@@ -241,15 +253,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($review as $no => $rv)
                             <tr>
-                                <td>1</td>
-                                <td>Satu</td>
-                                <td>20</td>
-                                <td>1 s/d 100</td>
+                                <td>{{ $no+1 }}</td>
+                                <td>{{ $rv->kriteria }}</td>
+                                <td>{{ $rv->bobot }}</td>
+                                <td>{{ $rv->range_awal }} s/d {{ $rv->range_akhir }}</td>
                                 <td>
-                                    <input type="number" name="nilai" class="form-control">
+                                    <input type="number" name="nilai[]" class="form-control">
+                                    <input type="hidden" name="bobot[]" class="form-control" value="{{ $rv->bobot }}" required>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="row">
@@ -257,7 +272,7 @@
                             <strong>Keterangan</strong>
                         </div>
                         <div class="col-md-9">
-                            <textarea rows="5" name="komen" style="width: 100%"></textarea>
+                            <textarea rows="5" name="komentar" style="width: 100%"></textarea>
                         </div>
                     </div>
                 </div>
@@ -267,6 +282,8 @@
             </form>
         </div>
     </div>
+    @endif
+    @if ($review[0]->tipe_dokumen == 4)
     <div class="container-fluid">
         <div class="card card-default">
             <form method="POST" action="">
@@ -286,15 +303,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($review as $no => $rv)
                             <tr>
-                                <td>1</td>
-                                <td>Satu</td>
-                                <td>20</td>
-                                <td>1 s/d 100</td>
+                                <td>{{ $no+1 }}</td>
+                                <td>{{ $rv->kriteria }}</td>
+                                <td>{{ $rv->bobot }}</td>
+                                <td>{{ $rv->range_awal }} s/d {{ $rv->range_akhir }}</td>
                                 <td>
-                                    <input type="number" name="nilai" class="form-control">
+                                    <input type="hidden" name="bobot[]" class="form-control" value="{{ $rv->bobot }}" required>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="row">
@@ -302,7 +321,7 @@
                             <strong>Keterangan</strong>
                         </div>
                         <div class="col-md-9">
-                            <textarea rows="5" name="komen" style="width: 100%"></textarea>
+                            <textarea rows="5" name="komentar" style="width: 100%"></textarea>
                         </div>
                     </div>
                 </div>
@@ -312,6 +331,7 @@
             </form>
         </div>
     </div>
+    @endif
 </section>
 @endsection
 

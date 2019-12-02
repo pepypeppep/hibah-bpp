@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Models\Hibah;
-use App\Models\HibahKategori;
 use App\Models\Unit;
+use App\Models\Hibah;
+use App\Models\Reviewer;
 use Illuminate\Http\Request;
+use App\Models\HibahKategori;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HibahController extends Controller
 {
@@ -30,6 +32,8 @@ class HibahController extends Controller
                         ->where('hibah_tgl_mulai', '<=', now())
                         ->where('hibah_tgl_selesai', '>=', now())
                         ->orderBy('created_at');
+        $review = Reviewer::where('user_id', Auth::user()->id)
+                            ->where('komentar', null)->count();
 
         $data = $request->validate([
             'judul' => 'string|nullable',
@@ -48,7 +52,8 @@ class HibahController extends Controller
         return view('dashboard.hibah.daftar.index', [
             'hibahs' => $hibahs->orderBy('created_at', 'DESC')->paginate(10),
             'categories' => HibahKategori::get(),
-            'units' => Unit::get()
+            'units' => Unit::get(),
+            'getReview' => $review
         ]);
     }
 

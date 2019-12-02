@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('layouts.master')
 
 @section('title', 'Review Laporan Hibah')
 
@@ -6,6 +6,20 @@
 
 @section('content')
 <section class="content">
+    @if(Session::has('flash_message'))
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+        <div class="toast-body pt-4 pb-4 bg-success">
+                {!! session('flash_message') !!}
+        </div>
+    </div>
+    @endif
+    @if(Session::has('flash_error'))
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+        <div class="toast-body pt-4 pb-4 bg-danger">
+                {!! session('flash_error') !!}
+        </div>
+    </div>
+    @endif
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -34,6 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($reviews) != 0)
                         @foreach ($reviews as $no => $rv)
                         <tr>
                             <td>{{ $no+1 }}</td>
@@ -41,25 +56,37 @@
                             <td>{{ $rv->pengajuanHibah->hibah->hibah_judul }}</td>
                             <td>{{ $rv->pengajuanHibah->user->name }}</td>
                             <td>
-                                <span class="badge badge-danger">Proposal</span><br>
-                                <span class="badge badge-info">Laporan Kemajuan</span><br>
-                                <span class="badge badge-info">Laporan Akhir</span><br>
-                                <span class="badge badge-info">Luaran</span><br>
+                                @if ($rv->tipe_dokumen == 1)
+                                    <span class="badge badge-danger">Proposal</span><br>
+                                @elseif ($rv->tipe_dokumen == 2)
+                                    <span class="badge badge-info">Laporan Kemajuan</span><br>
+                                @elseif ($rv->tipe_dokumen == 3)
+                                    <span class="badge badge-info">Laporan Akhir</span><br>
+                                @elseif ($rv->tipe_dokumen == 4)
+                                    <span class="badge badge-success">Luaran</span><br>
+                                @endif
                             </td>
                             <td>
-                                @if ($rv->komen != '' && $rv->total != 0)
+                                @if ($rv->komen == null && $rv->total == 0)
                                     <span class="badge badge-danger">Belum Direview</span>
                                 @else
                                     <span class="badge badge-success">Sudah Direview</span>
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('hibah.review.show', $rv->pengajuanHibah->slug) }}" class="btn btn-warning">
+                                <a href="{{ route('hibah.review.show', [$rv->pengajuanHibah->slug, $rv->slug]) }}" class="btn btn-warning">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td colspan="7">
+                                <div class="alert alert-danger">Tidak ada data yang dapat ditampilkan!</div>
+                            </td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

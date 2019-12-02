@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Staff;
 use App\Models\Reviewer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\PengajuanHibah;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,10 +47,15 @@ class ReviewController extends Controller
             Session::flash('flash_error', '<strong class="mr-auto">Gagal!</strong> reviewer gagal ditambahkan. Jenis penilaian belum dipilih.');
         }else{
             $data = new Reviewer;
+            $data->slug = sha1(now());
             $data->user_id = $request->reviewer_id;
             $data->pengajuan_hibah_id = $id;
             $data->tipe_dokumen = $request->tipe_dokumen;
             $data->save();
+
+            $hibah = PengajuanHibah::find($id);
+            $hibah->status_pengajuan = 2;
+            $hibah->save();
 
             Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> reviewer berhasil ditambahkan.');
         }

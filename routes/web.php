@@ -39,7 +39,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:member']], functio
     Route::put('riwayat/{id}/update', 'Dashboard\PengajuanHibahController@update')->name('hibah.riwayat.update');
 
     Route::get('review', 'AddReviewController@index')->name('hibah.review.index');
-    Route::get('review/{slug}/show', 'AddReviewController@show')->name('hibah.review.show');
+    Route::get('review/{slug}/show/{slug2}', 'AddReviewController@show')->name('hibah.review.show');
+    Route::put('review/{slug}/update', 'AddReviewController@update')->name('hibah.review.update');
 });
 
 

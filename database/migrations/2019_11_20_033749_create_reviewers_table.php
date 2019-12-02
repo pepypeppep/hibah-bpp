@@ -15,6 +15,7 @@ class CreateReviewersTable extends Migration
     {
         Schema::create('reviewers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('slug');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->bigInteger('pengajuan_hibah_id')->unsigned()->index();
             $table->bigInteger('tipe_dokumen');

@@ -40,13 +40,14 @@ class KriteriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id, $criteria)
+    public function store(Request $request, $slug)
     {
+        $hibah = Hibah::where('slug', $slug)->first();
         $length = count($request->kriteria);
 
         for ($i=0; $i < $length ; $i++) {
             $data = new Criteria;
-            $data->hibah_id = $id;
+            $data->hibah_id = $hibah->id;
             $data->tipe_dokumen = $request->tipe_dokumen;
             $data->kriteria = $request->kriteria[$i];
             $data->bobot = $request->bobot[$i];
@@ -57,7 +58,7 @@ class KriteriaController extends Controller
 
         Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> kriteria penilaian berhasil ditambahkan.');
 
-        return redirect()->route('s_hibah.pengaturan.show', Hibah::find($id)->slug);
+        return redirect()->route('s_hibah.pengaturan.show', $slug);
     }
 
     /**

@@ -6,6 +6,29 @@
 
 @section('content')
 <section class="content">
+    @if ($getReview != 0)
+    <div class="container-fluid">
+        <div class="card card-default" style="border-left: 4px solid #dc3545; background: #dc35451c">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="text-danger">Informasi Reviewer Hibah</h5>
+                        <p>
+                            Jika Saudara merupakan Reviewer Hibah, silakan menuju halaman Review Hibah
+                            <a href="{{ route('hibah.review.index') }}">
+                                <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-eye"></i> Review Hibah</button>
+                            </a>
+                        </p>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.card -->
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+    @endif
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
