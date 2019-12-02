@@ -95,15 +95,27 @@ class AddReviewController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        $review = Reviewer::where('slug', $slug)->first();
+
         $total = 0;
         foreach ($request->nilai as $key => $nl) {
             $total += $nl * $request->bobot[$key];
         }
 
-        $data = Reviewer::where('slug', $slug)->first();
+        $data = $review;
         $data->total = $total;
         $data->komentar = $request->komentar;
         $data->save();
+
+        $reviews = Reviewer::where('tipe_dokumen', $review->tipe_dokumen)
+                            ->where('total', 0)
+                            ->where('komentar', null)->count();
+
+        if ($reviews == 0) {
+            $hibah = PengajuanHibah::find($review->pengajuan_hibah_id);
+            $hibah->status_pengajuan = 4;
+            $hibah->save();
+        }
 
         Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> review berhasil ditambahkan.');
 

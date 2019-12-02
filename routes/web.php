@@ -51,6 +51,7 @@ Route::group(['prefix' => 'staff', 'middleware' => ['role:staff']], function () 
 
     Route::get('daftar', 'Staff\HibahController@index')->name('s_hibah.daftar.index');
     Route::get('daftar/{slug}/show', 'Staff\HibahController@show')->where('slug', '[\w\d\-\_]+')->name('s_hibah.daftar.show');
+    Route::put('final/{id}/update', 'Staff\HibahController@update')->where('slug', '[\w\d\-\_]+')->name('s_hibah.daftar.update');
 
     Route::get('/pengaturan', 'Staff\HibahPengaturanController@index')->name('s_hibah.pengaturan.index');
     Route::get('/pengaturan/create', 'Staff\HibahPengaturanController@create')->name('s_hibah.pengaturan.create');

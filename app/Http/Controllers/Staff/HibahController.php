@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Staff;
 
+use App\Models\Criteria;
+use App\Models\Reviewer;
 use App\Models\AnggotaStaff;
 use Illuminate\Http\Request;
 use App\Models\PengajuanHibah;
 use App\Models\AnggotaMahasiswa;
 use App\Models\AnggotaNonCivitas;
 use App\Http\Controllers\Controller;
-use App\Models\Reviewer;
+use Illuminate\Support\Facades\Session;
 
 class HibahController extends Controller
 {
@@ -89,7 +91,11 @@ class HibahController extends Controller
             'reviewer4' => Reviewer::with('user', 'user.unit')->where('pengajuan_hibah_id', $hibah->id)->where('tipe_dokumen', 4)->get(),
             'komentars' => Reviewer::with('user', 'user.unit')
                                 ->where('pengajuan_hibah_id', $hibah->id)
-                                ->where('komentar', '!=', '')->get()
+                                ->where('komentar', '!=', '')->get(),
+            'kriteria1' => Criteria::where('hibah_id', $hibah->hibah_id)->where('tipe_dokumen', 1)->get(),
+            'kriteria2' => Criteria::where('hibah_id', $hibah->hibah_id)->where('tipe_dokumen', 2)->get(),
+            'kriteria3' => Criteria::where('hibah_id', $hibah->hibah_id)->where('tipe_dokumen', 3)->get(),
+            'kriteria4' => Criteria::where('hibah_id', $hibah->hibah_id)->where('tipe_dokumen', 4)->get()
         ]);
     }
 
@@ -113,7 +119,17 @@ class HibahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = PengajuanHibah::find($id);
+        if ($request->status == 1) {
+            $data->status_pengajuan = 5;
+        }else{
+            $data->status_pengajuan = 6;
+        }
+        $data->save();
+
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> hibah berhasil diubah.');
+
+        return redirect()->route('s_hibah.daftar.index');
     }
 
     /**

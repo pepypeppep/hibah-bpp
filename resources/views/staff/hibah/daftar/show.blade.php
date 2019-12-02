@@ -191,6 +191,7 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 
+    @if (count($kriteria1) != 0 || count($kriteria2) != 0 || count($kriteria3) != 0 || count($kriteria4) != 0)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -206,22 +207,30 @@
                             <label>Jenis</label>
                         </div>
                         <div class="col-md-9">
+                            @if (count($kriteria1) != 0)
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type1" value="1">
                                 <label class="form-check-label" for="text_type1"> Proposal</label>
                             </div>
+                            @endif
+                            @if (count($kriteria2) != 0)
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type2" value="2">
                                 <label class="form-check-label" for="text_type2"> Laporan Kemajuan</label>
                             </div>
+                            @endif
+                            @if (count($kriteria3) != 0)
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type3" value="3">
                                 <label class="form-check-label" for="text_type3"> Laporan Akhir</label>
                             </div>
+                            @endif
+                            @if (count($kriteria4) != 0)
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="tipe_dokumen" id="text_type4" value="4">
                                 <label class="form-check-label" for="text_type4"> Luaran</label>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="row">
@@ -239,6 +248,7 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endif
 
     @if (count($reviewer1) != 0)
     <div class="container-fluid">
@@ -267,9 +277,11 @@
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
                             <td class="text-center reviewer1">{{ $rv->total }}</td>
                             <td class="text-center">
+                                @if ($rv->total == 0 && $rv->komentar == null)
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endif
                             </td>
                         </tr>
                         <!-- Modal -->
@@ -339,9 +351,11 @@
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
                             <td class="text-center reviewer2">{{ $rv->total }}</td>
                             <td class="text-center">
+                                @if ($rv->total == 0 && $rv->komentar == null)
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endif
                             </td>
                         </tr>
                         <!-- Modal -->
@@ -411,9 +425,11 @@
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
                             <td class="text-center reviewer3">{{ $rv->total }}</td>
                             <td class="text-center">
+                                @if ($rv->total == 0 && $rv->komentar == null)
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endif
                             </td>
                         </tr>
                         <!-- Modal -->
@@ -483,9 +499,11 @@
                             <td class="text-center">{{ $rv->user->unit->nama }}</td>
                             <td class="text-center reviewer4">{{ $rv->total }}</td>
                             <td class="text-center">
+                                @if ($rv->total == 0 && $rv->komentar == null)
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $rv->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endif
                             </td>
                         </tr>
                         <!-- Modal -->
@@ -590,14 +608,16 @@
                                 <h3 class="card-title">Apakah pengajuan ini diterima ?</h3>
                             </div>
                             <div class="card-body text-center">
-                                <button type="submit" class="btn btn-outline-success col-md-5">Terima</button>
-                                <button type="submit" class="btn btn-outline-danger col-md-5 ml-2">Tolak</button>
-                                <form method="POST" action="">
+                                <button type="submit" class="btn btn-outline-success col-md-5" onclick="document.getElementById('submity').submit();">Terima</button>
+                                <button type="submit" class="btn btn-outline-danger col-md-5 ml-2" onclick="document.getElementById('submitx').submit();">Tolak</button>
+                                <form method="POST" action="{{ route('s_hibah.daftar.update', $hibah->id) }}" id="submity">
                                     @csrf
+                                    @method('PUT')
                                     <input type="hidden" name="status" value="1">
                                 </form>
-                                <form method="POST" action="">
+                                <form method="POST" action="{{ route('s_hibah.daftar.update', $hibah->id) }}" id="submitx">
                                     @csrf
+                                    @method('PUT')
                                     <input type="hidden" name="status" value="0">
                                 </form>
                             </div>

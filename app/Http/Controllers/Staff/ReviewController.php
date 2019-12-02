@@ -54,7 +54,7 @@ class ReviewController extends Controller
             $data->save();
 
             $hibah = PengajuanHibah::find($id);
-            $hibah->status_pengajuan = 2;
+            $hibah->status_pengajuan = 3;
             $hibah->save();
 
             Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> reviewer berhasil ditambahkan.');
