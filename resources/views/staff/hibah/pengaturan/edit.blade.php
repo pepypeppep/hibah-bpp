@@ -163,6 +163,24 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-3 text-right">
+                                        <label>Luaran<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-outline-danger {{ $hibah->luaran == 0 ? 'active' : '' }}">
+                                                <input type="radio" name="luaran" autocomplete="off" value="0" {{ $hibah->luaran == 0 ? 'checked' : '' }}> Tidak Wajib
+                                            </label>
+                                            <label class="btn btn-outline-info {{ $hibah->luaran == 1 ? 'active' : '' }}">
+                                                <input type="radio" name="luaran" autocomplete="off" value="1" {{ $hibah->luaran == 1 ? 'checked' : '' }}> Wajib
+                                            </label>
+                                        </div>
+                                        <span class="invalid-feedback">
+                                            Form isian Luaran dibutuhkan.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-3 text-right">
                                         <label>Panduan<span class="text-danger"></span></label>
                                     </div>
                                     <div class="col-md-9">

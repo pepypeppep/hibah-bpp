@@ -8,6 +8,8 @@ use App\Models\Reviewer;
 use Illuminate\Http\Request;
 use App\Models\HibahKategori;
 use App\Http\Controllers\Controller;
+use App\Models\Luaran;
+use App\Models\PengajuanHibah;
 use Illuminate\Support\Facades\Auth;
 
 class HibahController extends Controller
@@ -49,11 +51,37 @@ class HibahController extends Controller
             $hibahs->where($key, $value);
         }
 
+        $checkHibah = PengajuanHibah::with('hibah', 'luarans')
+                                    ->where('user_id', Auth::user()->id)
+                                    ->where('status_pengajuan', 5)
+                                    ->whereHas('hibah', function ($query) {
+                                        return $query->where('luaran', 1);
+                                    })->get();
+
+        $luaran = Luaran::with('user', 'pengajuanHibah', 'pengajuanHibah.hibah')
+                        ->where('user_id', Auth::user()->id)->get();
+        // $luaran = Luaran::with('user', 'pengajuanHibah', 'pengajuanHibah.hibah')
+        //                 ->where('user_id', Auth::user()->id)
+        //                 ->whereHas('pengajuanHibah', function ($query) {
+        //                     return $query->where('user_id', Auth::user()->id)->where('status_pengajuan', 5);
+        //                 })->whereHas('pengajuanHibah.hibah', function ($query) {
+        //                     return $query->where('luaran', 1);
+        //                 })->get();
+        // dd($checkHibah);
+
+        $stack = [];
+        foreach ($checkHibah as $hb) {
+            $stack[] = $hb->hibah->hibah_kategori_id;
+        }
+
         return view('dashboard.hibah.daftar.index', [
             'hibahs' => $hibahs->orderBy('created_at', 'DESC')->paginate(10),
             'categories' => HibahKategori::get(),
             'units' => Unit::get(),
-            'getReview' => $review
+            'getReview' => $review,
+            'luaran' => $luaran,
+            'checkHibah' => $checkHibah,
+            'stack' => $stack
         ]);
     }
 

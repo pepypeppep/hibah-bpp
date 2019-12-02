@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\PengajuanHibah');
     }
+
+    public function luarans()
+    {
+        return $this->hasMany('App\Models\Luaran');
+    }
 }

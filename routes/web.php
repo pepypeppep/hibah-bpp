@@ -41,6 +41,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:member']], functio
     Route::get('review', 'AddReviewController@index')->name('hibah.review.index');
     Route::get('review/{slug}/show/{slug2}', 'AddReviewController@show')->name('hibah.review.show');
     Route::put('review/{slug}/update', 'AddReviewController@update')->name('hibah.review.update');
+
+    Route::get('luaran', 'LuaranController@index')->name('hibah.luaran.index');
 });
 
 
@@ -68,4 +70,6 @@ Route::group(['prefix' => 'staff', 'middleware' => ['role:staff']], function () 
 
     Route::post('reviewer/{id}/store', 'Staff\ReviewController@store')->name('s_hibah.review.store');
     Route::get('reviewer/{id}/delete', 'Staff\ReviewController@destroy')->name('s_hibah.review.delete');
+
+    Route::get('luaran', 'LuaranController@index')->name('s_hibah.luaran.index');
 });

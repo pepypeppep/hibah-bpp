@@ -144,7 +144,11 @@
                                 <a href="{{ asset('storage/hibah/panduan/'.$hibah->hibah_panduan) }}">Download</a>
                             </td>
                             <td class="text-center">
+                                @if (in_array($hibah->hibah_kategori_id, $stack))
+                                <button type="button" class="btn btn-sm btn-info" disabled>Pengajuan</button>
+                                @else
                                 <a href="{{ route('hibah.daftar.create', $hibah->slug) }}" class="btn btn-sm btn-info">Pengajuan</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -156,6 +160,25 @@
         <!-- /.card -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+    <div class="modal fade" id="luaranModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Peringatan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Anda masih memiliki tanggungan laporan luaran. Apabila luaran belum dilengkapi maka anda tidak dapat mendaftar pada jenis hibah yang sama.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info">Lengkapi Luaran</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup Peringatan</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection
 
@@ -173,7 +196,9 @@
 
         //Initialize Select2 Elements
         $('.select2').select2()
-
+        if ({{ count($luaran) }} != {{ count($checkHibah) }}) {
+            $('#luaranModal').modal('show')
+        }
     });
 </script>
 @endpush

@@ -75,6 +75,12 @@
                         <p>Review</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('hibah.luaran.index') }}" class="nav-link {{ Request::is('*luaran*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Luaran</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

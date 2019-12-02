@@ -97,6 +97,7 @@ class HibahPengaturanController extends Controller
         $request->hibah_panduan->move($filePath, $fileName);
 
         $data = new Hibah;
+        $data->user_id = Auth::user()->id;
         $data->hibah_judul = $request->hibah_judul;
         $data->slug = sha1(now());
         $data->hibah_kategori_id = $request->hibah_kategori;
@@ -110,6 +111,7 @@ class HibahPengaturanController extends Controller
         $data->hibah_tgl_pengumuman = $request->hibah_tgl_pengumuman;
         $data->unit_id = $request->hibah_unit_id;
         $data->hibah_panduan = $fileName;
+        $data->luaran = $request->luaran;
         $data->save();
 
         Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> hibah baru berhasil ditambahkan.');
@@ -188,6 +190,7 @@ class HibahPengaturanController extends Controller
 
             $data->hibah_panduan = $fileName;
         }
+        $data->luaran = $request->luaran;
         $data->save();
 
         Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> hibah berhasil diubah.');

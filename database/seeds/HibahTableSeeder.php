@@ -45,6 +45,7 @@ class HibahTableSeeder extends Seeder
             $data->hibah_tgl_pengumuman = $value['hibah_tgl_pengumuman'];
             $data->unit_id = $value['unit_id'];
             $data->hibah_panduan = $value['hibah_panduan'];
+            $data->luaran = 0;
             $data->save();
         }
     }

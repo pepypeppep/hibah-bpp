@@ -29,6 +29,7 @@ class CreateHibahsTable extends Migration
             $table->dateTime('hibah_tgl_pengumuman');
             $table->bigInteger('unit_id')->unsigned()->index();
             $table->string('hibah_panduan');
+            $table->boolean('luaran')->default(0);
             $table->timestamps();
         });
     }

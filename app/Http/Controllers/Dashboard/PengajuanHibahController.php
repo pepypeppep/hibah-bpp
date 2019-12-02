@@ -32,7 +32,7 @@ class PengajuanHibahController extends Controller
     public function index()
     {
         return view('dashboard.hibah.riwayat.index', [
-            'hibahs' => PengajuanHibah::where('user_id', Auth::user()->id)->with('hibah')->get()
+            'hibahs' => PengajuanHibah::with('proposal')->where('user_id', Auth::user()->id)->with('hibah')->get()
         ]);
     }
 
@@ -102,8 +102,8 @@ class PengajuanHibahController extends Controller
 
         //Set Ketua
         //Find on Pegawai
-        $stf = AnggotaStaff::where('user_id', $request->set_ketua[0])->first();
-        $mhsw = AnggotaMahasiswa::where('user_id', $request->set_ketua[0])->first();
+        $stf = AnggotaStaff::where('pengajuan_hibah_id', $data->id)->where('user_id', $request->set_ketua[0])->first();
+        $mhsw = AnggotaMahasiswa::where('pengajuan_hibah_id', $data->id)->where('user_id', $request->set_ketua[0])->first();
         if (!is_null($stf)) {
             $stf->ketua = 2;
             $stf->save();
@@ -212,8 +212,8 @@ class PengajuanHibahController extends Controller
 
         //Set Ketua
         //Find on Pegawai
-        $stf = AnggotaStaff::where('user_id', $request->set_ketua[0])->first();
-        $mhsw = AnggotaMahasiswa::where('user_id', $request->set_ketua[0])->first();
+        $stf = AnggotaStaff::where('pengajuan_hibah_id', $data->id)->where('user_id', $request->set_ketua[0])->first();
+        $mhsw = AnggotaMahasiswa::where('pengajuan_hibah_id', $data->id)->where('user_id', $request->set_ketua[0])->first();
         if (!is_null($stf)) {
             $stf->ketua = 2;
             $stf->save();

@@ -30,4 +30,9 @@ class PengajuanHibah extends Model
     {
         return $this->hasMany(Reviewer::class);
     }
+
+    public function luarans()
+    {
+        return $this->hasMany(Luaran::class);
+    }
 }

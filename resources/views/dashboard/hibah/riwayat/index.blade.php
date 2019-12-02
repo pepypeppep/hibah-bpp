@@ -120,14 +120,16 @@
                             </td>
                             <td class="text-center">
                                 @if ($hibah->hibah_status == 0)
-                                <button type="button" class="btn btn-outline-danger btn-sm" title="Ajukan" onclick="document.getElementById('form_pub').submit();">
-                                    <i class="fas fa-lock"></i>
-                                </button>
-                                <form method="POST" action="{{ route('hibah.daftar.doLock', $hibah->id) }}" id="form_pub">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="hibah_status" value="1">
-                                </form>
+                                    @if (count($hibah->proposal) != 0)
+                                    <button type="button" class="btn btn-outline-danger btn-sm" title="Ajukan" onclick="document.getElementById('form_pub').submit();">
+                                        <i class="fas fa-lock"></i>
+                                    </button>
+                                    <form method="POST" action="{{ route('hibah.daftar.doLock', $hibah->id) }}" id="form_pub">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="hibah_status" value="1">
+                                    </form>
+                                    @endif
                                 <a href="{{ route('hibah.riwayat.edit', $hibah->slug) }}" class="btn btn-outline-warning btn-sm" title="Ubah">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>

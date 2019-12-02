@@ -42,6 +42,14 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-2 text-right">
+                                        <label>Luaran</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <strong class="btn {{ $hibah->luaran == 0 ? 'btn-danger' : 'btn-success' }} btn-sm">{{ $hibah->luaran == 0 ? 'Tidak Wajib' : 'Wajib' }}</strong>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-2 text-right">
                                         <label>Judul<span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-10">
