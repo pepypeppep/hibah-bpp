@@ -107,7 +107,8 @@ class AddReviewController extends Controller
         $data->komentar = $request->komentar;
         $data->save();
 
-        $reviews = Reviewer::where('tipe_dokumen', $review->tipe_dokumen)
+        $reviews = Reviewer::where('pengajuan_hibah_id', $review->pengajuan_hibah_id)
+                            ->where('tipe_dokumen', $review->tipe_dokumen)
                             ->where('total', 0)
                             ->where('komentar', null)->count();
 

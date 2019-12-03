@@ -43,6 +43,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:member']], functio
     Route::put('review/{slug}/update', 'AddReviewController@update')->name('hibah.review.update');
 
     Route::get('luaran', 'LuaranController@index')->name('hibah.luaran.index');
+    Route::get('luaran/{slug}/show', 'LuaranController@show')->name('hibah.luaran.show');
+    Route::post('luaran/{id}/store', 'LuaranController@store')->name('hibah.luaran.store');
 });
 
 
