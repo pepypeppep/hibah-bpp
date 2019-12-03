@@ -74,4 +74,5 @@ Route::group(['prefix' => 'staff', 'middleware' => ['role:staff']], function () 
     Route::get('reviewer/{id}/delete', 'Staff\ReviewController@destroy')->name('s_hibah.review.delete');
 
     Route::get('luaran', 'LuaranController@index')->name('s_hibah.luaran.index');
+    Route::put('luaran/{id}/verify', 'LuaranController@verify')->name('s_hibah.luaran.verify');
 });

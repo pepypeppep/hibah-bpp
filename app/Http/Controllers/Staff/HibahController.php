@@ -67,7 +67,7 @@ class HibahController extends Controller
      */
     public function show($slug)
     {
-        $hibah = PengajuanHibah::with('user', 'hibah', 'hibah.unit', 'hibah.category', 'berkas')
+        $hibah = PengajuanHibah::with('user', 'hibah', 'hibah.unit', 'hibah.category', 'berkas', 'luarans')
                     ->where('slug', $slug)->first();
         $staff = AnggotaStaff::with('user')->where('pengajuan_hibah_id', $hibah->id)
                     ->where('ketua', 2)->get();

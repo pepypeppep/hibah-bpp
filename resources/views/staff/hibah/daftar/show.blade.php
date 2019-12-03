@@ -161,26 +161,28 @@
                 <table class="table table-condensed">
                     <thead class="text-center">
                         <tr>
-                            <th style="width: 10px">No</th>
-                            <th>Kriteria</th>
-                            <th>Bobot</th>
-                            <th>Range Nilai</th>
-                            <th></th>
+                            <th>Jenis Luaran</th>
+                            <th>DOI</th>
+                            <th>Jurnal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class="text-center">
+                        @if ($hibah->luarans)
+                            <td>
+                                <span>{{ $hibah->luarans->jenis_luaran == 1 ? 'Prosiding' : 'Jurnal' }}</span>
+                            </td>
+                            <td>
+                                <a href="http://{{ $hibah->luarans->doi }}" target="_blank">{{ $hibah->luarans->doi }}</a>
+                            </td>
+                            <td>
+                                <span>{{ $hibah->luarans->journal }}</span>
+                            </td>
+                        @else
                             <td colspan="5">
                                 <div class="alert alert-danger">Tidak ada data!</div>
                             </td>
-                            {{-- <td class="text-center">1</td>
-                            <td>Pengusul: First Author (nilai 1)</td>
-                            <td class="text-center">20</td>
-                            <td class="text-center">0 - 1</td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                            </td> --}}
+                        @endif
                         </tr>
                     </tbody>
                 </table>
@@ -577,7 +579,7 @@
     </div><!-- /.container-fluid -->
     @endif
 
-    @if (count($komentars) != 0)
+    @if (count($komentars) != 0 && $hibah->status_pengajuan == 1)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
@@ -616,6 +618,62 @@
                                     <input type="hidden" name="status" value="1">
                                 </form>
                                 <form method="POST" action="{{ route('s_hibah.daftar.update', $hibah->id) }}" id="submitx">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="status" value="0">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+    @endif
+
+    @if (count($komentars) != 0 && $hibah->status_pengajuan == 4)
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <div class="card-header bg-success">
+                <h3 class="card-title"><b>Status</b> Luaran</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <div class="container">
+                    <div class="card card-default mt-4 ml-3 mr-3" style="border-left: 4px solid #28a745; background: #f1fbfd52">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="text-success">Informasi</h5>
+                                    <p>Verifikasi luaran untuk menyelesaikan proses penerimaan hibah</p>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="card card-default">
+                            <div class="card-header bg-success">
+                                <h3 class="card-title">Apakah luaran ini sudah sesuai ?</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                <button type="submit" class="btn btn-outline-success col-md-5" onclick="document.getElementById('submity').submit();">Konfirmasi</button>
+                                <button type="submit" class="btn btn-outline-danger col-md-5 ml-2" onclick="document.getElementById('submitx').submit();">Tolak</button>
+                                <form method="POST" action="{{ route('s_hibah.luaran.verify', $hibah->luarans->id) }}" id="submity">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="status" value="1">
+                                </form>
+                                <form method="POST" action="{{ route('s_hibah.luaran.verify', $hibah->luarans->id) }}" id="submitx">
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="status" value="0">

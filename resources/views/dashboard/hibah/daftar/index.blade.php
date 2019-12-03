@@ -173,7 +173,7 @@
                     <p>Anda masih memiliki tanggungan laporan luaran. Apabila luaran belum dilengkapi maka anda tidak dapat mendaftar pada jenis hibah yang sama.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info">Lengkapi Luaran</button>
+                    <a href="{{ route('hibah.luaran.index') }}" class="btn btn-info">Lengkapi Luaran</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup Peringatan</button>
                 </div>
             </div>
@@ -196,6 +196,7 @@
 
         //Initialize Select2 Elements
         $('.select2').select2()
+
         if ({{ count($luaran) }} != {{ count($checkHibah) }}) {
             $('#luaranModal').modal('show')
         }

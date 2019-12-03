@@ -97,11 +97,13 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                @if ($hibah->status_terbit == 0)
+                                @if ($hibah->status_terbit == 1)
                                     <h6>--</h6>
-                                @elseif ($hibah->status_terbit == 1)
-                                    <h6><span class="badge badge-secondary">Belum Terbit</span></h6>
-                                @else
+                                @elseif ($hibah->status_terbit == 2)
+                                    <h6><span class="badge badge-danger">Ditolak</span></h6>
+                                @elseif ($hibah->status_terbit == 3)
+                                    <h6><span class="badge badge-info">Verifikasi</span></h6>
+                                @elseif ($hibah->status_terbit == 4)
                                     <h6><span class="badge badge-success">Sudah Terbit</span></h6>
                                 @endif
                             </td>

@@ -33,6 +33,6 @@ class PengajuanHibah extends Model
 
     public function luarans()
     {
-        return $this->hasMany(Luaran::class);
+        return $this->hasOne(Luaran::class);
     }
 }

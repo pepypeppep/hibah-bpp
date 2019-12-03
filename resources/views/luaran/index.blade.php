@@ -58,27 +58,27 @@
                             <td>{{ $hb->user->name }}</td>
                             <td>{{ $hb->hibah->category->nama }}</td>
                             <td>
-                                @if (count($hb->luarans) == 0)
-                                    <span class="badge badge-danger">Belum</span>
-                                @else
+                                @if ($hb->luarans)
                                     <span class="badge badge-success">Sudah</span>
+                                @else
+                                    <span class="badge badge-danger">Belum</span>
                                 @endif
                             </td>
                             <td>
-                                @if (count($hb->luarans) == 0)
-                                    <h6>--</h6>
-                                @else
-                                    @if ($hb->luarans[0]->status == 1)
+                                @if ($hb->luarans)
+                                    @if ($hb->luarans->status == 1)
                                         <h6><span class="badge badge-secondary">Diajukan</span></h6>
-                                    @elseif ($hb->luarans[0]->status == 2)
+                                    @elseif ($hb->luarans->status == 2)
                                         <h6><span class="badge badge-success">Diterima</span></h6>
-                                    @elseif ($hb->luarans[0]->status == 3)
+                                    @elseif ($hb->luarans->status == 3)
                                         <h6><span class="badge badge-danger">Ditolak</span></h6>
                                     @endif
+                                @else
+                                    <h6>--</h6>
                                 @endif
                             </td>
                             <td class="text-center">
-                                @if (count($hb->luarans) == 0 || $hb->luarans[0]->status == 3)
+                                @if ($hb->luarans == null || $hb->luarans->status == 3)
                                 <a href="{{ route('hibah.luaran.show', $hb->slug) }}" class="btn btn-warning">
                                     <i class="fas fa-eye"></i>
                                 </a>

@@ -51,6 +51,17 @@ class HibahController extends Controller
             $hibahs->where($key, $value);
         }
 
+        // $checkHibah = PengajuanHibah::with('hibah', 'luarans')
+        //                             ->where('user_id', Auth::user()->id)
+        //                             ->where('status_pengajuan', 5)
+        //                             ->whereHas('hibah', function ($query) {
+        //                                 return $query->where('luaran', 1);
+        //                             })
+        //                             ->whereHas('luarans', function ($query) {
+        //                                 return $query->where('status', '!=', 2);
+        //                             })->get();
+
+
         $checkHibah = PengajuanHibah::with('hibah', 'luarans')
                                     ->where('user_id', Auth::user()->id)
                                     ->where('status_pengajuan', 5)
@@ -59,7 +70,8 @@ class HibahController extends Controller
                                     })->get();
 
         $luaran = Luaran::with('user', 'pengajuanHibah', 'pengajuanHibah.hibah')
-                        ->where('user_id', Auth::user()->id)->get();
+                        ->where('user_id', Auth::user()->id)
+                        ->where('status', 2)->get();
         // $luaran = Luaran::with('user', 'pengajuanHibah', 'pengajuanHibah.hibah')
         //                 ->where('user_id', Auth::user()->id)
         //                 ->whereHas('pengajuanHibah', function ($query) {

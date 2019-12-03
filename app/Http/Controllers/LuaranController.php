@@ -56,6 +56,10 @@ class LuaranController extends Controller
         $data->status = 1;
         $data->save();
 
+        $hibah = PengajuanHibah::find($id);
+        $hibah->status_terbit = 3;
+        $hibah->save();
+
         Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> luaran berhasil diajukan.');
 
         return redirect()->route('hibah.luaran.index');
@@ -98,6 +102,37 @@ class LuaranController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function verify(Request $request, $id)
+    {
+        $data = Luaran::find($id);
+        if ($request->status == 1) {
+            $data->status = 2;
+            $data->save();
+
+            $hibah = PengajuanHibah::find($id);
+            $hibah->status_terbit = 4;
+            $hibah->save();
+        }else{
+            $data->status = 3;
+            $data->save();
+
+            $hibah = PengajuanHibah::find($id);
+            $hibah->status_terbit = 2;
+            $hibah->save();
+        }
+
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> luaran berhasil diperbaharui.');
+
+        return redirect()->route('s_hibah.daftar.index');
     }
 
     /**
