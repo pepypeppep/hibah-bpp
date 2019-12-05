@@ -144,7 +144,7 @@
                                 <a href="{{ asset('storage/hibah/panduan/'.$hibah->hibah_panduan) }}">Download</a>
                             </td>
                             <td class="text-center">
-                                @if (in_array($hibah->hibah_kategori_id, $stack))
+                                @if (in_array($hibah->hibah_kategori_id, $stack) && in_array($hibah->unit_id, $stack2))
                                 <button type="button" class="btn btn-sm btn-info" disabled>Pengajuan</button>
                                 @else
                                 <a href="{{ route('hibah.daftar.create', $hibah->slug) }}" class="btn btn-sm btn-info">Pengajuan</a>

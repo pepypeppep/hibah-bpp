@@ -118,14 +118,14 @@ class LuaranController extends Controller
             $data->status = 2;
             $data->save();
 
-            $hibah = PengajuanHibah::find($id);
+            $hibah = PengajuanHibah::find($data->pengajuan_hibah_id);
             $hibah->status_terbit = 4;
             $hibah->save();
         }else{
             $data->status = 3;
             $data->save();
 
-            $hibah = PengajuanHibah::find($id);
+            $hibah = PengajuanHibah::find($data->pengajuan_hibah_id);
             $hibah->status_terbit = 2;
             $hibah->save();
         }

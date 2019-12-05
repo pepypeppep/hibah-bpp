@@ -14,7 +14,7 @@ class HibahTableSeeder extends Seeder
     {
         $hibahs = [
             [
-                'hibah_judul' => 'Example',
+                'hibah_judul' => 'Penghargaan Karya Ilmiah sudah Terbit Tahun Anggaran 2019 Periode bulan November',
                 'hibah_kategori_id' => 8,
                 'hibah_tgl_publish' => '2019-12-01 00:00:00',
                 'hibah_tgl_mulai' => '2019-12-01 00:00:00',

@@ -69,9 +69,27 @@ class HibahController extends Controller
                                         return $query->where('luaran', 1);
                                     })->get();
 
+        $checkLuaran = ['1','1'];
+        foreach ($checkHibah as $ch) {
+            $checkLuaran = Luaran::with('user', 'pengajuanHibah', 'pengajuanHibah.hibah')
+                                ->where('user_id', Auth::user()->id)
+                                ->where('pengajuan_hibah_id', $ch->id)
+                                ->where('status', 2)->get();
+        }
+
         $luaran = Luaran::with('user', 'pengajuanHibah', 'pengajuanHibah.hibah')
                         ->where('user_id', Auth::user()->id)
                         ->where('status', 2)->get();
+
+        // $getCheck = PengajuanHibah::with('hibah', 'luarans')
+        //                             ->where('user_id', Auth::user()->id)
+        //                             ->where('status_pengajuan', 5)
+        //                             ->whereHas('hibah', function ($query) {
+        //                                 return $query->where('luaran', 1);
+        //                             })
+        //                             ->whereHas('luarans', function ($query) {
+        //                                 return $query->where('status', 1);
+        //                             })->get();
         // $luaran = Luaran::with('user', 'pengajuanHibah', 'pengajuanHibah.hibah')
         //                 ->where('user_id', Auth::user()->id)
         //                 ->whereHas('pengajuanHibah', function ($query) {
@@ -79,12 +97,17 @@ class HibahController extends Controller
         //                 })->whereHas('pengajuanHibah.hibah', function ($query) {
         //                     return $query->where('luaran', 1);
         //                 })->get();
-        // dd($checkHibah);
+        // dd($checkLuaran);
 
         $stack = [];
-        foreach ($checkHibah as $hb) {
-            $stack[] = $hb->hibah->hibah_kategori_id;
+        $stack2 = [];
+        if (count($checkLuaran) == 0) {
+            foreach ($checkHibah as $hb) {
+                $stack[] = $hb->hibah->hibah_kategori_id;
+                $stack2[] = $hb->hibah->unit_id;
+            }
         }
+        // dd($stack);
 
         return view('dashboard.hibah.daftar.index', [
             'hibahs' => $hibahs->orderBy('created_at', 'DESC')->paginate(10),
@@ -93,7 +116,8 @@ class HibahController extends Controller
             'getReview' => $review,
             'luaran' => $luaran,
             'checkHibah' => $checkHibah,
-            'stack' => $stack
+            'stack' => $stack,
+            'stack2' => $stack2
         ]);
     }
 
