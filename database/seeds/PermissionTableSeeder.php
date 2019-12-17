@@ -50,6 +50,24 @@ class PermissionTableSeeder extends Seeder
             'riwayat_pengajuan_hibah-edit',
             'riwayat_pengajuan_hibah-delete',
             'riwayat_pengajuan_hibah-detail',
+            // Pencairan Dana
+            'pencairan_dana-list',
+            'pencairan_dana-create',
+            'pencairan_dana-edit',
+            'pencairan_dana-delete',
+            'pencairan_dana-detail',
+            // Review
+            'review-list',
+            'review-create',
+            'review-edit',
+            'review-delete',
+            'review-detail',
+            // Luaran
+            'luaran-list',
+            'luaran-create',
+            'luaran-edit',
+            'luaran-delete',
+            'luaran-detail',
         ];
 
         foreach ($permissions as $permission) {
@@ -91,6 +109,18 @@ class PermissionTableSeeder extends Seeder
             'riwayat_pengajuan_hibah-edit',
             'riwayat_pengajuan_hibah-delete',
             'riwayat_pengajuan_hibah-detail',
+            // Review
+            'review-list',
+            'review-create',
+            'review-edit',
+            'review-delete',
+            'review-detail',
+            // Luaran
+            'luaran-list',
+            'luaran-create',
+            'luaran-edit',
+            'luaran-delete',
+            'luaran-detail',
         ];
 
         $permissionMembers = Permission::whereIn('name', $permissionMemberArrays)->pluck('id');
@@ -112,6 +142,18 @@ class PermissionTableSeeder extends Seeder
             'riwayat_pengajuan_hibah-edit',
             'riwayat_pengajuan_hibah-delete',
             'riwayat_pengajuan_hibah-detail',
+            // Review
+            'review-list',
+            'review-create',
+            'review-edit',
+            'review-delete',
+            'review-detail',
+            // Luaran
+            'luaran-list',
+            'luaran-create',
+            'luaran-edit',
+            'luaran-delete',
+            'luaran-detail',
         ];
 
         $permissionMahasiswas = Permission::whereIn('name', $permissionMahasiswaArrays)->pluck('id');

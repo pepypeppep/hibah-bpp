@@ -23,7 +23,7 @@ class CreatePengajuanHibahsTable extends Migration
             $table->enum('hibah_status', [0, 1]);
             $table->enum('status_pengajuan', [0, 1, 2, 3, 4, 5]);
             $table->enum('status_terbit', [1, 2, 3, 4]);
-            $table->enum('status_pencairan', [0, 1, 2, 3]);
+            $table->enum('status_pencairan', [0, 1, 2, 3, 4]);
             $table->timestamps();
         });
     }

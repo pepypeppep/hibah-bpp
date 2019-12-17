@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Session;
 
 class LuaranController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:luaran-list');
+        $this->middleware('permission:luaran-create', ['only' => ['create','store']]);
+        $this->middleware('permission:luaran-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:luaran-detail', ['only' => ['show']]);
+        $this->middleware('permission:luaran-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

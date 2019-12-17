@@ -143,6 +143,7 @@
                             <th style="width: 120px">Judul</th>
                             <th style="width: 160px">Data Pengaju</th>
                             <th style="width: 160px">Proposal</th>
+                            <th style="width: 70px">Nilai Total</th>
                             <th style="width: 70px">Status</th>
                             <th style="width: 70px">Status Terbit</th>
                             <th style="width: 70px">Pencairan Dana</th>
@@ -166,6 +167,9 @@
                             </td>
                             <td class="text-center">
                                 <a href="{{ asset('/storage/hibah/berkas_pengajuan/'.$hibah->proposal[0]->hibah_dokumen_pengajuan) }}"><i class="fas fa-file"></i></a>
+                            </td>
+                            <td class="text-center">
+                                -
                             </td>
                             <td class="text-center">
                                 @if ($hibah->status_pengajuan == 1)
@@ -195,11 +199,11 @@
                             </td>
                             <td class="text-center">
                                 @if ($hibah->status_pencairan == 1)
-                                    <h6><span class="badge badge-secondary">Diajukan</span></h6>
+                                    <h6><span class="badge badge-warning">Verifikasi Berkas</span></h6>
                                 @elseif ($hibah->status_pencairan == 2)
-                                    <h6><span class="badge badge-warning">Verifikasi</span></h6>
+                                    <h6><span class="badge badge-info">Proses Pencairan</span></h6>
                                 @elseif ($hibah->status_pencairan == 3)
-                                    <h6><span class="badge badge-success">Dicairkan</span></h6>
+                                    <h6><span class="badge badge-success">Berhasil Dicairkan</span></h6>
                                 @elseif ($hibah->status_pencairan == 4)
                                     <h6><span class="badge badge-danger">Ditolak</span></h6>
                                 @elseif ($hibah->status_pencairan == 0)
@@ -207,7 +211,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('s_hibah.daftar.show', $hibah->slug) }}" class="btn btn-sm btn-default">
+                                <a href="{{ route('s_hibah.keuangan.show', $hibah->slug) }}" class="btn btn-sm btn-default">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="" class="btn btn-sm btn-danger">

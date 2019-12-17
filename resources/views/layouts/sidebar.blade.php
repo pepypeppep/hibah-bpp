@@ -67,20 +67,32 @@
                             </a>
                         </li>
                         @endcan
+                        @can('pencairan_dana-list')
+                        <li class="nav-item">
+                            <a href="{{ route('s_hibah.keuangan.index') }}" class="nav-link {{ Request::is('staff/pencairan_dana*') ? 'active' : '' }}">
+                                <i class="fas fa-chevron-right nav-icon"></i>
+                                <p>Pencairan Dana Hibah</p>
+                            </a>
+                        </li>
+                        @endcan
                     </ul>
                 </li>
+                @can('hibah-list')
                 <li class="nav-item">
                     <a href="{{ route('hibah.review.index') }}" class="nav-link {{ Request::is('*review*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Review</p>
                     </a>
                 </li>
+                @endcan
+                @can('luaran-list')
                 <li class="nav-item">
                     <a href="{{ route('hibah.luaran.index') }}" class="nav-link {{ Request::is('*luaran*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Luaran</p>
                     </a>
                 </li>
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

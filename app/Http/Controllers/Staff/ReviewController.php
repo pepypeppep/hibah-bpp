@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:review-list');
+        $this->middleware('permission:review-create', ['only' => ['create','store']]);
+        $this->middleware('permission:review-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:review-detail', ['only' => ['show']]);
+        $this->middleware('permission:review-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
