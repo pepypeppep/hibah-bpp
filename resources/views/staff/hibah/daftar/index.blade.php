@@ -195,11 +195,11 @@
                             </td>
                             <td class="text-center">
                                 @if ($hibah->status_pencairan == 1)
-                                    <h6><span class="badge badge-secondary">Diajukan</span></h6>
+                                    <h6><span class="badge badge-warning">Verifikasi Berkas</span></h6>
                                 @elseif ($hibah->status_pencairan == 2)
-                                    <h6><span class="badge badge-warning">Verifikasi</span></h6>
+                                    <h6><span class="badge badge-info">Proses Pencairan</span></h6>
                                 @elseif ($hibah->status_pencairan == 3)
-                                    <h6><span class="badge badge-success">Dicairkan</span></h6>
+                                    <h6><span class="badge badge-success">Berhasil Dicairkan</span></h6>
                                 @elseif ($hibah->status_pencairan == 4)
                                     <h6><span class="badge badge-danger">Ditolak</span></h6>
                                 @elseif ($hibah->status_pencairan == 0)
