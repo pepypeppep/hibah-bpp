@@ -9,10 +9,17 @@
     @if(Session::has('flash_message'))
     <div class="toast mt-5" data-autohide="true" data-delay="3000" data-animation="true" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
         <div class="toast-body pt-4 pb-4 bg-success">
-                {!! session('flash_message') !!}
+            {!! session('flash_message') !!}
         </div>
     </div>
     @endif
+    @foreach ($errors->all() as $message)
+    <div class="toast mt-5" data-autohide="true" data-delay="3000" data-animation="true" style="position: absolute; top: 1%; right: 0;z-index: 1;opacity: 0.9">
+        <div class="toast-body pt-4 pb-4 bg-danger">
+            {{ $message }}
+        </div>
+    </div>
+    @endforeach
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -75,7 +82,8 @@
                                         <label>DOI <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="doi" placeholder="10.1234/ugm.123" required>
+                                        <input type="text" class="form-control" name="doi" placeholder="10.1234/ugm.123" value="{{ old('doi') }}" required>
+                                        <span class="text-danger font-weight-bold">{{ $errors->first('doi') }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -83,7 +91,7 @@
                                         <label>Jurnal <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="jurnal" placeholder="Scopus / World of Science / Microsoft Academic" required>
+                                        <input type="text" class="form-control" name="jurnal" placeholder="Scopus / World of Science / Microsoft Academic" value="{{ old('jurnal') }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -116,6 +124,7 @@
                             <li>
                                 Jurnal bisa diisi dengan nama Jurnal dapat juga diisi dengan <i>Link</i> Jurnal.
                             </li>
+                            <li>DOI yang dimasukkan akan dicek secara otomatis oleh sistem. Jika tidak valid, maka DOI akan gagal disimpan.</li>
                         </ul>
                     </div>
                 </div>

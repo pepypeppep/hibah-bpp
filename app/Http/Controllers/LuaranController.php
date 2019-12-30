@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Luaran;
 use Illuminate\Http\Request;
 use App\Models\PengajuanHibah;
+use App\Rules\ValidDOI;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -56,22 +57,28 @@ class LuaranController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $data = new Luaran;
-        $data->user_id = Auth::user()->id;
-        $data->pengajuan_hibah_id = $id;
-        $data->jenis_luaran = $request->jenis_luaran;
-        $data->doi = $request->doi;
-        $data->journal = $request->jurnal;
-        $data->status = 1;
-        $data->save();
+        $request->validate([
+            'jenis_luaran' => 'required',
+            'doi' => ['required', 'string', new ValidDOI],
+            'jurnal' => 'required|string',
+        ]);
 
-        $hibah = PengajuanHibah::find($id);
-        $hibah->status_terbit = 3;
-        $hibah->save();
+        // $data = new Luaran;
+        // $data->user_id = Auth::user()->id;
+        // $data->pengajuan_hibah_id = $id;
+        // $data->jenis_luaran = $request->jenis_luaran;
+        // $data->doi = $request->doi;
+        // $data->journal = $request->jurnal;
+        // $data->status = 1;
+        // $data->save();
 
-        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> luaran berhasil diajukan.');
+        // $hibah = PengajuanHibah::find($id);
+        // $hibah->status_terbit = 3;
+        // $hibah->save();
 
-        return redirect()->route('hibah.luaran.index');
+        // Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> luaran berhasil diajukan.');
+
+        // return redirect()->route('hibah.luaran.index');
     }
 
     /**

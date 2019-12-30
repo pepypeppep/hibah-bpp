@@ -185,9 +185,9 @@
                                     @method('PUT')
                                     <select name="status_pencairan" class="form-control" required>
                                         <option value="0" {{ $hibah->status_pencairan == 0 ? 'selected' : '' }}>--</option>
-                                        <option value="1" {{ $hibah->status_pencairan == 1 ? 'selected' : '' }}>Verifikasi Berkas</option>
-                                        <option value="2" {{ $hibah->status_pencairan == 2 ? 'selected' : '' }}>Proses Pencairan</option>
-                                        <option value="3" {{ $hibah->status_pencairan == 3 ? 'selected' : '' }}>Berhasil Dicairkan</option>
+                                        <option value="1" {{ $hibah->status_pencairan == 1 ? 'selected' : '' }}>Verifikasi Berkas BPP</option>
+                                        <option value="2" {{ $hibah->status_pencairan == 2 ? 'selected' : '' }}>Pengajuan Keuangan UGM</option>
+                                        <option value="3" {{ $hibah->status_pencairan == 3 ? 'selected' : '' }}>Terbayar</option>
                                         <option value="4" {{ $hibah->status_pencairan == 4 ? 'selected' : '' }}>Ditolak</option>
                                     </select><br>
                                     <button type="submit" class="btn btn-warning">Simpan</button>
