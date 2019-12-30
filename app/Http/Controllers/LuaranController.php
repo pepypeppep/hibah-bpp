@@ -63,22 +63,22 @@ class LuaranController extends Controller
             'jurnal' => 'required|string',
         ]);
 
-        // $data = new Luaran;
-        // $data->user_id = Auth::user()->id;
-        // $data->pengajuan_hibah_id = $id;
-        // $data->jenis_luaran = $request->jenis_luaran;
-        // $data->doi = $request->doi;
-        // $data->journal = $request->jurnal;
-        // $data->status = 1;
-        // $data->save();
+        $data = new Luaran;
+        $data->user_id = Auth::user()->id;
+        $data->pengajuan_hibah_id = $id;
+        $data->jenis_luaran = $request->jenis_luaran;
+        $data->doi = $request->doi;
+        $data->journal = $request->jurnal;
+        $data->status = 1;
+        $data->save();
 
-        // $hibah = PengajuanHibah::find($id);
-        // $hibah->status_terbit = 3;
-        // $hibah->save();
+        $hibah = PengajuanHibah::find($id);
+        $hibah->status_terbit = 3;
+        $hibah->save();
 
-        // Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> luaran berhasil diajukan.');
+        Session::flash('flash_message', '<strong class="mr-auto">Berhasil!</strong> luaran berhasil diajukan.');
 
-        // return redirect()->route('hibah.luaran.index');
+        return redirect()->route('hibah.luaran.index');
     }
 
     /**
