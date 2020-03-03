@@ -635,7 +635,7 @@
     </div><!-- /.container-fluid -->
     @endif
 
-    @if (count($komentars) != 0 && $hibah->status_pengajuan == 4)
+    @if (count($komentars) != 0 && $hibah->luarans != null)
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">

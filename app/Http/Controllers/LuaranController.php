@@ -32,7 +32,7 @@ class LuaranController extends Controller
                                 ->where('status_pengajuan', 5)
                                 ->whereHas('hibah', function ($query) {
                                     return $query->where('luaran', 1);
-                                })->get();
+                                })->orderBy('created_at','DESC')->get();
         // dd($hibah);
         return view('luaran.index', [
             'hibahs' => $hibah

@@ -32,7 +32,7 @@ class PengajuanHibahController extends Controller
     public function index()
     {
         return view('dashboard.hibah.riwayat.index', [
-            'hibahs' => PengajuanHibah::with('proposal')->where('user_id', Auth::user()->id)->with('hibah')->get()
+            'hibahs' => PengajuanHibah::with('proposal')->where('user_id', Auth::user()->id)->with('hibah')->orderBy('created_at','DESC')->get()
         ]);
     }
 

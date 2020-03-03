@@ -30,7 +30,7 @@ class HibahPengaturanController extends Controller
      */
     public function index(Request $request)
     {
-        $hibahs = Hibah::with('category','unit')->orderBy('created_at');
+        $hibahs = Hibah::with('category','unit')->orderBy('created_at','DESC');
 
         $data = $request->validate([
             'judul' => 'string|nullable',

@@ -21,7 +21,7 @@ class AddReviewController extends Controller
     public function index()
     {
         $data = Reviewer::with('pengajuanHibah','pengajuanHibah.hibah','pengajuanHibah.user','user')
-                        ->where('user_id', Auth::user()->id)->get();
+                        ->where('user_id', Auth::user()->id)->orderBy('created_at','DESC')->get();
 
         return view('review.index', [
             'reviews' => $data

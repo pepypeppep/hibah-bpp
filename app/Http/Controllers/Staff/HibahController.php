@@ -31,7 +31,7 @@ class HibahController extends Controller
     public function index()
     {
         $hibah = PengajuanHibah::with('hibah', 'hibah.unit', 'hibah.category', 'proposal')
-                    ->where('hibah_status', 2)->get();
+                    ->where('hibah_status', 2)->orderBy('created_at','DESC')->get();
 
         return view('staff.hibah.daftar.index', [
             'hibahs' => $hibah
